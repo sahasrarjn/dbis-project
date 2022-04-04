@@ -1,0 +1,123 @@
+INSTITUTE, LANGUAGE, TAGS, TEMPLATE, EXAM_TYPE:
+    no null attributes allowed
+    no fk constraints
+    (template me base code can be null, empty file deni)
+
+
+TEMPLATE_LANGUAGE:
+    no null 
+    template id refers to t_id from template
+    language_id refers to l_id from language
+
+TAG_CHILD
+    parent not allowed to be null
+    child can be null, meaning this is a leaf node in DAG of tag dependency
+
+TEACHER:
+    dob allowed to be null, not an important info
+    username must be unique
+
+STUDENT:
+    dob, facad allowed to be null
+    template is set to default if data contains null (implement krna h ye, python me hoga)
+    facad refers to teacher ka primary key
+    username should be unique
+
+QUESTION:
+    answer, tc allowed to be null, not very imp info
+    author refers to teacher
+
+QUESTION_TAGS:
+    nothing can be null
+    q_id refers to QUESTION
+    tag_id refers to TAGS
+    each q_id must appear atleast once in this table (implement this smhow)
+
+
+EXAM:
+    nothing can be null
+    author refers to teacher
+    exam_type_id refers to EXAM_TYPE
+
+EXAM_QUESTION:
+    nothing can be null
+    assert that no of questions is consistent with exam exam_type
+
+STUDENT_EXAM_QUES_STAT
+    rating and relevance can be null (student didnt give any review)
+    question_id and exam_id are consistent with EXAM_QUESTION
+
+
+
+EK BAAR DEKH LENA SARE FOREIGN KEY CONSTRAINTS DALE H KI NHI
+
+--MATERIALIZED VIEW
+    tags wont be modified and will be used a lot. Therefore we can create mat view for list of children of each tag
+
+
+--USE CASES
+
+TEACHER, STUDENT:
+    login with credentials
+    signup
+
+INSERT QUESTION:
+    will be done by a simple insert statement by teacher
+
+DELETE/UPDATE QUESTION:
+    allowed only if question not asked in any exam
+
+REGISTER TEACHER/STUDENT:
+    simple insert again
+    student can add a new institute 
+
+EXAM:
+    teacher can select an exam type, questions manually for exam
+    or use auto generator with given difficulty and tags
+    teacher can add student to an exam
+    this creates rows with default values
+
+    auto generator will search for questions with diff and tags and select random from them(in python)
+    will insert data in EXAM_QUESTION
+
+    
+    
+EXAM_TYPE:
+    teacher can add exam_type
+        simple insert statement
+
+TEMPLATE:
+    student can add template
+        simple insert statement
+
+VIEWING:
+    teachers can view questions with specific filters on difficulty, tags
+        simple select statement
+    teacher can view report card of their own students 
+        first get list of all students, then generate their reportcard
+    teacher can view statistics of a question
+        no of exams it was asked in
+        % of students able to solve it, grouped by region and overall
+        avg reviews by students
+    teacher can view statistics of exam they created
+        avg stats grouped by question
+
+    students can view their own report card
+        same as above
+
+    student can attempt any exam running in current year(we will reuse old code (SSL project) for this)
+    After exam is completed, records are inserted accordingly in table
+
+    
+
+INDEXING:
+    in STUDENT_EXAM_QUES_STAT, we have to query a lot based on student, exam, ques all three 
+    therefore creating index on these is good, since there arent lots of inserts (and slow inserts arent much of an issue)
+
+
+FORMS:
+    already bna rkhe na? kch chngs ho to daal dena
+
+LOGIC CONTROLLER:
+    iska dekh lo bc kya krna
+

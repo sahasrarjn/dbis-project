@@ -1,0 +1,101 @@
+Name,City,State,Score,Rank
+Indian Institute of Technology Madras,Chennai,Tamil Nadu,89.93,1
+Indian Institute of Technology Delhi,New Delhi,Delhi,88.08,2
+Indian Institute of Technology Bombay,Mumbai,Maharashtra,85.08,3
+Indian Institute of Technology Kanpur,Kanpur,Uttar Pradesh,82.18,4
+Indian Institute of Technology Kharagpur,Kharagpur,West Bengal,80.56,5
+Indian Institute of Technology Roorkee,Roorkee,Uttarakhand,76.29,6
+Indian Institute of Technology Guwahati,Guwahati,Assam,74.90,7
+Indian Institute of Technology Hyderabad,Hyderabad,Telangana,66.44,8
+National Institute of Technology Tiruchirappalli,Tiruchirappalli,Tamil Nadu,64.10,9
+Indian Institute of Technology Indore,Indore,Madhya Pradesh,62.88,10
+Indian Institute of Technology (BHU) Varanasi,Varanasi,Uttar Pradesh,62.54,11
+Indian Institute of Technology (Indian School of Mines),Dhanbad,Jharkhand,62.06,12
+National Institute of Technology Karnataka,Surathkal,Karnataka,61.30,13
+Anna University,Chennai,Tamil Nadu,59.89,14
+Vellore Institute of Technology,Vellore,Tamil Nadu,59.32,15
+National Institute of Technology Rourkela,Rourkela,Odisha,59.29,16
+Jadavpur University,Kolkata,West Bengal,59.23,17
+Institute of Chemical Technology,Mumbai,Maharashtra,58.70,18
+National Institute of Technology Warangal,Warangal,Telangana,57.76,19
+Amrita School of Engineering,Amritapuri,Kerala,57.37,20
+Indian Institute of Engineering Science and Technology,Shibpur,West Bengal,57.14,21
+Indian Institute of Technology Bhubaneswar,Bhubaneswar,Odisha,56.80,22
+National Institute of Technology Calicut,Kozhikode,Kerala,56.56,23
+Indian Institute of Technology Gandhinagar,Gandhinagar,Gujarat,56.15,24
+Indian Institute of Technology Ropar,Rupnagar,Punjab,55.95,25
+Indian Institute of Technology Patna,Patna,Bihar,55.74,26
+Visvesvaraya National Institute of Technology,Nagpur,Maharashtra,54.76,27
+Jamia Millia Islamia,New Delhi,Delhi,54.58,28
+Thapar Institute of Engineering & Technology,Patiala,Punjab,54.45,29
+Birla Institute of Technology & Science,Pilani,Rajasthan,54.39,30
+Indian Institute of Technology Mandi,Mandi,Himachal Pradesh,54.17,31
+Amity University Noida,Gautam Budh Nagar,Uttar Pradesh,53.09,32
+Indian Institute of Space Science and Technology,Thiruvananthapuram,Kerala,53.01,33
+Siksha `O` Anusandhan,Bhubaneswar,Odisha,52.38,34
+Malaviya National Institute of Technology,Jaipur,Rajasthan,52.25,35
+Delhi Technological University,New Delhi,Delhi,51.99,36
+Shanmugha Arts Science Technology & Research Academy,Thanjavur,Tamil Nadu,51.79,37
+Birla Institute of Technology,Ranchi,Jharkhand,51.42,38
+Aligarh Muslim University,Aligarh,Uttar Pradesh,51.39,39
+National Institute of Technology Kurukshetra,Kurukshetra,Haryana,51.19,39
+S. R. M. Institute of Science and Technology,Chennai,Tamil Nadu,50.95,41
+Kalinga Institute of Industrial Technology,Bhubaneswar,Odisha,50.07,42
+International Institute of Information Technology Hyderabad,Hyderabad,Telangana,49.45,43
+Sri Sivasubramaniya Nadar College of Engineering,Kancheepuram,Tamil Nadu,49.26,44
+Manipal Institute of Technology,Manipal,Karnataka,49.06,45
+National Institute of Technology Silchar,Silchar,Assam,48.66,46
+National Institute of Technology Durgapur,Durgapur,West Bengal,48.39,47
+Motilal Nehru National Institute of Technology,Allahabad,Uttar Pradesh,48.24,48
+PSG College of Technology,Coimbatore,Tamil Nadu,47.21,49
+College of Engineering Pune,Pune,Maharashtra,46.79,50
+Sathyabama Institute of Science and Technology,Chennai,Tamil Nadu,46.77,51
+Dr. B. R. Ambedkar National Institute of Technology,Jalandhar,Punjab,46.45,52
+Indian Institute of Technology Jodhpur,Jodhpur,Rajasthan,46.13,53
+Sardar Vallabhbhai National Institute of Technology,Surat,Gujarat,45.59,54
+Visvesvaraya Technological University,Belgaum,Karnataka,45.37,55
+Indraprastha Institute of Information Technology Delhi,New Delhi,Delhi,45.03,56
+Jawaharlal Nehru Technological University,Hyderabad,Telangana,44.97,57
+Koneru Lakshmaiah Education Foundation University,Vaddeswaram,Andhra Pradesh,44.70,58
+M. S. Ramaiah Institute of Technology,Bengaluru,Karnataka,43.74,59
+Kalasalingam Academy of Research and Higher Education,Srivilliputtur,Tamil Nadu,43.71,60
+National Institute of Technology Meghalaya,Shillong,Meghalaya,43.69,61
+International Institute of Information Technology Bangalore,Bengaluru,Karnataka,43.55,62
+Defence Institute of Advanced Technology,Pune,Maharashtra,43.13,63
+Thiagarajar College of Engineering,Madurai,Tamil Nadu,43.11,64
+Maulana Azad National Institute of Technology,Bhopal,Madhya Pradesh,42.17,65
+Indian Institute of Information Technology Guwahati,Guwahati,Assam,41.92,66
+National Institute of Technology Raipur,Raipur,Chhattisgarh,41.58,67
+Punjab Engineering College (Deemed To Be University),Chandigarh,Chandigarh,41.43,68
+College of Engineering(A),Visakhapatnam,Andhra Pradesh,41.36,69
+R. V. College of Engineering,Bengaluru,Karnataka,41.02,70
+Veermata Jijabai Technological Institute,Mumbai,Maharashtra,40.58,71
+Panjab University,Chandigarh,Chandigarh,40.44,72
+B.M.S. College of Engineering,Bengaluru,Karnataka,40.35,73
+Indian Institute of Food Processing Technology (IIFPT),Thanjavur,Tamil Nadu,40.24,74
+National Institute of Technology Agartala,Agratala,Tripura,39.98,75
+Netaji Subhas University of Technology (NSUT),South West,Delhi,39.97,76
+National Institute of Technology Goa,Ponda,Goa,39.93,77
+Shri Mata Vaishno Devi University,Katra,Jammu and Kashmir,39.68,78
+National Institute of Technology Jamshedpur,Jamshedpur,Jharkhand,39.44,79
+Karunya Institute of Technology and Sciences,Coimbatore,Tamil Nadu,39.40,80
+Indian Institute of Information Technology Design & Manufacturing Jabalpur,Jabalpur,Madhya Pradesh,39.29,81
+Kumaraguru College of Technology,Coimbatore,Tamil Nadu,39.24,82
+Sri Krishna College of Engineering and Technology,Coimbatore,Tamil Nadu,38.83,83
+Chandigarh University,Mohali,Punjab,38.82,84
+College of Engineering Trivandrum,Thiruvananthapuram,Kerala,38.68,85
+Guru Gobind Singh Indraprastha University,New Delhi,Delhi,38.61,86
+Lovely Professional University,Phagwara,Punjab,38.44,87
+University College of Engineering,Hyderabad,Telangana,38.43,88
+Graphic Era University,Dehradun,Uttarakhand,38.32,89
+Coimbatore Institute of Technology,Coimbatore,Tamil Nadu,38.24,90
+Siddaganga Institute of Technology,Tumkur,Karnataka,38.23,91
+National Institute of Technology Patna,Patna,Bihar,38.21,92
+C.V. Raman Global University,Bhubaneswar,Odisha,37.94,93
+PES University,Bengaluru,Karnataka,37.94,93
+Vel Tech Rangarajan Dr. Sagunthala R & D Institute of Science and Technology,Chennai,Tamil Nadu,37.86,95
+Jaypee Institute of Information Technology,Noida,Uttar Pradesh,37.80,96
+University College of Engineering,Kakinada,Andhra Pradesh,37.77,97
+National Institute of Technology Hamirpur,Hamirpur,Himachal Pradesh,37.73,98
+Bharati Vidyapeeth Deemed University College of Engineering,Pune,Maharashtra,37.71,99
+Atal Bihari Vajpayee Indian Institute of Information Technology and Management,Gwalior,Madhya Pradesh,37.60,100

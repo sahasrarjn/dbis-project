@@ -1,0 +1,128 @@
+//// -- LEVEL 1
+//// -- Tables and References
+
+
+Table question as Q {
+  question_id int [pk]
+  question_text text
+  Primary_difficulty int
+  answer varchar
+  testcase text
+  visibility varchar
+  author int [ref: > Th.teacher_id]
+
+}
+
+Table Teacher as Th {
+  teacher_id int [pk]
+  First_Name varchar
+  Last_Name varchar 
+  Date_of_Birth datetime
+  user_name varchar
+  password varchar
+}
+
+
+Table Student as S {
+  student_id int [pk]
+  First_Name varchar
+  Last_Name varchar 
+  Date_of_Birth datetime
+  user_name varchar
+  password varchar
+  student_template text
+  institute int [ref: > I.institute_id]
+  facad int [ref: > Th.teacher_id]
+}
+
+
+Table Institute as I {
+  institute_id int [pk]
+  name varchar
+  location varchar
+}
+
+Table Exam as E {
+  exam_id int [pk]
+  exam_name varchar
+  year varchar
+  exam_type_id int [ref: > ET.id]
+  author int [ref: - Th.teacher_id]
+}
+
+Table Tags as T {
+  tag_id int [pk]
+  tag_name varchar
+  // child_nodes int [ref: > T.tag_id]
+}
+
+
+Table exam_type as ET {
+   id int [pk]
+   type varchar
+   duration int
+   num_ques int
+}
+
+Table template as TM {
+  template_id int [pk]
+  base_code text
+}
+
+Table language as L {
+  language_id int [pk]
+  language varchar
+}
+
+Table student_exam_ques_stat {
+  statid int [pk]
+  student_id int [ref: > S.student_id]
+  question_id int [ref: > Q.question_id]
+  exam_id int [ref: > E.exam_id]
+  marks int
+  time_taken int
+  rating int
+  relevance int
+}
+
+Table exam_question {
+  eq_id int [pk]
+  exam_id int [ref: > E.exam_id]
+  question_id int [ref: - Q.question_id]
+}
+
+Table template_language {
+  tl_id int [pk]
+  template_id int [ref: - TM.template_id]
+  language_id int [ref: - L.language_id]
+}
+
+
+
+Table question_tags {
+  id int [pk]
+  question_id int [ref: < Q.question_id]
+  tag_id int [ref: - T.tag_id]
+}
+
+Table tag_child {
+  id int [pk]
+  parent_tag int [ref: > T.tag_id]
+  child_tag int [ref: < T.tag_id]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
