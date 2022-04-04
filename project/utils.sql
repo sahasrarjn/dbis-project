@@ -15,3 +15,9 @@ CREATE MATERIALIZED VIEW tag_children AS
     FROM tag_req
     INNER JOIN tags as child ON child.tag_id = tag_req.child_tag
     INNER JOIN tags as parent ON parent.tag_id = tag_req.parent_tag;
+
+
+
+CREATE INDEX student_idx ON student(student_id);
+CREATE INDEX ques_idx ON question(question_id);
+CREATE INDEX exam_idx ON exam(exam_id);

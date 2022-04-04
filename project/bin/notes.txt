@@ -110,7 +110,7 @@ VIEWING:
 
     
 
-INDEXING:
+INDEXING: (done)
     in STUDENT_EXAM_QUES_STAT, we have to query a lot based on student, exam, ques all three 
     therefore creating index on these is good, since there arent lots of inserts (and slow inserts arent much of an issue)
 
