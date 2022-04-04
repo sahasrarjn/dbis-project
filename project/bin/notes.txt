@@ -51,7 +51,7 @@ STUDENT_EXAM_QUES_STAT
 
 EK BAAR DEKH LENA SARE FOREIGN KEY CONSTRAINTS DALE H KI NHI
 
---MATERIALIZED VIEW
+--MATERIALIZED VIEW (done)
     tags wont be modified and will be used a lot. Therefore we can create mat view for list of children of each tag
 
 
