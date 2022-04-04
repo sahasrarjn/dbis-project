@@ -26,7 +26,7 @@ CREATE TABLE "student" (
   "Last_Name" varchar NOT NULL,
   "Date_of_Birth" date,
   "user_name" varchar NOT NULL UNIQUE,
-  "password" varchar,
+  "password" varchar NOT NULL,
   "student_template" text,
   "institute" int NOT NULL,
   "facad" int NOT NULL
@@ -77,9 +77,9 @@ CREATE TABLE "language" (
 DROP TABLE IF EXISTS "student_exam_ques_stat" CASCADE;
 CREATE TABLE "student_exam_ques_stat" (
   "statid" int PRIMARY KEY,
-  "student_id" int ,
-  "question_id" int,
-  "exam_id" int,
+  "student_id" int NOT NULL ,
+  "question_id" int NOT NULL,
+  "exam_id" int NOT NULL,
   "marks" int NOT NULL,
   "time_taken" int NOT NULL,
   "rating" int,
@@ -89,8 +89,8 @@ CREATE TABLE "student_exam_ques_stat" (
 DROP TABLE IF EXISTS "exam_question" CASCADE;
 CREATE TABLE "exam_question" (
   "eq_id" int PRIMARY KEY,
-  "exam_id" int,
-  "question_id" int
+  "exam_id" int NOT NULL,
+  "question_id" int NOT NULL
 );
 
 DROP TABLE IF EXISTS "template_language" CASCADE;
@@ -103,14 +103,14 @@ CREATE TABLE "template_language" (
 DROP TABLE IF EXISTS "question_tags" CASCADE;
 CREATE TABLE "question_tags" (
   "id" int PRIMARY KEY,
-  "question_id" int,
-  "tag_id" int
+  "question_id" int NOT NULL,
+  "tag_id" int NOT NULL
 );
 
 DROP TABLE IF EXISTS "tag_child" CASCADE;
 CREATE TABLE "tag_child" (
   "id" int PRIMARY KEY,
-  "parent_tag" int,
+  "parent_tag" int NOT NULL,
   "child_tag" int
 );
 
@@ -147,3 +147,49 @@ ALTER TABLE "tag_child" ADD FOREIGN KEY ("parent_tag") REFERENCES "tags" ("tag_i
 -- ALTER TABLE "Tags" ADD FOREIGN KEY ("tag_id") REFERENCES "tag_child" ("child_tag");
 ALTER TABLE "tag_child" ADD FOREIGN KEY ("child_tag") REFERENCES "tags" ("tag_id");
 -- ALTER TABLE "tag_child" ADD FOREIGN KEY ("parent_tag") REFERENCES "tags" ("tag_id");
+
+
+-- triggers to assert some constraints
+CREATE OR REPLACE FUNCTION check_num_ques()
+  RETURNS TRIGGER 
+  LANGUAGE PLPGSQL
+  AS
+$$
+DECLARE
+count_exams INT;
+exam_type_id_ INT;
+BEGIN
+  select count(*) into count_exams from exam_question where exam_question.exam_id = NEW.exam_id;
+  select exam_type_id into exam_type_id_ from exam where exam.exam_id = NEW.exam_id;
+  IF count_exams > (select num_ques from exam_type where exam_type =  exam_type_id_) THEN
+    RAISE EXCEPTION 'Exam contains more questions than specified by its type';
+  END IF;
+
+  RETURN NEW;
+END;
+$$;
+
+create trigger assert_question_exam_type
+after INSERT on "exam_question" execute function check_num_ques();
+
+-- trigger to check question_id and exam_id are consistent with each other in student_exam_ques_stat
+CREATE OR REPLACE FUNCTION check_ques_exam_consistency()
+  RETURNS TRIGGER 
+  LANGUAGE PLPGSQL
+  AS
+$$
+DECLARE
+num_exam_ques_mapping INT;
+BEGIN
+  select count(*) into num_exam_ques_mapping from exam_question where exam_question.exam_id = NEW.exam_id and exam_question.question_id = NEW.question_id;
+  IF num_exam_ques_mapping != 1 THEN
+    RAISE EXCEPTION 'Invalid exam question mapping while insertion into student_exam_ques_stat %', num_exam_ques_mapping;
+  END IF;
+  RETURN NEW;
+END;
+$$;
+
+create trigger assert_ques_exam_consistency
+after INSERT on student_exam_ques_stat execute function check_ques_exam_consistency();
+
+
