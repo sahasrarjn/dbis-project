@@ -16,7 +16,7 @@ with open("data_exam.csv", "w") as f:
         e = [i+40000]
         t = random.randint(0,3)
         e.append(types[t][1]+str(random.randint(1000,9999)))
-        ques[i] = [random.randint(1,448) for _ in range(types[t][3])]
+        ques[i] = random.sample(range(1,448), types[t][3])
         e.append(str(random.randint(2015,2021)))
         e.append(t)
         e.append(random.randint(1001,1050))
