@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS "question" CASCADE;
 CREATE TABLE "question" (
   "question_id" int PRIMARY KEY,
   "question_text" text NOT NULL,
-  "Primary_difficulty" int NOT NULL,
+  "primary_difficulty" int NOT NULL,
   "answer" varchar,
   "testcase" text,
   "visibility" varchar NOT NULL,
@@ -12,9 +12,9 @@ CREATE TABLE "question" (
 DROP TABLE IF EXISTS "teacher" CASCADE;
 CREATE TABLE "teacher" (
   "teacher_id" int PRIMARY KEY,
-  "First_Name" varchar NOT NULL,
-  "Last_Name" varchar NOT NULL,
-  "Date_of_Birth" date,
+  "first_name" varchar NOT NULL,
+  "last_name" varchar NOT NULL,
+  "date_of_birth" date,
   "user_name" varchar UNIQUE NOT NULL,
   "password" varchar NOT NULL
 );
@@ -22,9 +22,9 @@ CREATE TABLE "teacher" (
 DROP TABLE IF EXISTS "student" CASCADE;
 CREATE TABLE "student" (
   "student_id" int PRIMARY KEY,
-  "First_Name" varchar NOT NULL,
-  "Last_Name" varchar NOT NULL,
-  "Date_of_Birth" date,
+  "first_name" varchar NOT NULL,
+  "last_name" varchar NOT NULL,
+  "date_of_birth" date,
   "user_name" varchar NOT NULL UNIQUE,
   "password" varchar NOT NULL,
   "student_template" text,
@@ -230,13 +230,28 @@ CREATE MATERIALIZED VIEW tag_children AS
 		FROM tag_child, tag_req
 		WHERE tag_child.parent_tag = tag_req.child_tag
 	)
-	SELECT parent.tag_name as parent_tag, child.tag_name as child_tag
+	SELECT parent.tag_id as parent_tag, child.tag_id as child_tag
 	FROM tag_req
 	INNER JOIN tags as child ON child.tag_id = tag_req.child_tag
 	INNER JOIN tags as parent ON parent.tag_id = tag_req.parent_tag;
 
 
 
-CREATE INDEX student_idx ON student(student_id);
-CREATE INDEX ques_idx ON question(question_id);
-CREATE INDEX exam_idx ON exam(exam_id);
+CREATE INDEX student_idx ON student_exam_ques_stat(student_id);
+CREATE INDEX ques_idx ON student_exam_ques_stat(question_id);
+CREATE INDEX exam_idx ON student_exam_ques_stat(exam_id);
+
+DROP VIEW if EXISTS all_ques_tags;
+CREATE VIEW all_ques_tags AS
+with x as
+(
+  select question_id, tag_children.parent_tag as tag
+  from question_tags, tag_children
+  where question_tags.tag_id = tag_children.child_tag
+
+  UNION
+
+  select question_id, tag_id
+  from question_tags
+)
+select * from x;

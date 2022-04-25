@@ -7,6 +7,9 @@ t = 0
 c=1
 tags = []
 record = [[] for _ in range(15)]
+def getdiff(qid):
+    t = qid%11
+    return t*100 + 1000
 with open ("questions.csv", "r") as f:
     for line in f.readlines():
         l = [x.strip() for x in line.split(',')]
@@ -23,7 +26,7 @@ with open ("questions.csv", "r") as f:
         elem = [i]
         i+=1
         elem.append(l[1])
-        elem.append(100*random.randint(10,20))
+        elem.append(getdiff(i-1))
         elem.append("./sol/{}/{}.cpp".format(t if t>9 else "0"+str(t), c if c>9 else "0"+str(c)))
         os.system("mkdir -p ./testcases/{}".format(t if t>9 else "0"+str(t)))
         os.system("mkdir -p ./testcases/{}/{}".format(t if t>9 else "0"+str(t),c if c>9 else "0"+str(c)))

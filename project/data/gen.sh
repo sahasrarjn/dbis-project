@@ -1,5 +1,5 @@
-python3 temp.py 
-python3 teacher.py 
-python3 template.py
-python3 exam.py
-python3 tags.py
+python temp.py 
+python teacher.py 
+python template.py
+python exam.py
+python tags.py
