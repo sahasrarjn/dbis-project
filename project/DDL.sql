@@ -218,7 +218,6 @@ CREATE TRIGGER cap_num_ques after insert or update on student_exam_ques_stat for
 CREATE TRIGGER check_ques_exam after insert or update on student_exam_ques_stat for each row execute procedure check_ques_exam_consistency();
 
 DROP MATERIALIZED VIEW IF EXISTS tag_children;
-
 CREATE MATERIALIZED VIEW tag_children AS
 	WITH RECURSIVE tag_req(parent_tag, child_tag) AS (
 		SELECT parent_tag, child_tag 

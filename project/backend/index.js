@@ -55,6 +55,7 @@ app.get('/questions', async function(req, res){
     var { diff_lower, diff_upper, author_id, tags } = req.query;
     // pass empty string if no filter
     
+    // Todo: return tags names instead of ids
     /*
     [
         {
@@ -110,6 +111,7 @@ app.get('/question_data', async function(req, res){
     // needs question_id as qid
     var qid = req.query.qid;
     /*
+    // Todo: return tags names instead of ids
     returns resp as
     resp:
     {
