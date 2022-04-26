@@ -12,10 +12,12 @@ export class QuestionComponent implements OnInit {
   selectedQuestion : string = "";
 
   constructor(private route : ActivatedRoute, private ms : MainService) { }
-
+  // todo (gucci) : handle pagination of data (questions)
   ngOnInit(): void {
     this.ms.getQuestions().subscribe(data => {
-        this.questions = data;
+      // get 10 from data
+        this.questions = (data as Array<any>).slice(0, 10);
+        console.log(this.questions);
       }
     );
   }

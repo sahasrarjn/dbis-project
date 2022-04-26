@@ -1,7 +1,6 @@
-question component works
-<!-- <div>
-    <mat-selection-list #list [(ngModel)]="selectedQuestions" (ngModelChange)="onNgModelChange($event)">
-        <div *ngFor="let q of questions" >
+<div>
+    <mat-selection-list #list>
+    <div *ngFor="let q of questions" >
             <mat-expansion-panel style="margin-bottom: 0.2cm;">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
@@ -12,7 +11,7 @@ question component works
                     <mat-panel-description>
                         Author: {{q.author}}, Difficulty: {{q.primary_difficulty}}
                     </mat-panel-description>
-                    <a mat-button href="question/{{q.question_id}}" target="_blank">
+                    <a mat-button href="question/{{q.question_id}}">
                         <mat-icon>launch</mat-icon>
                         Detailed View
                     </a>
@@ -25,4 +24,4 @@ question component works
             </mat-expansion-panel>
         </div>
     </mat-selection-list>
-</div> -->
+</div>

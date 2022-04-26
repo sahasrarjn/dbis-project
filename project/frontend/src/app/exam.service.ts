@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ExamService {
-  baseurl = 'http://localhost8081/';
+  baseurl = 'http://localhost:8081/';
 
   constructor(private http : HttpClient) { }
 

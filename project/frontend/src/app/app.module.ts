@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { QuestionComponent } from './question/question.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
 import { QuestionDataComponent } from './question-data/question-data.component';
 import { PrepareExamComponent } from './prepare-exam/prepare-exam.component';
 import { ExamDetailComponent } from './exam-detail/exam-detail.component';
 import { HttpClientModule } from '@angular/common/http';
 
+// Angular material
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -30,6 +34,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatListModule,
     HttpClientModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

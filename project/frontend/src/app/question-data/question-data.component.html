@@ -1,5 +1,5 @@
-question data component works
-<!-- <mat-card class="example-card">
+<!-- Handle styling -->
+<mat-card class="example-card">
     <mat-card-header>
       <mat-card-title>Question: #{{question.general.question_id}}</mat-card-title>
     </mat-card-header>
@@ -19,15 +19,15 @@ question data component works
             <mat-list-item>Average time: {{question.stats.avg_time}}</mat-list-item>
             <mat-list-item>Percentage: {{question.stats.perc}}</mat-list-item>
             <mat-list-item>Student Rating: {{question.stats.student_rating}}</mat-list-item>
-        </mat-list> -->
+        </mat-list>
         <!-- Todo: Handle demographics properly -->
-        <!-- <mat-list>Demographics:
+        <mat-list>Demographics:
             <mat-list-item *ngFor="let d of question.demographics">
-                Institute: {{d.institute}}, {d.name}
+                Institute: {{d.institute}}, {{d.name}}
                 Average time: {{d.avg_time}}
                 Percentage: {{d.perc}}
                 Student Rating: {{d.student_rating}}
             </mat-list-item>
         </mat-list>
     </mat-card-content>
-  </mat-card> -->
+  </mat-card>

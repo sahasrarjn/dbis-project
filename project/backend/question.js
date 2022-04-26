@@ -73,7 +73,7 @@ async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 		select * from y
 		`
 	}
-	console.log(query)
+	// console.log(query)
 	qres = await client.query(query);
 	return qres.rows;
 }

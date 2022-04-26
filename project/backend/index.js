@@ -136,7 +136,7 @@ app.get('/questions', async function(req, res){
     */
     
     var qres = await question_lib.get_all_questions(diff_lower, diff_upper, author_id, tags);
-    console.log(qres);
+    // console.log(qres);
     res.send(qres);
 })
 
@@ -199,7 +199,7 @@ app.post('/create_random_exam', async function(req, res){
     var min_diff = req.body.min_diff;
     var tags = req.body.tags;
     var author = req.body.author;
-    console.log(req.body);
+    // console.log(req.body);
     var qres = await exam_lib.auto_create_exam(exam_name, exam_type, max_diff, min_diff, tags, author);
     res.send(qres);
 })

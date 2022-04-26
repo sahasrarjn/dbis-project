@@ -106,9 +106,9 @@ async function auto_create_exam(exam_name, exam_type, max_diff, min_diff, tags, 
     upd = `
         insert into exam values(${eid},'${exam_name}', 2022, ${exam_type}, ${author});
     `
-    console.log(upd);
+    // console.log(upd);
     ret = await client.query(upd);
-    console.log("insert done");
+    // console.log("insert done");
     
     for(let i=0; i<selected_questions.length; i++)
     {
@@ -136,9 +136,9 @@ async function manual_exam(exam_name, selected_questions, exam_type, author)
     upd = `
         insert into exam values(${eid},'${exam_name}', 2022, ${exam_type}, ${author});
     `
-    console.log(upd);
+    // console.log(upd);
     ret = await client.query(upd);
-    console.log("insert done");
+    // console.log("insert done");
 
     for(let i=0; i<selected_questions.length; i++)
     {

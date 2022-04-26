@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class MainService {
-  baseurl = 'http://localhost8081/';
+  baseurl = 'http://localhost:8081/';
 
   constructor(private http : HttpClient) { }
 
@@ -25,6 +25,7 @@ export class MainService {
   }
 
   getQuestionData(id : any){
+    console.log(this.baseurl + 'question_data?qid=' + id);
     return this.http.get(this.baseurl + 'question_data?qid=' + id);
   }
 
