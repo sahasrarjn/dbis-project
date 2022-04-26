@@ -42,9 +42,9 @@ async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 		),
 		y as
 		(
-			select x.question_id, question_text, x.primary_difficulty, author, ARRAY_AGG(tag) as tags, author_id
-			from x, all_ques_tags
-			where x.question_id = all_ques_tags.question_id
+			select x.question_id, question_text, x.primary_difficulty, author, ARRAY_AGG(tag_name) as tags, author_id
+			from x, all_ques_tags_names
+			where x.question_id = all_ques_tags_names.question_id
 			group by x.question_id, question_text, x.primary_difficulty, author, author_id
 		)
 		select * from y
@@ -65,9 +65,9 @@ async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 		),
 		y as
 		(
-			select x.question_id, question_text, primary_difficulty, author, ARRAY_AGG(tag) as tags, author_id
-			from x, all_ques_tags
-			where x.question_id = all_ques_tags.question_id
+			select x.question_id, question_text, primary_difficulty, author, ARRAY_AGG(tag_name) as tags, author_id
+			from x, all_ques_tags_names
+			where x.question_id = all_ques_tags_names.question_id
 			group by x.question_id, question_text, x.primary_difficulty, author, author_id
 		)
 		select * from y
@@ -89,7 +89,7 @@ async function get_question_data(qid)
     qres = await client.query(query);
     resp['general'] = qres.rows[0];
     query = `
-        select ARRAY_AGG(tag) as tags from all_ques_tags where question_id = ${qid}
+        select ARRAY_AGG(tag_name) as tags from all_ques_tags_names where question_id = ${qid}
     `
     qres = await client.query(query);
     resp['tags'] = qres.rows[0];
