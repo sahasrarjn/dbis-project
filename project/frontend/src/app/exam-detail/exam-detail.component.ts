@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ExamService } from '../exam.service';
+import { ExamService } from '../services/exam.service';
 
 @Component({
   selector: 'app-exam-detail',

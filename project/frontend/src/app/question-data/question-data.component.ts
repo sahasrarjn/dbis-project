@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MainService } from '../main.service';
+import { MainService } from '../services/main.service';
 
 @Component({
   selector: 'app-question-data',

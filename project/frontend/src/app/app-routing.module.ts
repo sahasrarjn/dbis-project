@@ -4,6 +4,8 @@ import { ExamDetailComponent } from './exam-detail/exam-detail.component';
 import { PrepareExamComponent } from './prepare-exam/prepare-exam.component';
 import { QuestionDataComponent } from './question-data/question-data.component';
 import { QuestionComponent } from './question/question.component';
+import { ReportCardComponent } from './report-card/report-card.component';
+import { StudentComponent } from './student/student.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'questions', pathMatch: 'full'},
@@ -11,6 +13,8 @@ const routes: Routes = [
   {path: 'question/:id', component: QuestionDataComponent},
   {path: 'exam-detail/:id', component: ExamDetailComponent},
   {path: 'prepare-exam', component: PrepareExamComponent},
+  {path: 'report-card/:eid', component: ReportCardComponent},
+  {path: 'student', component: StudentComponent}, // Todo: Update this to profile, and redirect to relevant component based on role
 ];
 
 @NgModule({

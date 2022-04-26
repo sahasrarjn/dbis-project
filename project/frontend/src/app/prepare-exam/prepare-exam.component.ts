@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ExamService } from '../exam.service';
-import { MainService } from '../main.service';
+import { ExamService } from '../services/exam.service';
+import { MainService } from '../services/main.service';
 
 @Component({
   selector: 'app-prepare-exam',
