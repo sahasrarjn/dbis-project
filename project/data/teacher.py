@@ -2,7 +2,7 @@ import random
 import names
 import hashlib
 
-with open("data_teacher.csv", "w") as f:
+with open("/mnt/e/CS387/data_teacher.csv", "w") as f:
     for i in range(1001, 1051):
         e = [i]
         e.append(names.get_first_name())
@@ -27,7 +27,7 @@ with open("data_student.csv", "w") as f:
         pswd = hashlib.md5((e[1]+e[3]).encode()).hexdigest()
         e.append(pswd)
         e.append(random.randint(0,3))
-        e.append(random.randint(1,100))
+        e.append(1+i%100)
         e.append(random.randint(1001,1050))
         e = ['\''+str(x)+'\'' for x in e]
         f.write(", ".join(map(str, e)))
