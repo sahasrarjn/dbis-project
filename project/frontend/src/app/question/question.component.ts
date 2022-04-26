@@ -9,6 +9,7 @@ import { MainService } from '../main.service';
 })
 export class QuestionComponent implements OnInit {
   questions : any;
+  selectedQuestion : string = "";
 
   constructor(private route : ActivatedRoute, private ms : MainService) { }
 

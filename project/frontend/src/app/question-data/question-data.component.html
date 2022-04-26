@@ -1,1 +1,32 @@
-<p>question-data works!</p>
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Question: #{{question.general.question_id}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list>Question:
+            <p>{{question.general.question_text}}</p>
+        </mat-list>
+        <mat-list>Tags:
+            <mat-list-item *ngFor="let t of question.tags.tags">{{t}}</mat-list-item>
+        </mat-list>
+        <mat-list>Exam:
+            <mat-list-item *ngFor="let e of question.exams">{{e.exam_id}}, {{e.exam_name}}</mat-list-item>
+        </mat-list>
+        <mat-list>Difficutly: {{question.general.primary_difficulty}}</mat-list>
+        <mat-list>Author: {{question.general.author}}</mat-list>
+        <mat-list>Stats:
+            <mat-list-item>Average time: {{question.stats.avg_time}}</mat-list-item>
+            <mat-list-item>Percentage: {{question.stats.perc}}</mat-list-item>
+            <mat-list-item>Student Rating: {{question.stats.student_rating}}</mat-list-item>
+        </mat-list>
+        <!-- Todo: Handle demographics properly -->
+        <mat-list>Demographics:
+            <mat-list-item *ngFor="let d of question.demographics">
+                Institute: {{d.institute}}, {d.name}
+                Average time: {{d.avg_time}}
+                Percentage: {{d.perc}}
+                Student Rating: {{d.student_rating}}
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+  </mat-card>

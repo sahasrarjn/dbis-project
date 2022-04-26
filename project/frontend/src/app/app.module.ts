@@ -9,13 +9,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { QuestionDataComponent } from './question-data/question-data.component';
+import { PrepareExamComponent } from './prepare-exam/prepare-exam.component';
+import { ExamDetailComponent } from './exam-detail/exam-detail.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionComponent,
-    QuestionDataComponent
+    QuestionDataComponent,
+    PrepareExamComponent,
+    ExamDetailComponent
   ],
   imports: [
     BrowserModule,

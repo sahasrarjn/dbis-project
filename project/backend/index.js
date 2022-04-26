@@ -50,6 +50,39 @@ app.get('/tags_list', async function(req, res){
     res.send(qres);
 })
 
+app.get('/exam_types', async function(req, res){
+    /*
+    [
+        {
+            "id": 0,
+            "type": "State",
+            "duration": 30,
+            "num_ques": 2
+        },
+        {
+            "id": 1,
+            "type": "Educational",
+            "duration": 60,
+            "num_ques": 3
+        },
+        {
+            "id": 2,
+            "type": "Standard",
+            "duration": 90,
+            "num_ques": 4
+        },
+        {
+            "id": 3,
+            "type": "National",
+            "duration": 120,
+            "num_ques": 6
+        }
+        ]
+    */
+    var qres = await exam_lib.get_exam_types();
+    res.send(qres);
+})
+
 app.get('/questions', async function(req, res){
     // needs diff_lower, diff_upper, author_id, tags(as array)
     var { diff_lower, diff_upper, author_id, tags } = req.query;

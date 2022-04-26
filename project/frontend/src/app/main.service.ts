@@ -15,12 +15,18 @@ export class MainService {
     })
   };
 
+  getTags(){
+    return this.http.get(this.baseurl + 'tags_list');
+  }
+
   getQuestions(){
+    // TODO: Update for `var { diff_lower, diff_upper, author_id, tags } = req.query;`
     return this.http.get(this.baseurl + 'questions');
   }
 
   getQuestionData(id : any){
-    console.log("Getting question data for qid: ", id);
     return this.http.get(this.baseurl + 'question_data?qid=' + id);
   }
+
+  
 }

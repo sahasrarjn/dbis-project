@@ -14,8 +14,7 @@ export class QuestionDataComponent implements OnInit {
   constructor(private route : ActivatedRoute, private ms : MainService) { }
 
   ngOnInit(): void {
-    // this.route.params.subscribe(params => { this.id = params['id'] });
+    this.route.params.subscribe(params => { this.id = params['id'] });
     this.question = this.ms.getQuestionData(this.id);
-    console.log("here");
   }
 }

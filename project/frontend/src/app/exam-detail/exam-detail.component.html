@@ -1,0 +1,24 @@
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Exam: #{{question.overall.exam_name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list>Year: {{exam.overall.year}}</mat-list>
+        <mat-list>Exam Type: {{exam.overall.exam_type}}</mat-list>
+        <mat-list>Duration: {{exam.overall.duration}}</mat-list>
+        <mat-list>Type: {{exam.overall.type}}</mat-list>
+        <mat-list>Num question: {{question.overall.num_ques}}</mat-list>
+        <mat-list>Stats:
+            <mat-list-item>Average Marks: {{exam.overall.avg_marks}}</mat-list-item>
+            <mat-list-item>Max Marks: {{exam.overall.max_marks}}</mat-list-item>
+            <mat-list-item>Num students: {{exam.overall.num_students}}</mat-list-item>
+        </mat-list>
+        <!-- Todo: Handle questions properly and add link to question detail view-->
+        <mat-list>Questions:
+            <mat-list-item *ngFor="let q of exam.questions">
+                Question: {{q.question_id}}, {{q.question_text}}
+                Primary Difficutly: {{q.primary_difficulty}}
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+  </mat-card>

@@ -1,0 +1,27 @@
+<div>
+    <mat-selection-list #list [(ngModel)]="selectedQuestions" (ngModelChange)="onNgModelChange($event)">
+        <div *ngFor="let q of questions" >
+            <mat-expansion-panel style="margin-bottom: 0.2cm;">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <mat-list-option checkboxPosition="before" [value]="q.id">
+                            {{q.question_id}}
+                        </mat-list-option>  
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Author: {{q.author}}, Difficulty: {{q.primary_difficulty}}
+                    </mat-panel-description>
+                    <a mat-button href="question/{{q.question_id}}" target="_blank">
+                        <mat-icon>launch</mat-icon>
+                        Detailed View
+                    </a>
+                </mat-expansion-panel-header> 
+                <div>
+                    <p>
+                        {{q.question_text}}
+                    </p>
+                </div> 
+            </mat-expansion-panel>
+        </div>
+    </mat-selection-list>
+</div>

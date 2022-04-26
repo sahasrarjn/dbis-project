@@ -13,10 +13,19 @@ async function get_all_exams()
 	return qres.rows;
 }
 
+async function get_exam_types()
+{
+    query = `select * from exam_type`
+    qres = await client.query(query);
+    return qres.rows;
+}
+
 async function get_exam_data(exam_id)
 {
     // exam name, exam type, exam duration, no of students, avg score, max score
     resp={};
+    // todo (prabs) : not working
+    
     query = `
         with x as
         (
@@ -150,5 +159,6 @@ module.exports =
     get_all_exams,
     auto_create_exam,
     manual_exam,
-    get_exam_data
+    get_exam_data,
+    get_exam_types
 }
