@@ -31,6 +31,21 @@ with open("data_exam_question.csv", "w") as f:
             f.write("\'%d\',\'%d\',\'%d\'\n" % (c,i+40000, q))
             c+=1
 
+def gettime(sid, qid):
+    diff = 5*(qid%11)
+    clg = 1+(sid%100)
+    p = (diff+clg)/2
+    
+    y = 16.0*p/149 + 886.0/149 + random.randint(-1,1)
+    return round(y)
+
+def getmarks(sid):
+    x = 1+(sid%100)
+    p = 4.0*x/495 + 91.0/990
+    q = random.random()
+    if q<p:
+        return 0
+    return 1
 with open("data_student_exam_ques_stat.csv", "w") as f:
     c=1
     for exam in range(100):
@@ -41,8 +56,8 @@ with open("data_student_exam_ques_stat.csv", "w") as f:
 
                 rec = [c, s, q, e]
                 c+=1
-                rec.append(random.randint(0,1))
-                rec.append(random.randint(5,15))
+                rec.append(getmarks(s))
+                rec.append(gettime(s,q))
                 rec.append(100*random.randint(10,20))
                 rec.append(random.randint(1,10))
                 rec = ['\''+str(x)+'\'' for x in rec]
