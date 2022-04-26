@@ -11,6 +11,8 @@ import { MatListModule } from '@angular/material/list';
 import { QuestionDataComponent } from './question-data/question-data.component';
 import { PrepareExamComponent } from './prepare-exam/prepare-exam.component';
 import { ExamDetailComponent } from './exam-detail/exam-detail.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { ExamDetailComponent } from './exam-detail/exam-detail.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
