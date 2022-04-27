@@ -4,11 +4,11 @@
       <mat-card-title>Question: #{{question.general.question_id}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <mat-list>Question:
+        <mat-list><b class="question">Question: </b>
             <p>{{question.general.question_text}}</p>
         </mat-list>
         <mat-list>Tags:
-            <mat-list-item *ngFor="let t of question.tags.tags">{{t}}</mat-list-item>
+            <span class="tag-item" *ngFor="let t of question.tags.tags">{{t}} </span>
         </mat-list>
         <mat-list>Exam:
             <mat-list-item *ngFor="let e of question.exams">{{e.exam_id}}, {{e.exam_name}}</mat-list-item>
@@ -31,3 +31,15 @@
         </mat-list>
     </mat-card-content>
   </mat-card>
+
+<div style="width:20%">
+  <div>
+    <div class="chart">
+      <canvas baseChart
+              [data]="pieChartData"
+              [type]="pieChartType"
+              [options]="pieChartOptions">
+      </canvas>
+    </div>
+  </div>
+</div>
