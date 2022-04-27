@@ -1,27 +1,46 @@
-<div>
-    <mat-selection-list #list>
-    <div *ngFor="let q of questions" >
-            <mat-expansion-panel style="margin-bottom: 0.2cm;">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <mat-list-option checkboxPosition="before" [value]="q.id">
-                            {{q.question_id}}
-                        </mat-list-option>  
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        Author: {{q.author}}, Difficulty: {{q.primary_difficulty}}
-                    </mat-panel-description>
-                    <a mat-button href="question/{{q.question_id}}">
-                        <mat-icon>launch</mat-icon>
-                        Detailed View
-                    </a>
-                </mat-expansion-panel-header> 
-                <div>
-                    <p>
-                        {{q.question_text}}
-                    </p>
-                </div> 
-            </mat-expansion-panel>
+<section>
+    <div style="width: 50%; margin-left: 25%;">
+        <div [class.mat-elevation-z2]="true">
+            <div style="margin-bottom: -0.6cm; margin-top: 1cm">
+                <h2 mat-subheader>Tags:</h2>
+            </div>
+            <mat-selection-list #list [(ngModel)]="selectedTags" (ngModelChange)="onNgModelChange($event)">
+                <mat-list-option *ngFor="let t of tags" [value]="t.tag_id"> {{ t.tag_id }}. {{ t.tag_name }} </mat-list-option>
+            </mat-selection-list>
         </div>
-    </mat-selection-list>
-</div>
+        <div style="text-align: center; margin-top: 0.5cm;">
+            <button mat-raised-button color="primary" (click)="toggle_all_tags();" style="float:left">Toggle</button>
+            <button mat-raised-button color="primary" (click)="tags_select();" style="float:right">Select Tags</button>
+        </div>
+    </div>
+</section>
+
+<section style="margin-top: 3cm;">
+    <div>
+        <mat-selection-list #list>
+        <div *ngFor="let q of questions" >
+                <mat-expansion-panel style="margin-bottom: 0.2cm;">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-list-option checkboxPosition="before" [value]="q.id">
+                                {{q.question_id}}
+                            </mat-list-option>  
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Author: {{q.author}}, Difficulty: {{q.primary_difficulty}}
+                        </mat-panel-description>
+                        <a mat-button href="question/{{q.question_id}}">
+                            <mat-icon>launch</mat-icon>
+                            Detailed View
+                        </a>
+                    </mat-expansion-panel-header> 
+                    <div>
+                        <p>
+                            {{q.question_text}}
+                        </p>
+                    </div> 
+                </mat-expansion-panel>
+            </div>
+        </mat-selection-list>
+    </div>
+</section>

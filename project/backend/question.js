@@ -19,14 +19,26 @@ async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 		diff_upper = 10000;
 	if (tags == null || tags=="")
 	{
-		tg = await get_all_tags();
+		// tg = await get_all_tags();
 		tags = [];
-		for(let i=0; i<tg.length; i++)
-			tags.push(tg[i].tag_id);
+		// for(let i=0; i<tg.length; i++)
+		// 	tags.push(tg[i].tag_id);
 		
 	}
 		
-	tgstr = '(' + tags.join(',') + ')';
+	tgstr = '(';
+	for(let i=0; i<tags.length; i++)
+	{
+		if (i!=0)
+			tgstr += ',';
+		tgstr += tags[i];
+	}
+	tgstr += ')';
+	if(tgstr == '()'){
+		tgstr = '(0)';
+	}
+
+
 	if (author_id == null || author_id=="")
 	{   
 		query = `

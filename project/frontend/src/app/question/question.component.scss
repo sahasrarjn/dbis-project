@@ -1,0 +1,25 @@
+/* Split the screen in half */
+.split {
+    height: 100%;
+}
+
+/* Control the left side */
+.left {
+    left: 0;
+    width: 45%;
+    float: left;
+}
+
+/* Control the right side */
+.right {
+    right: 0;
+    width: 50%;
+    float: right;
+}
+
+
+.bot {
+    float: left;
+    width: 100%;
+    margin-top: 2cm;
+}
