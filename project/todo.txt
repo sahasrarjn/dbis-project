@@ -16,3 +16,5 @@ Prabs:
         - Idhar graphbaazzi karenge frontend pe to dekh lena jo data imp lage bhej dena
 
 - List of questions for given tags and difficult, if none assume all
+
+- List of exams prepared by some teacher (author).
