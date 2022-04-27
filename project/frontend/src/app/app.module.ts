@@ -23,6 +23,8 @@ import { ReportCardComponent } from './report-card/report-card.component';
 import { StudentComponent } from './student/student.component';
 import { TeacherComponent } from './teacher/teacher.component';
 import { ExamsComponent } from './exams/exams.component';
+import { NgChartsModule } from 'ng2-charts';
+
 
 
 @NgModule({
@@ -35,7 +37,7 @@ import { ExamsComponent } from './exams/exams.component';
     ReportCardComponent,
     StudentComponent,
     TeacherComponent,
-    ExamsComponent
+    ExamsComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,7 @@ import { ExamsComponent } from './exams/exams.component';
     MatExpansionModule,
     MatIconModule,
     FormsModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
