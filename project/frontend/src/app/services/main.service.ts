@@ -19,9 +19,14 @@ export class MainService {
     return this.http.get(this.baseurl + 'tags_list');
   }
 
-  getQuestions(){
+  getQuestions(diff_lower:any, diff_upper:any, tags:any, author_id:any){
     // TODO: Update for `var { diff_lower, diff_upper, author_id, tags } = req.query;`
-    return this.http.get(this.baseurl + 'questions');
+    var url = this.baseurl + 'questions?diff_lower=' + diff_lower + '&diff_upper=' + diff_upper + '&author_id=' + author_id;
+    for (var i = 0; i < tags.length; i++) {
+      url += '&tags=' + tags[i];
+    }
+    // console.log(url);
+    return this.http.get(url);
   }
 
   getQuestionData(id : any){

@@ -19,14 +19,26 @@ async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 		diff_upper = 10000;
 	if (tags == null || tags=="")
 	{
-		tg = await get_all_tags();
+		// tg = await get_all_tags();
 		tags = [];
-		for(let i=0; i<tg.length; i++)
-			tags.push(tg[i].tag_id);
+		// for(let i=0; i<tg.length; i++)
+		// 	tags.push(tg[i].tag_id);
 		
 	}
 		
-	tgstr = '(' + tags.join(',') + ')';
+	tgstr = '(';
+	for(let i=0; i<tags.length; i++)
+	{
+		if (i!=0)
+			tgstr += ',';
+		tgstr += tags[i];
+	}
+	tgstr += ')';
+	if(tgstr == '()'){
+		tgstr = '(0)';
+	}
+
+
 	if (author_id == null || author_id=="")
 	{   
 		query = `
@@ -142,6 +154,23 @@ async function get_question_data(qid)
     `
     qres = await client.query(query);
     resp['demographics'] = qres.rows;
+
+	query = `
+		with x as
+		(
+			select exam_id, student_id, time_taken, marks, relevance
+			from student_exam_ques_stat
+			where question_id = ${qid}
+		)
+		select x.student_id, CONCAT(first_name, ' ', last_name) as student_name, x.exam_id, exam_name,
+			time_taken, marks, relevance
+		from x, exam, student
+		where x.exam_id = exam.exam_id and x.student_id = student.student_id
+		order by student_name
+	`
+	qres = await client.query(query);
+	resp['student_data'] = qres.rows;
+
     return resp;
 
 }
