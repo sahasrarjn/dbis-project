@@ -81,8 +81,9 @@ async function get_question_data(qid)
 {
     var resp={}
     query = `
-        select question_text, primary_difficulty, author, question_id
+        select question_text, primary_difficulty, author, question_id, first_name as author_first_name, last_name as author_last_name
         from question
+		inner join teacher on question.author = teacher.teacher_id
         where question_id = ${qid}
     `
     qres = await client.query(query);

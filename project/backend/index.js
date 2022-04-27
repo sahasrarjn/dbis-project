@@ -154,6 +154,8 @@ app.get('/question_data', async function(req, res){
             question_text
             primary_difficulty
             author_id as author
+            first_name as author_first_name
+            last_name as author_last_name
         },
         tags:
         {
