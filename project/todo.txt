@@ -17,4 +17,4 @@ Prabs:
 
 - List of questions for given tags and difficult, if none assume all
 
-- List of exams prepared by some teacher (author).
+- List of exams prepared by some teacher (author). List of all exams.
