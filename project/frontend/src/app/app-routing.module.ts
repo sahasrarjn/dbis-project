@@ -6,6 +6,7 @@ import { QuestionDataComponent } from './question-data/question-data.component';
 import { QuestionComponent } from './question/question.component';
 import { ReportCardComponent } from './report-card/report-card.component';
 import { StudentComponent } from './student/student.component';
+import { TeacherComponent } from './teacher/teacher.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'questions', pathMatch: 'full'},
@@ -15,6 +16,8 @@ const routes: Routes = [
   {path: 'prepare-exam', component: PrepareExamComponent}, // Todo (gucci): left to implement (form banana hai)
   {path: 'report-card/:eid', component: ReportCardComponent},
   {path: 'student', component: StudentComponent}, // Todo: Update this to profile, and redirect to relevant component based on role
+  {path: 'teacher/:id', component: TeacherComponent}, // Todo: empty component, this is a public page, any user can access and see all exams prepared by teacher and other details
+  
 ];
 
 @NgModule({
