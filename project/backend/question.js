@@ -142,6 +142,23 @@ async function get_question_data(qid)
     `
     qres = await client.query(query);
     resp['demographics'] = qres.rows;
+
+	query = `
+		with x as
+		(
+			select exam_id, student_id, time_taken, marks, relevance
+			from student_exam_ques_stat
+			where question_id = ${qid}
+		)
+		select x.student_id, CONCAT(first_name, ' ', last_name) as student_name, x.exam_id, exam_name,
+			time_taken, marks, relevance
+		from x, exam, student
+		where x.exam_id = exam.exam_id and x.student_id = student.student_id
+		order by student_name
+	`
+	qres = await client.query(query);
+	resp['student_data'] = qres.rows;
+
     return resp;
 
 }

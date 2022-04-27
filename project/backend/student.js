@@ -3,6 +3,25 @@ const client = require('./obj.js');
 
 const question_lib = require('./question.js');
 
+async function get_student_data(sid)
+{
+    query = `
+        with x as
+        (
+            select student_id, first_name, last_name, user_name, institute, facad
+            from student
+            where student_id = ${sid}
+        )
+        select student_id, x.first_name, x.last_name, x.user_name, x.institute, x.facad,
+        institute.name, CONCAT(teacher.first_name, ' ', teacher.last_name) as facad_name
+        from x, institute, teacher
+        where x.institute = institute.institute_id and
+            x.facad = teacher.teacher_id
+    `
+    qres = await client.query(query);
+    return qres.rows[0];
+}
+
 async function get_attempted_questions(sid)
 {
     query = `
@@ -70,7 +89,7 @@ async function get_report_card(eid, sid)
         ),
         y as
         (
-            select student_id, marks, num_ques, time_taken, RANK() OVER (ORDER BY marks, time_taken DESC) as rnk
+            select student_id, marks, num_ques, time_taken, RANK() OVER (ORDER BY marks DESC, time_taken ) as rnk
             from x
         )
         select CONCAT(marks, '/', num_ques) as marks, time_taken, CONCAT(rnk, ' / ', (select count(*) from y)) as rank
@@ -86,5 +105,6 @@ module.exports=
 {
     get_attempted_questions,
     get_attempted_exams,
-    get_report_card
+    get_report_card,
+    get_student_data
 }
