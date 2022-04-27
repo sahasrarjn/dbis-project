@@ -1,0 +1,18 @@
+Prabs:
+- Question detailed demographics:
+    - List of students who attempted the Question
+        - Each with time they took
+        - Percentage
+        - blah blah
+        - sorted in some order (bas mention kar dena, fronend pe likh dunga kya order hai)
+    
+- Exam detailed demographics:
+    - List of students who attempted the Exam
+        - Each with time they took
+        - Rank of them
+        - Percentage
+        - blah blah
+        - sorted according to rank
+        - Idhar graphbaazzi karenge frontend pe to dekh lena jo data imp lage bhej dena
+
+- List of questions for given tags and difficult, if none assume all

@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'questions', component: QuestionComponent},
   {path: 'question/:id', component: QuestionDataComponent},
   {path: 'exam-detail/:id', component: ExamDetailComponent},
-  {path: 'prepare-exam', component: PrepareExamComponent},
+  {path: 'prepare-exam', component: PrepareExamComponent}, // Todo (gucci): left to implement (form banana hai)
   {path: 'report-card/:eid', component: ReportCardComponent},
   {path: 'student', component: StudentComponent}, // Todo: Update this to profile, and redirect to relevant component based on role
 ];

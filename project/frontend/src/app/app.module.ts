@@ -20,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReportCardComponent } from './report-card/report-card.component';
 import { StudentComponent } from './student/student.component';
 import { TeacherComponent } from './teacher/teacher.component';
+import { ExamsComponent } from './exams/exams.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { TeacherComponent } from './teacher/teacher.component';
     ExamDetailComponent,
     ReportCardComponent,
     StudentComponent,
-    TeacherComponent
+    TeacherComponent,
+    ExamsComponent
   ],
   imports: [
     BrowserModule,

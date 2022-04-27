@@ -11,7 +11,6 @@ async function get_all_tags()
 	return qres.rows;
 }
 
-
 async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 {
 	if (diff_lower == null || diff_lower=="")
@@ -103,7 +102,7 @@ async function get_question_data(qid)
         from x, exam
         where x.exam_id = exam.exam_id
     `
-    console.log(query);
+    // console.log(query);
     qres = await client.query(query);
     resp['exams'] = qres.rows;
 
