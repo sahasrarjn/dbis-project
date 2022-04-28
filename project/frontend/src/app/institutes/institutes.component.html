@@ -1,27 +1,21 @@
 <section style="margin-top: 3cm;">
     <div>
         <mat-selection-list #list>
-        <div *ngFor="let e of exams" >
+        <div *ngFor="let i of institutes" >
                 <mat-expansion-panel style="margin-bottom: 0.2cm;">
+                    <!-- Todo: (gucci), disable expansion or some other styling -->
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            {{e.exam_id}}
+                            {{i.institute_id}}
                         </mat-panel-title>
                         <mat-panel-description>
-                            {{e.exam_name}}
+                            {{i.name}}, {{i.location}}
                         </mat-panel-description>
-                        <a mat-button href="exam/{{e.exam_id}}">
+                        <a mat-button href="institute/{{i.institute_id}}">
                             <mat-icon>launch</mat-icon>
                             Detailed View
                         </a>
                     </mat-expansion-panel-header> 
-                    <div>
-                        <mat-list>
-                            <mat-list-item>Year: {{e.year}}</mat-list-item>
-                            <mat-list-item>Type: {{e.type}}</mat-list-item>
-                            <mat-list-item>Duration {{e.duration}}</mat-list-item>
-                        </mat-list>
-                    </div> 
                 </mat-expansion-panel>
             </div>
         </mat-selection-list>
@@ -31,5 +25,5 @@
 <div class="d-flex justify-content-around" style="padding-bottom: 32px; padding-top:32px">
     <button mat-button (click)="goto_start()" [disabled]="start == 0">Start</button>
     <button mat-button (click)="prev()" [disabled]="start == 0">Prev</button>
-    <button mat-button (click)="next()" [disabled]="start * 10 >= all_exams.length">Next</button>
+    <button mat-button (click)="next()" [disabled]="start * 10 >= all_institutes.length">Next</button>
 </div>

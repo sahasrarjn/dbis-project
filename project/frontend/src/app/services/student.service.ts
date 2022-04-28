@@ -9,6 +9,10 @@ export class StudentService {
 
   constructor(private http : HttpClient) { }
 
+  getStudentbyId(sid:any){
+    return this.http.get(this.baseurl + 'get_student?sid=' + sid);
+  }
+
   getReportCard(sid:any, eid:any){
     return this.http.get(this.baseurl + 'get_report_card?sid=' + sid + '&eid=' + eid);
   }

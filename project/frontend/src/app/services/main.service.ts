@@ -25,7 +25,7 @@ export class MainService {
     for (var i = 0; i < tags.length; i++) {
       url += '&tags=' + tags[i];
     }
-    console.log(url);
+    // console.log(url);
     return this.http.get(url);
   }
 

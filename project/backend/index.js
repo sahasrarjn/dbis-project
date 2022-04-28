@@ -324,7 +324,12 @@ app.get('/get_student', async function (req, res) {
 	var qres = await student_lib.get_student_data(sid);
 	res.send(qres);
 })
+<<<<<<< HEAD
 app.get('/get_own_students', async function (req, res) {
+=======
+
+app.get('/get_own_students', async function(req, res){
+>>>>>>> d199171981d43819fc41cbf0820db437182182e9
 	var tid = req.query.tid;
 	/*
 [
@@ -473,6 +478,11 @@ app.get('/get_report_card', async function (req, res) {
 
 app.get('/get_all_insti', async function (req, res) {
 	/*
+	{
+		"institute_id": 1,
+		"name": "Indian Institute of Technology Madras",
+		"location": "Tamil Nadu"
+	}
 	*/
 	var qres = await insti_lib.get_all_institutes();
 	res.send(qres)
@@ -508,6 +518,8 @@ app.get('/get_insti', async function (req, res) {
 	var qres = await insti_lib.get_institute_data(iid);
 	res.send(qres);
 })
+
+// Todo (prabs): get teacher, return student list who's facad is the teacher. List of questions prepared by the teacher.
 
 var server = app.listen(8081, HOST, function () {
 	var host = server.address().address

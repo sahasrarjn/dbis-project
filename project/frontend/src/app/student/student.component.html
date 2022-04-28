@@ -3,6 +3,12 @@
       <mat-card-title>Student profile: {{sid}}</mat-card-title> 
     </mat-card-header>
     <mat-card-content>
+        <mat-list>Name: {{student.first_name}} {{student.last_name}}</mat-list>
+        <!-- <mat-list>Exam Type: {{student.exam_type}}</mat-list> -->
+        <mat-list>Username: {{student.user_name}}</mat-list>
+        <mat-list>Institute: {{student.institute}}, {{student.name}}</mat-list>
+        <mat-list>FacAd: <a href="teacher/{{student.facad}}">{{student.facad}}</a>, {{student.facad_name}}</mat-list>
+        
         <!-- Todo: Handle questions properly and add link to question detail view-->
         <mat-list>Attempted exams:
             <mat-list-item *ngFor="let e of attempted_exams">

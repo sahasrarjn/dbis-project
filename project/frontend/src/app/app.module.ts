@@ -19,6 +19,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReportCardComponent } from './report-card/report-card.component';
 import { StudentComponent } from './student/student.component';
 import { TeacherComponent } from './teacher/teacher.component';
@@ -28,6 +33,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RegService } from './reg.service';
 import { LoginService } from './login.service';
+import { InstitutesComponent } from './institutes/institutes.component';
+import { InstituteDetailComponent } from './institute-detail/institute-detail.component';
+
+
 
 
 
@@ -44,6 +53,8 @@ import { LoginService } from './login.service';
     ExamsComponent,
     LoginComponent,
     RegisterComponent,
+    InstitutesComponent,
+    InstituteDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,10 +66,16 @@ import { LoginService } from './login.service';
     MatButtonModule,
     MatExpansionModule,
     MatIconModule,
+    NgChartsModule,
     FormsModule,
     NgChartsModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTooltipModule
   ],
   providers: [RegService, LoginService],
   bootstrap: [AppComponent]
