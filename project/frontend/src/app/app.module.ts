@@ -17,13 +17,17 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ReportCardComponent } from './report-card/report-card.component';
 import { StudentComponent } from './student/student.component';
 import { TeacherComponent } from './teacher/teacher.component';
 import { ExamsComponent } from './exams/exams.component';
 import { NgChartsModule } from 'ng2-charts';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { RegService } from './reg.service';
+import { LoginService } from './login.service';
 
 
 
@@ -38,6 +42,8 @@ import { NgChartsModule } from 'ng2-charts';
     StudentComponent,
     TeacherComponent,
     ExamsComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,9 +56,11 @@ import { NgChartsModule } from 'ng2-charts';
     MatExpansionModule,
     MatIconModule,
     FormsModule,
-    NgChartsModule
+    NgChartsModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [RegService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
