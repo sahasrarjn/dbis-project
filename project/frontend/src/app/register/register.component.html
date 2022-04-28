@@ -1,0 +1,113 @@
+<br>
+<div *ngIf="!is_teacher && !is_student">
+    <h1 style="text-align: center;"> Register </h1>
+
+    <button class="btn btn-lg btn-dark" (click)="activateStudentreg()" type="submit">Register as Student</button>
+    <button class="btn btn-lg btn-dark" (click)="activateTeacherreg()" type="submit">Register as Teacher</button>
+</div>
+<div *ngIf="is_student">
+    <h1 style="text-align: center;"> Register as Student</h1>
+
+    <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>Roll No</label>
+            <input class="form-control form-control-lg" type="text" formControlName="student_id"
+                placeholder="Enter your Roll no">
+        </div>
+        <div class="form-group">
+            <label>First Name</label>
+            <input class="form-control form-control-lg" type="text" formControlName="first_name"
+                placeholder="Enter your first name">
+        </div>
+        <div class="form-group">
+            <label>Last Name</label>
+            <input class="form-control form-control-lg" type="text" formControlName="last_name"
+                placeholder="Enter your last name">
+        </div>
+        <div class="form-group">
+            <label>username</label>
+            <input class="form-control form-control-lg" type="text" formControlName="user_name"
+                placeholder="Enter your user name">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" formControlName="password" class="form-control form-control-lg"
+                placeholder="Enter password">
+        </div>
+        <div class="form-group">
+            <label>Date of Birth</label>
+            <input class="form-control form-control-lg" type="text" formControlName="date_of_birth"
+                placeholder="Enter your dob">
+        </div>
+        <div class="form-group">
+            <label>Student Template</label>
+            <input class="form-control form-control-lg" type="number" formControlName="student_template"
+                placeholder="Enter your template">
+        </div>
+        <div class="form-group">
+            <label>Institute</label>
+            <input class="form-control form-control-lg" type="number" formControlName="institute"
+                placeholder="Enter your Institute">
+        </div>
+        <div class="form-group">
+            <label>Facad</label>
+            <input class="form-control form-control-lg" type="number" formControlName="facad"
+                placeholder="Enter your facad">
+        </div>
+    </form>
+    <div class="text-center mt-3">
+        <button class="btn btn-lg btn-dark" [disabled]="!validate()" (click)="onSubmit()"
+            type="submit">Register</button>
+    </div>
+    <br>
+    <!-- <div *ngIf="errormessage">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Could not register! Try again with non-empty credentials.
+    </div> -->
+
+</div>
+<div *ngIf="is_teacher">
+    <h1 style="text-align: center;"> Register as Teacher </h1>
+
+    <form [formGroup]="regFormTeacher" (ngSubmit)="onTeacherSubmit()">
+        <div class="form-group">
+            <label>Teacher ID</label>
+            <input class="form-control form-control-lg" type="text" formControlName="teacher_id"
+                placeholder="Enter your teacher id">
+        </div>
+        <div class="form-group">
+            <label>First Name</label>
+            <input class="form-control form-control-lg" type="text" formControlName="first_name"
+                placeholder="Enter your first name">
+        </div>
+        <div class="form-group">
+            <label>Last Name</label>
+            <input class="form-control form-control-lg" type="text" formControlName="last_name"
+                placeholder="Enter your last name">
+        </div>
+        <div class="form-group">
+            <label>username</label>
+            <input class="form-control form-control-lg" type="text" formControlName="user_name"
+                placeholder="Enter your user name">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" formControlName="password" class="form-control form-control-lg"
+                placeholder="Enter password">
+        </div>
+        <div class="form-group">
+            <label>Date of Birth</label>
+            <input class="form-control form-control-lg" type="text" formControlName="date_of_birth"
+                placeholder="Enter your dob">
+        </div>
+    </form>
+    <div class="text-center mt-3">
+        <button class="btn btn-lg btn-dark" [disabled]="!validate2()" (click)="onTeacherSubmit()"
+            type="submit">Register</button>
+    </div>
+    <br>
+    <!-- <div *ngIf="errormessage" class="alert alert-danger" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Could not register! Try again with non-empty credentials.
+    </div> -->
+</div>

@@ -1,19 +1,27 @@
-const env = require('dotenv').config({path: __dirname + '/.env'});
+const env = require('dotenv').config({ path: __dirname + '/.env' });
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const multer = require('multer');
+
+const jwt = require('jsonwebtoken');
+
 var upload = multer();
 
 app.options('*', cors());
 app.use(cors());
-app.use(upload.array()); 
+app.use(upload.array());
 app.use(express.static('public'));
 app.use(bodyParser.json());
+
+var AuthController = require('./auth/AuthController');
+app.use('/auth', AuthController);
+module.exports = app;
+
 HOST = (process.env.PGHOST ? process.env.PGHOST : '0.0.0.0');
 
-const tacher_lib = require('./teacher.js');
+const teacher_lib = require('./teacher.js');
 const exam_lib = require('./exams.js');
 const question_lib = require('./question.js');
 const student_lib = require('./student.js');
@@ -22,11 +30,12 @@ const insti_lib = require('./institute.js')
 
 const { Client } = require('pg');
 var { query } = require('express');
+const { nextTick } = require('async');
 
 const client = new Client();
 client.connect();
 
-app.get('/tags_list', async function(req, res){
+app.get('/tags_list', async function (req, res) {
 	/*
 		[
 			{
@@ -51,7 +60,7 @@ app.get('/tags_list', async function(req, res){
 	res.send(qres);
 })
 
-app.get('/exam_types', async function(req, res){
+app.get('/exam_types', async function (req, res) {
 	/*
 	[
 		{
@@ -84,11 +93,11 @@ app.get('/exam_types', async function(req, res){
 	res.send(qres);
 })
 
-app.get('/questions', async function(req, res){
+app.get('/questions', async function (req, res) {
 	// needs diff_lower, diff_upper, author_id, tags(as array)
 	var { diff_lower, diff_upper, author_id, tags } = req.query;
 	// pass empty string if no filter
-	
+
 	// Todo: return tags names instead of ids
 	/*
 	[
@@ -135,13 +144,13 @@ app.get('/questions', async function(req, res){
 		}
 	]
 	*/
-	
+
 	var qres = await question_lib.get_all_questions(diff_lower, diff_upper, author_id, tags);
 	// console.log(qres);
 	res.send(qres);
 })
 
-app.get('/question_data', async function(req, res){
+app.get('/question_data', async function (req, res) {
 	// needs question_id as qid
 	var qid = req.query.qid;
 	/*
@@ -200,12 +209,12 @@ app.get('/question_data', async function(req, res){
 
 	}
 	*/
-	
+
 	var qres = await question_lib.get_question_data(qid);
 	res.send(qres);
 })
 
-app.post('/create_random_exam', async function(req, res){
+app.post('/create_random_exam', async function (req, res) {
 	// exam_name, exam_type, max_diff, min_diff, tags, authorid as author
 	// returns nothing
 	var exam_name = req.body.exam_name;
@@ -219,13 +228,13 @@ app.post('/create_random_exam', async function(req, res){
 	res.send(qres);
 })
 
-app.post('/create_manual_exam', async function(req, res){
-	var {exam_name, exam_type, qids, author} = req.body;
+app.post('/create_manual_exam', async function (req, res) {
+	var { exam_name, exam_type, qids, author } = req.body;
 	var qres = await exam_lib.manual_exam(exam_name, qids, exam_type, author);
 	res.send(qres);
 })
 
-app.get('/get_exam_data', async function(req, res){
+app.get('/get_exam_data', async function (req, res) {
 	var exam_id = req.query.exam_id;
 	/*
 	{
@@ -293,12 +302,12 @@ app.get('/get_exam_data', async function(req, res){
 		]
 	}
 	*/
-	
+
 	var qres = await exam_lib.get_exam_data(exam_id);
 	res.send(qres);
 })
 
-app.get('/get_student', async function(req, res){
+app.get('/get_student', async function (req, res) {
 	var sid = req.query.sid;
 	/*
 		{
@@ -315,8 +324,12 @@ app.get('/get_student', async function(req, res){
 	var qres = await student_lib.get_student_data(sid);
 	res.send(qres);
 })
+<<<<<<< HEAD
+app.get('/get_own_students', async function (req, res) {
+=======
 
 app.get('/get_own_students', async function(req, res){
+>>>>>>> d199171981d43819fc41cbf0820db437182182e9
 	var tid = req.query.tid;
 	/*
 [
@@ -338,7 +351,7 @@ app.get('/get_own_students', async function(req, res){
 	res.send(qres);
 })
 
-app.get('/get_attempted_questions', async function(req, res){
+app.get('/get_attempted_questions', async function (req, res) {
 	var sid = req.query.sid;
 	/*
 	[
@@ -358,7 +371,7 @@ app.get('/get_attempted_questions', async function(req, res){
 	res.send(qres);
 })
 
-app.get('/get_attempted_exams', async function(req, res){
+app.get('/get_attempted_exams', async function (req, res) {
 	var sid = req.query.sid;
 	/*
 	[
@@ -374,12 +387,12 @@ app.get('/get_attempted_exams', async function(req, res){
 		}
 	]
 	*/
-	
+
 	var qres = await student_lib.get_attempted_exams(sid);
 	res.send(qres);
 })
 
-app.get('/get_all_exams', async function(req, res){
+app.get('/get_all_exams', async function (req, res) {
 	var author = req.query.author; //empty if all exams are needed
 	/*
 		[
@@ -396,7 +409,7 @@ app.get('/get_all_exams', async function(req, res){
 	res.send(qres);
 })
 
-app.get('/get_report_card', async function(req, res){
+app.get('/get_report_card', async function (req, res) {
 	var sid = req.query.sid;
 	var eid = req.query.eid;
 	/*
@@ -463,7 +476,7 @@ app.get('/get_report_card', async function(req, res){
 	res.send(qres);
 })
 
-app.get('/get_all_insti', async function(req, res){
+app.get('/get_all_insti', async function (req, res) {
 	/*
 	{
 		"institute_id": 1,
@@ -475,7 +488,7 @@ app.get('/get_all_insti', async function(req, res){
 	res.send(qres)
 })
 
-app.get('/get_insti', async function(req, res){
+app.get('/get_insti', async function (req, res) {
 	var iid = req.query.iid;
 	/*
 		"general": 
@@ -483,7 +496,7 @@ app.get('/get_insti', async function(req, res){
 			"institute_id": 2,
 			"name": "Indian Institute of Technology Delhi",
 			"location": "Delhi"
-    	},
+		},
 		"students": 
 		[
 			{
@@ -511,7 +524,7 @@ app.get('/get_insti', async function(req, res){
 var server = app.listen(8081, HOST, function () {
 	var host = server.address().address
 	var port = server.address().port
- 
+
 	console.log("Example app listening at http://%s:%s", host, port)
- })
- 
+})
+

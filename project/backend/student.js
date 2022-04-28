@@ -3,8 +3,7 @@ const client = require('./obj.js');
 
 const question_lib = require('./question.js');
 
-async function get_student_data(sid)
-{
+async function get_student_data(sid) {
     query = `
         with x as
         (
@@ -22,8 +21,7 @@ async function get_student_data(sid)
     return qres.rows[0];
 }
 
-async function get_attempted_questions(sid)
-{
+async function get_attempted_questions(sid) {
     query = `
         with x as
         (
@@ -39,8 +37,7 @@ async function get_attempted_questions(sid)
     return qres.rows;
 }
 
-async function get_attempted_exams(sid)
-{
+async function get_attempted_exams(sid) {
     query = `
         with x as
         (
@@ -56,8 +53,7 @@ async function get_attempted_exams(sid)
     return qres.rows;
 }
 
-async function get_report_card(eid, sid)
-{
+async function get_report_card(eid, sid) {
     resp = {}
     query = `
         with x as
@@ -77,7 +73,7 @@ async function get_report_card(eid, sid)
         select * from y
         `
     qres = await client.query(query);
-    resp['ques_wise']=qres.rows;
+    resp['ques_wise'] = qres.rows;
 
     query = `
         with x as
@@ -101,10 +97,52 @@ async function get_report_card(eid, sid)
     return resp;
 }
 
-module.exports=
+async function login(user_name, password) {
+    resp = {}
+    query = `
+    select * from 
+    student 
+    where user_name = '${user_name}' and password = '${password}'`
+
+    qres = await client.query(query);
+    resp['loginstatus'] = qres.rows[0];
+
+    if (resp['loginstatus'] == undefined) {
+        resp['loginstatus'] = "failed";
+    }
+    return resp;
+}
+
+async function register(roll_no, user_name, password, first_name, last_name,
+    date_of_birth, student_template, institute, facad) {
+    resp = {}
+    query = `
+    insert into student(student_id, user_name, password, first_name, last_name, 
+        date_of_birth, student_template, institute, facad)
+    values(${roll_no}, '${user_name}', '${password}', '${first_name}', '${last_name}','${date_of_birth}',
+    ${student_template},${institute},${facad})`
+
+    after_query = `select * from student where user_name = '${user_name}'`
+
+    try {
+        qres = await client.query(query);
+        qres = await client.query(after_query);
+        resp['registerstatus'] = qres.rows[0];
+        return resp;
+    }
+    catch (err) {
+        console.log(err);
+        resp['registerstatus'] = "failed";
+        return resp;
+    }
+}
+
+module.exports =
 {
     get_attempted_questions,
     get_attempted_exams,
     get_report_card,
-    get_student_data
+    get_student_data,
+    login,
+    register
 }

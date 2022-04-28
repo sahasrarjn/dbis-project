@@ -17,17 +17,22 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReportCardComponent } from './report-card/report-card.component';
 import { StudentComponent } from './student/student.component';
 import { TeacherComponent } from './teacher/teacher.component';
 import { ExamsComponent } from './exams/exams.component';
 import { NgChartsModule } from 'ng2-charts';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { RegService } from './reg.service';
+import { LoginService } from './login.service';
 import { InstitutesComponent } from './institutes/institutes.component';
 import { InstituteDetailComponent } from './institute-detail/institute-detail.component';
 
@@ -46,6 +51,8 @@ import { InstituteDetailComponent } from './institute-detail/institute-detail.co
     StudentComponent,
     TeacherComponent,
     ExamsComponent,
+    LoginComponent,
+    RegisterComponent,
     InstitutesComponent,
     InstituteDetailComponent,
   ],
@@ -61,6 +68,8 @@ import { InstituteDetailComponent } from './institute-detail/institute-detail.co
     MatIconModule,
     NgChartsModule,
     FormsModule,
+    NgChartsModule,
+    FormsModule,
     ReactiveFormsModule,
     MatCheckboxModule,
     MatRadioModule,
@@ -68,7 +77,7 @@ import { InstituteDetailComponent } from './institute-detail/institute-detail.co
     MatInputModule,
     MatTooltipModule
   ],
-  providers: [],
+  providers: [RegService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
