@@ -324,12 +324,7 @@ app.get('/get_student', async function (req, res) {
 	var qres = await student_lib.get_student_data(sid);
 	res.send(qres);
 })
-<<<<<<< HEAD
 app.get('/get_own_students', async function (req, res) {
-=======
-
-app.get('/get_own_students', async function(req, res){
->>>>>>> d199171981d43819fc41cbf0820db437182182e9
 	var tid = req.query.tid;
 	/*
 [

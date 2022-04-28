@@ -3,24 +3,64 @@
       <mat-card-title>Exam: #{{exam.overall.exam_name}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <mat-list>Year: {{exam.overall.year}}</mat-list>
-        <!-- <mat-list>Exam Type: {{exam.overall.exam_type}}</mat-list> -->
-        <mat-list>Duration: {{exam.overall.duration}}</mat-list>
-        <mat-list>Type: {{exam.overall.type}}</mat-list>
-        <mat-list>Num question: {{exam.overall.num_ques}}</mat-list>
-        <mat-list>Stats:
-            <mat-list-item>Average Marks: {{exam.overall.avg_marks}}</mat-list-item>
-            <mat-list-item>Max Marks: {{exam.overall.max_marks}}</mat-list-item>
-            <mat-list-item>Num students: {{exam.overall.num_students}}</mat-list-item>
-        </mat-list>
+        <table class="table table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Year</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Type</th>
+                <th scope="col">Number of Questions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{exam.overall.year}}</th>
+                <td>{{exam.overall.duration}}</td>
+                <td>{{exam.overall.type}}</td>
+                <td>{{exam.overall.num_ques}}</td>
+              </tr>
+            </tbody>
+        </table>
 
+        <h2>Statistics</h2>
+        <table class="table table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Average Marks</th>
+                <th scope="col">Maximum Marks</th>
+                <th scope="col">Number of Students</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{exam.overall.avg_marks}}</th>
+                <td>{{exam.overall.max_marks}}</td>
+                <td>{{exam.overall.num_students}}</td>
+              </tr>
+            </tbody>
+        </table>
 
         <!-- Todo: Handle questions properly and add link to question detail view-->
-        <mat-list>Questions:
-            <mat-list-item *ngFor="let q of exam.questions">
-                Question: <a href="question/{{q.question_id}}">{{q.question_id}}</a>, {{q.question_text}}
-                Primary Difficulty: {{q.primary_difficulty}}
-            </mat-list-item>
+        <mat-list>
+            <h2>Questions:</h2>
+            <table class="table">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Question Id</th>
+                    <th scope="col">Question Description</th>
+                    <th scope="col">Difficulty</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let q of exam.questions">
+                    <tr class="linked-row" (click)="navigate(q.question_id)">
+                        <th scope="row">{{q.question_id}}</th>
+                        <td>{{q.question_text}}</td>
+                        <td>{{q.primary_difficulty}}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+            </table>
         </mat-list>
     </mat-card-content>
   </mat-card>

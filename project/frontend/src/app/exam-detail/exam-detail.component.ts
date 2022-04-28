@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ExamService } from '../services/exam.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ExamService } from '../services/exam.service';
 export class ExamDetailComponent implements OnInit {
   id : any;
   exam : any;
-  constructor(private route:ActivatedRoute, private es:ExamService) { }
+  constructor(private route:ActivatedRoute, private es:ExamService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => { this.id = params['id'] });
@@ -19,4 +19,7 @@ export class ExamDetailComponent implements OnInit {
     });
   }
 
+  navigate(id){
+    this.router.navigate(['question/' + id]);
+  }
 }
