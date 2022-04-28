@@ -51,6 +51,7 @@
 </section>
 
 <div class="d-flex justify-content-around" style="padding-bottom: 32px; padding-top:32px">
+    <button mat-button (click)="goto_start()" [disabled]="start == 0">Start</button>
     <button mat-button (click)="prev()" [disabled]="start == 0">Prev</button>
     <button mat-button (click)="next()" [disabled]="start * 10 >= all_questions.length">Next</button>
 </div>

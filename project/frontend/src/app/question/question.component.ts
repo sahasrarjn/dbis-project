@@ -29,14 +29,14 @@ export class QuestionComponent implements OnInit {
       this.toggle_all_tags();
       this.get_questions();
     });
-    
   }
 
   get_questions(){
     this.ms.getQuestions(this.diff_lower, this.diff_upper, this.selectedTags, this.author_id).subscribe(data => {
       // get 10 from data
       this.all_questions = data;
-        this.questions = (data as Array<any>).slice(this.start * 10 , this.start * 10 + 10);
+      this.questions = (data as Array<any>).slice(this.start * 10 , this.start * 10 + 10);
+      this.start = 0;
     });
   }
 
@@ -57,6 +57,10 @@ export class QuestionComponent implements OnInit {
 
   onNgModelChange(event : any){
 
+  }
+  goto_start(){
+    this.start = 0;
+    this.questions = (this.all_questions as Array<any>).slice(this.start * 10 , this.start * 10 + 10);
   }
 
   prev(){

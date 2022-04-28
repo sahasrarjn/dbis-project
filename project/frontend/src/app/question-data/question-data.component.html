@@ -11,7 +11,7 @@
             <span class="tag-item" *ngFor="let t of question.tags.tags">{{t}} </span>
         </mat-list>
         <mat-list>Exams in which this question is used:
-            <mat-list-item *ngFor="let e of question.exams"><a href="exam-detail/{{e.exam_id}}">{{e.exam_id}}</a>, {{e.exam_name}}</mat-list-item>
+            <mat-list-item *ngFor="let e of question.exams">Exam: <a href="exam/{{e.exam_id}}">{{e.exam_id}}</a>, {{e.exam_name}}</mat-list-item>
         </mat-list>
         <mat-list>Difficulty: {{question.general.primary_difficulty}}</mat-list>
         <mat-list>Author: <a href="teacher/{{question.general.author}}">{{question.general.author_first_name}} {{question.general.author_last_name}}</a></mat-list>

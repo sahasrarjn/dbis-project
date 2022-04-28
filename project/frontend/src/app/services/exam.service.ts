@@ -19,6 +19,10 @@ export class ExamService {
     return this.http.get(this.baseurl + 'exam_types');
   }
 
+  getAllExams(){
+    return this.http.get(this.baseurl + 'get_all_exams');
+  }
+
   getExamData(exam_id:any){
     return this.http.get(this.baseurl + 'get_exam_data?exam_id=' + exam_id);
   }

@@ -28,6 +28,8 @@ import { TeacherComponent } from './teacher/teacher.component';
 import { ExamsComponent } from './exams/exams.component';
 import { NgChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InstitutesComponent } from './institutes/institutes.component';
+import { InstituteDetailComponent } from './institute-detail/institute-detail.component';
 
 
 
@@ -44,6 +46,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     StudentComponent,
     TeacherComponent,
     ExamsComponent,
+    InstitutesComponent,
+    InstituteDetailComponent,
   ],
   imports: [
     BrowserModule,

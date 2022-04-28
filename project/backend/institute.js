@@ -63,6 +63,7 @@ async function get_institute_data(iid)
 		select r.exam_id, exam.exam_name, avg_marks, avg_time, best_rank
 		from r natural join exam
 	`
+	// todo (prabs): round off return kar de
 	qres = await client.query(query)
 	resp['exams'] = qres.rows
 	return resp;
