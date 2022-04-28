@@ -1,3 +1,24 @@
+.tags-list, .ques-list{
+    height: 50vh;
+    overflow-y: scroll;
+}
+
+.buttons-div{
+    margin-top: 32px;
+}
+
+.header-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-button{
+    transform: translateY(-20%);
+}
+
+
+
 /* Split the screen in half */
 .split {
     height: 100%;

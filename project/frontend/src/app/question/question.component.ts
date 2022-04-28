@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MainService } from '../services/main.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-question',
@@ -17,6 +18,9 @@ export class QuestionComponent implements OnInit {
 
   tags : any;
   selectedTags : string[] = [];
+
+  mindiff = new FormControl('');
+  maxdiff = new FormControl('');
 
   constructor(private route : ActivatedRoute, private ms : MainService) { }
 
@@ -71,6 +75,19 @@ export class QuestionComponent implements OnInit {
   next(){
     this.start = Math.min(this.start+1, Math.ceil(this.all_questions.length)/10);
     this.questions = (this.all_questions as Array<any>).slice(this.start * 10 , this.start * 10 + 10);
+  }
+
+  filter(){
+    let min = this.mindiff.value;
+    let max = this.maxdiff.value;
+    if(!min && !max){
+      return;
+    }
+    if(!min) min = 0;
+    if(!max) max = 300000;
+    this.diff_lower = min;
+    this.diff_upper = max;
+    this.get_questions();
   }
 
 }

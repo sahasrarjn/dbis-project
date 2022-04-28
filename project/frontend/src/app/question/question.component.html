@@ -1,57 +1,75 @@
-
-<div class="d-flex justify-content-center align-items-center">
-    <h1>Questions</h1>
-</div>
-
-<section>
-    <div style="width: 50%; margin-left: 25%;">
-        <div [class.mat-elevation-z2]="true">
-            <div style="margin-bottom: -0.6cm; margin-top: 1cm">
-                <h2 mat-subheader>Tags:</h2>
-            </div>
-            <mat-selection-list #list [(ngModel)]="selectedTags" (ngModelChange)="onNgModelChange($event)">
-                <mat-list-option *ngFor="let t of tags" [value]="t.tag_id"> {{ t.tag_id }}. {{ t.tag_name }} </mat-list-option>
-            </mat-selection-list>
+<div class="d-flex justify-content-around align-items-center">
+    <section>
+        <div class="header-div">
+            <h2 mat-subheader>Tags</h2>
         </div>
-        <div style="text-align: center; margin-top: 0.5cm;">
+        <div class="tags-list">
+            <div [class.mat-elevation-z2]="true">
+                <mat-selection-list #list [(ngModel)]="selectedTags" (ngModelChange)="onNgModelChange($event)">
+                    <mat-list-option *ngFor="let t of tags" [value]="t.tag_id"> {{ t.tag_id }}. {{ t.tag_name }} </mat-list-option>
+                </mat-selection-list>
+            </div>
+        </div>
+        <div class="buttons-div" style="text-align: center;">
             <button mat-raised-button color="primary" (click)="toggle_all_tags();" style="float:left">Toggle</button>
             <button mat-raised-button color="primary" (click)="tags_select();" style="float:right">Select Tags</button>
         </div>
-    </div>
-</section>
+    </section>
 
-<section style="margin-top: 3cm;">
-    <div>
-        <mat-selection-list #list>
-        <div *ngFor="let q of questions" >
-                <mat-expansion-panel style="margin-bottom: 0.2cm;">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            <mat-list-option checkboxPosition="before" [value]="q.id">
-                                {{q.question_id}}
-                            </mat-list-option>  
-                        </mat-panel-title>
-                        <mat-panel-description>
-                            Author: {{q.author}}, Difficulty: {{q.primary_difficulty}}
-                        </mat-panel-description>
-                        <a mat-button href="question/{{q.question_id}}">
-                            <mat-icon>launch</mat-icon>
-                            Detailed View
-                        </a>
-                    </mat-expansion-panel-header> 
-                    <div>
-                        <p>
-                            {{q.question_text}}
-                        </p>
-                    </div> 
-                </mat-expansion-panel>
-            </div>
-        </mat-selection-list>
-    </div>
-</section>
+    <section>
+        <div class="header-div">
+            <h2 mat-subheader>Questions</h2>
+        </div>
+        <div class="input-fields d-flex justify-content-around align-items-center">
+            <mat-form-field appearance="fill">
+                <mat-label>Min Difficulty</mat-label>
+                <input matInput type="number" [formControl]="mindiff">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Max Difficulty</mat-label>
+                <input matInput type="number" [formControl]="maxdiff">
+            </mat-form-field>
+            <button class="filter-button" mat-raised-button color="primary" (click)="filter()">Filter</button>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <mat-error *ngIf="true"></mat-error>
+        </div>
+        <div class="ques-list">
+            <mat-selection-list #list>
+            <div *ngFor="let q of questions" >
+                    <mat-expansion-panel style="margin-bottom: 0.2cm;">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <mat-list-option checkboxPosition="before" [value]="q.id">
+                                    {{q.question_id}}
+                                </mat-list-option>  
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Author: {{q.author}}, Difficulty: {{q.primary_difficulty}}
+                            </mat-panel-description>
+                            <a mat-button href="question/{{q.question_id}}">
+                                <mat-icon>launch</mat-icon>
+                                Detailed View
+                            </a>
+                        </mat-expansion-panel-header> 
+                        <div>
+                            <p>
+                                {{q.question_text}}
+                            </p>
+                        </div> 
+                    </mat-expansion-panel>
+                </div>
+            </mat-selection-list>
+        </div>
 
-<div class="d-flex justify-content-around" style="padding-bottom: 32px; padding-top:32px">
-    <button mat-button (click)="goto_start()" [disabled]="start == 0">Start</button>
-    <button mat-button (click)="prev()" [disabled]="start == 0">Prev</button>
-    <button mat-button (click)="next()" [disabled]="start * 10 >= all_questions.length">Next</button>
+        <div class="buttons-div d-flex justify-content-around" style="padding-bottom: 32px">
+            <button mat-raised-button color="primary" (click)="goto_start()" [disabled]="start == 0">Start</button>
+            <button mat-raised-button color="primary" (click)="prev()" [disabled]="start == 0">Prev</button>
+            <button mat-raised-button color="primary" (click)="next()" [disabled]="start * 10 >= all_questions.length">Next</button>
+        </div>
+    </section>
 </div>
+
+
+
+
