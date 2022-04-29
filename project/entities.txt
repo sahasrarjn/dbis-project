@@ -1,0 +1,100 @@
+Entity question
+- question_id 
+- question_text 
+- primary_difficulty 
+- answer 
+- testcase
+- visibility
+- author 
+
+
+Entity teacher
+- teacher_id 
+- first_name
+- last_name
+- date_of_birth
+- user_name 
+- password
+
+
+Entity student
+- student_id 
+- first_name
+- last_name
+- date_of_birth 
+- user_name 
+- password
+- student_template
+- institute 
+- facad 
+
+
+Entity institute
+- institute_id 
+- name
+- location
+
+
+Entity exam
+- exam_id 
+- exam_name
+- year 
+- exam_type_id 
+- author 
+
+
+Entity tags
+- tag_id 
+- tag_name
+
+
+Entity exam_type
+- id 
+- type
+- duration 
+- num_ques 
+
+
+Entity template
+- template_id 
+- base_code
+
+
+Entity language
+- language_id 
+- language
+
+
+Entity student_exam_ques_stat
+- statid 
+- student_id 
+- question_id 
+- exam_id 
+- marks 
+- time_taken 
+- rating
+- relevance
+
+
+Entity exam_question
+- eq_id 
+- exam_id 
+- question_id 
+
+
+Entity template_language
+- tl_id 
+- template_id
+- language_id
+
+
+Entity question_tags
+- id 
+- question_id 
+- tag_id 
+
+
+Entity tag_child
+- id 
+- parent_tag 
+- child_tag
