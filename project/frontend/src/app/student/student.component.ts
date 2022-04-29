@@ -30,7 +30,6 @@ export class StudentComponent implements OnInit {
 
     this.ss.getAttemptedExams(this.sid).subscribe(data => {
       this.attempted_exams = data;
-      console.log("ae", data);
       this.max_table_idx = this.attempted_exams.length % 10 == 0 ? Math.floor(this.attempted_exams.length / 10) - 1 : Math.floor(this.attempted_exams.length / 10);
     });
   }
