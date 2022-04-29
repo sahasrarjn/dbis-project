@@ -1,5 +1,6 @@
 var { query } = require('express');
 const client = require('./obj.js');
+const fs = require("fs");
 
 async function get_soln(qid)
 {
@@ -26,9 +27,18 @@ async function create_question(qtext, diff, ans, tc, auth, tags)
 	`
 	qres = await client.query(query);
 	qid = qres.rows[0].qid;
+	fs.writeFileSync(`./media/sol/${qid}.txt`, ans, (err, file) => {
+		if (err) throw err;
+		console.log(file);
+	 });
+	 fs.writeFileSync(`./media/testcases/${qid}.txt`, tc, (err, file) => {
+		if (err) throw err;
+		console.log(file);
+	 });
 	query = `
-		insert into question values(${qid}, '${qtext}', ${diff}, '${ans}', '${tc}', 'public', ${auth})
+		insert into question values(${qid}, '${qtext}', ${diff}, 'media/sol/${qid}.txt', 'media/testcases/${qid}.txt', 'public', ${auth})
 	`
+	console.log(query);
 	resp = await client.query(query);
 	for(let i=0; i<tags.length; i++)
 	{
