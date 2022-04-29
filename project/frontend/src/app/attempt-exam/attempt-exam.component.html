@@ -3,6 +3,8 @@
 <div class="text-center exam-details">Total Duration: {{exam.overall.duration}}</div>
 <div style="text-align:right">Time Remaining: {{getMins() + ':' + getSeconds()}}</div>
 
+<div class="warning">Warning: Do not refresh! The exam will restart on refreshing</div>
+
 
 <div class="container">
     <form class="d-flex flex-column" [formGroup]="examForm" (ngSubmit)="onSubmit()">
@@ -11,7 +13,7 @@
             <mat-form-field  appearance="fill" class="mb-5">
                 
                 <mat-label>Your Code here</mat-label>
-                <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="10"> </textarea>
+                <textarea [formControlName]="'ques' + q.question_id"  matInput cdkTextareaAutosize cdkAutosizeMinRows="10"> </textarea>
                 <!-- <mat-label for="first-name">Exam Name: </mat-label>
                 <textarea matInput id="first-name" type="text" formControlName="examName"> </textarea> -->
             </mat-form-field>
