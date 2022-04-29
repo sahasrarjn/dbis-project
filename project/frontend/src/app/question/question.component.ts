@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MainService } from '../services/main.service';
 import { FormControl } from '@angular/forms';
+import { LoginService } from '../services/login.service';
+import { StudentService } from '../services/student.service';
+
 
 @Component({
   selector: 'app-question',
@@ -11,7 +14,7 @@ import { FormControl } from '@angular/forms';
 export class QuestionComponent implements OnInit {
   questions : any;
   selectedQuestion : string[] = [];
-  author_filter;
+  author_filter : any;
   authors = new Set();
 
   diff_lower : string = "";
@@ -24,11 +27,12 @@ export class QuestionComponent implements OnInit {
   mindiff = new FormControl('');
   maxdiff = new FormControl('');
 
-  direct_ques;
-  indirect_ques;
+  direct_ques : any;
+  indirect_ques : any;
   check_next_disabled = false;
 
-  constructor(private route : ActivatedRoute, private ms : MainService) { }
+  constructor(private route : ActivatedRoute, 
+              private ms : MainService) { }
 
   start = 0;
   all_questions;

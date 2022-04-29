@@ -12,9 +12,13 @@
                         <mat-panel-description>
                             {{e.exam_name}}
                         </mat-panel-description>
-                        <a mat-button href="exam/{{e.exam_id}}">
+                        <a mat-button href="exam/{{e.exam_id}}" *ngIf="!is_attempted[e.exam_id]">
                             <mat-icon>launch</mat-icon>
                             Detailed View
+                        </a>
+                        <a mat-button href="attempt-exam/{{e.exam_id}}" *ngIf="is_attempted[e.exam_id]">
+                            <mat-icon>launch</mat-icon>
+                            Attempt Exam
                         </a>
                     </mat-expansion-panel-header> 
                     <div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ExamService } from '../services/exam.service';
+import { LoginService } from '../services/login.service';
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'app-exams',
@@ -12,14 +14,37 @@ export class ExamsComponent implements OnInit {
   all_exams : any;
   start : any = 0;
 
-  constructor(private route:ActivatedRoute, private es:ExamService) { }
+  is_attempted : any = {};
+  attempted_exams : any;
+
+  constructor(private route:ActivatedRoute, private es:ExamService, private ss : StudentService, private _login : LoginService) { }
 
   ngOnInit(): void {
     this.es.getAllExams().subscribe(data => {
       this.all_exams = data;
       this.exams = (data as Array<any>).slice(this.start * 10 , this.start * 10 + 10);
       this.start = 0;
+      for(let i=0; i<this.all_exams.length; i++) {
+        this.is_attempted[this.all_exams[i].exam_id] = false;
+      }
     });    
+
+
+    if(this._login.studentloggedIn()){
+      this.handleQuesButton();
+    }
+  }
+
+  handleQuesButton(){
+    // console.log("handleQuesButton");
+    var sid = localStorage.getItem('user_id');
+    this.ss.getAttemptedExams(sid).subscribe(data => {
+      this.attempted_exams = data;
+      for(let i=0; i<this.attempted_exams.length; i++) {
+        this.is_attempted[this.attempted_exams[i].exam_id] = true;
+      }    
+      // console.log(this.is_attempted);
+    });
   }
 
   goto_start(){
