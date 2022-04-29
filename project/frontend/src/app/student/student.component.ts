@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '../services/student.service';
 
 @Component({
@@ -13,7 +13,9 @@ export class StudentComponent implements OnInit {
   student : any;
   attempted_exams : any;
   attempted_ques : any; // todo: what to do with this?
-  constructor(private route:ActivatedRoute, private ss:StudentService) { }
+  table_idx = 0;
+  max_table_idx = 0;
+  constructor(private route:ActivatedRoute, private ss:StudentService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => { this.sid = params['id'] });
@@ -28,7 +30,23 @@ export class StudentComponent implements OnInit {
 
     this.ss.getAttemptedExams(this.sid).subscribe(data => {
       this.attempted_exams = data;
+      this.max_table_idx = this.attempted_exams.length % 10 == 0 ? Math.floor(this.attempted_exams.length / 10) - 1 : Math.floor(this.attempted_exams.length / 10);
     });
   }
 
+  navigate(url){
+    this.router.navigate([url]);
+  }
+
+  start(){
+    this.table_idx = 0;
+  }
+
+  next(){
+    this.table_idx = Math.min(this.table_idx+ 1, Math.floor(this.attempted_exams.length / 10));
+  }
+
+  prev(){
+    this.table_idx = Math.max(this.table_idx- 1, 0);
+  } 
 }

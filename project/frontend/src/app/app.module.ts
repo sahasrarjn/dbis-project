@@ -36,6 +36,7 @@ import { RegService } from './reg.service';
 import { LoginService } from './login.service';
 import { InstitutesComponent } from './institutes/institutes.component';
 import { InstituteDetailComponent } from './institute-detail/institute-detail.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -56,6 +57,7 @@ import { InstituteDetailComponent } from './institute-detail/institute-detail.co
     RegisterComponent,
     InstitutesComponent,
     InstituteDetailComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

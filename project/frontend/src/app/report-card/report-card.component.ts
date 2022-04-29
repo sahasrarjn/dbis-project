@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '../services/student.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class ReportCardComponent implements OnInit {
 
   report_data : any;
 
-  constructor(private route:ActivatedRoute, private ss:StudentService) { }
+  constructor(private route:ActivatedRoute, private ss:StudentService, private router: Router) { }
 
 
   // TODO: student_id is fixed and will be decide by login component, exam_id will be decided by url
@@ -29,6 +29,10 @@ export class ReportCardComponent implements OnInit {
       data => {
         this.report_data = data;
     });
+  }
+
+  navigate(url){
+    this.router.navigate([url]);
   }
 
 }
