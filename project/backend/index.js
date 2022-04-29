@@ -13,6 +13,7 @@ app.options('*', cors());
 app.use(cors());
 app.use(upload.array());
 app.use(express.static('public'));
+app.use('/media', express.static('media'));
 app.use(bodyParser.json());
 
 var AuthController = require('./auth/AuthController');
@@ -324,6 +325,7 @@ app.get('/get_student', async function (req, res) {
 	var qres = await student_lib.get_student_data(sid);
 	res.send(qres);
 })
+
 app.get('/get_own_students', async function (req, res) {
 	var tid = req.query.tid;
 	/*
