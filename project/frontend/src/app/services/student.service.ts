@@ -26,7 +26,7 @@ export class StudentService {
   }
 
   getStudentTemplate(sid: any) {
-    return this.http.get(this.baseurl + 'get_student_template?sid=' + sid);
+    return this.http.get(this.baseurl + 'student_template?sid=' + sid);
   }
 
 }
