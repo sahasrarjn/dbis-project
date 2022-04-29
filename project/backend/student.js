@@ -40,7 +40,8 @@ async function attempt_exam(sid, eid)
         `
         console.log(query)
         //qres = await client.query(query);
-        await client.query(query);
+        qres = await client.query(query);
+        return qres;
 
     }
 
