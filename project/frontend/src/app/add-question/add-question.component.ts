@@ -42,7 +42,6 @@ export class AddQuestionComponent implements OnInit {
     this.submitted = false;
     var num_tags = 0;
     let item = this.createForm.value;
-    console.log(item);
     for(let i = 0; i < this.all_tags.length; i++){
       if(this.createForm.get(this.all_tags[i].tag_name).value){
         num_tags++;
@@ -55,13 +54,13 @@ export class AddQuestionComponent implements OnInit {
     }
 
     this.submitted = true;
-    // console.log(item);
     var tags = [];
     for(let i = 0; i < this.all_tags.length; i++){
       if(this.createForm.get(this.all_tags[i].tag_name).value){
         tags.push(this.all_tags[i].tag_id);
       }
     }
+    console.log(tags);
     this.ms.addQuestion(item.qtext, item.diff, item.ans, item.tc, this.author_id, tags).subscribe(data => {
       console.log(data);
     });

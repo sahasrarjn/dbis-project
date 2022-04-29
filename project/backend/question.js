@@ -110,7 +110,7 @@ async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 		)
 		`
 	}
-	console.log(query1 + ' select * from y1');
+	// console.log(query1 + ' select * from y1');
 	qres = await client.query(query1+ ' select * from y1');
 	resp['direct'] = qres.rows;
 
@@ -166,7 +166,7 @@ async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 		`
 	}
 	query = query1+query2;
-	console.log(query)
+	// console.log(query)
 	qres = await client.query(query);
 	resp['related'] = qres.rows;
 	return resp;
