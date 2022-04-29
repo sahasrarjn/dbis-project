@@ -17,7 +17,8 @@ export class AttemptedGuardGuard implements CanActivate {
     this.id = parseInt(state.url.split('/')[2]);
     var user_id = parseInt(localStorage.getItem("user_id"));
     var return_val = false;
-    if (this._login.studentloggedIn() || this._login.teacherloggedIn()) {
+    if(this._login.teacherloggedIn()) return true;
+    if (this._login.studentloggedIn()) {
       let data_var;
        let x = await this.http.get("http://localhost:8081/get_attempted_questions/?sid=" + user_id);
        data_var = await firstValueFrom(x);

@@ -36,7 +36,8 @@ export class QuestionComponent implements OnInit {
 
   constructor(private route : ActivatedRoute, 
               private ms : MainService,
-              private http: HttpClient) { }
+              private http: HttpClient,
+              private _login: LoginService) { }
 
   start = 0;
   all_questions;
@@ -152,6 +153,7 @@ export class QuestionComponent implements OnInit {
   }
 
   checkIfAttempted(qid){
+    if(this._login.teacherloggedIn()) return true;
     for(var i = 0; i < this.attempted_ques.length; i++){
       if(this.attempted_ques[i].question_id == qid){
         return true;
