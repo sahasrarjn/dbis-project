@@ -12,4 +12,8 @@ export class TeacherService {
   getTeacherById(tid:any){
     return this.http.get(this.baseurl + 'get_teacher?tid=' + tid);
   }
+
+  getAllTeachers(){
+    return this.http.get(this.baseurl + 'get_all_teachers');
+  }
 }

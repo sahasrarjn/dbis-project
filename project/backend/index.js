@@ -351,10 +351,12 @@ app.get('/get_teacher', async function (req, res) {
 	var qres = await teacher_lib.get_teacher_data(tid);
 	res.send(qres);
 })
+
 app.get('/get_all_teachers', async function(req, res){
 	var qres = await teacher_lib.get_all_teachers();
 	res.send(qres);
 })
+
 app.get('/get_student', async function (req, res) {
 	var sid = req.query.sid;
 	/*
