@@ -10,7 +10,7 @@
     <form class="d-flex flex-column" [formGroup]="examForm" (ngSubmit)="onSubmit()">
         <ng-container *ngFor="let q of exam.questions; let idx=index">
             <div>{{idx+1}}. {{q.question_text}}</div>
-            <app-editor></app-editor>
+            <app-editor [input_code]=this.code_template></app-editor>
         </ng-container>
 
         <button mat-button color="primary" (click)="onSubmit()">Submit</button>

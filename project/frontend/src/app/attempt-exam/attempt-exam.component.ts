@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExamService } from '../services/exam.service';
 import { StudentService } from '../services/student.service';
+import { templates } from './templates';
 
 @Component({
   selector: 'app-attempt-exam',
@@ -16,7 +17,7 @@ export class AttemptExamComponent implements OnInit {
   examForm = new FormGroup({});
   remaining_time = 0;
   student_template: any;
-  code_teamplate: any;
+  code_template: any;
 
   constructor(private ss: StudentService, private route: ActivatedRoute, private es: ExamService, private router: Router) { }
 
@@ -37,11 +38,17 @@ export class AttemptExamComponent implements OnInit {
     this.ss.getStudentTemplate(localStorage.getItem('user_id')).subscribe(
       res => {
         this.student_template = res['base_code'];
+        console.log(this.student_template);
+        this.get_code_template(this.student_template);
       },
       err => {
         console.log(err);
       }
     );
+  }
+
+  get_code_template(template) {
+    this.code_template = templates[template];
   }
 
   getMins() { return Math.floor(this.remaining_time / 60); }
