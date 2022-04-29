@@ -14,9 +14,10 @@ import { ReportCardComponent } from './report-card/report-card.component';
 import { StudentComponent } from './student/student.component';
 import { TeacherGuard } from './teacher.guard';
 import { TeacherComponent } from './teacher/teacher.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'questions', pathMatch: 'full' },
+  { path: '', component: HomeComponent},
   { path: 'questions', component: QuestionComponent },
   { path: 'question/:id', component: QuestionDataComponent },
 

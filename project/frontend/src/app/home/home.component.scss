@@ -1,0 +1,9 @@
+img{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10%;
+    &:hover{
+        transform: scale(1.05);
+        transition: 0.1s ease-in-out;
+    }
+    transition: 0.1s ease-in-out;
+}
