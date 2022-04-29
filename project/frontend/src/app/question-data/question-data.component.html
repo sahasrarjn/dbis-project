@@ -50,7 +50,6 @@
                 </tbody>
             </table>
 
-        <!-- Todo: Handle demographics properly -->
         <span class="header-small">Demographics</span>
         <br>
         <br>
@@ -78,9 +77,9 @@
                 <tbody>
                         <tr >
                             <th scope="row">{{current_insti.name}}</th>
-                            <td>{{current_insti.avg_time}}</td>
-                            <td>{{current_insti.perc}}</td>
-                            <td>{{current_insti.student_rating}}</td>
+                            <td>{{current_insti.avg_time | number : '1.2-2'}}</td>
+                            <td>{{current_insti.perc | number : '1.2-2'}}</td>
+                            <td>{{current_insti.student_rating | number : '1.2-2'}}</td>
                         </tr>
                 </tbody>
             </table>
