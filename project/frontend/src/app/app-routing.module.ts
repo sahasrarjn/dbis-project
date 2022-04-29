@@ -19,7 +19,6 @@ import { AddQuestionComponent } from './add-question/add-question.component';
 import { NotauthGuard } from './notauth.guard';
 
 const routes: Routes = [
-  { path: '**', component: HomeComponent },
   { path: 'questions', component: QuestionComponent, canActivate: [AuthGuard] },
   { path: 'question/:id', component: QuestionDataComponent, canActivate: [AuthGuard] },
 
@@ -33,12 +32,14 @@ const routes: Routes = [
   { path: 'report-card', component: ReportCardComponent, canActivate: [] },
   { path: 'student/:id', component: StudentComponent, canActivate: [TeacherGuard] },
   { path: 'teacher/:id', component: TeacherComponent, canActivate: [AuthGuard] },
-  
+
   { path: 'add-question', component: AddQuestionComponent, canActivate: [TeacherGuard] },
 
-  { path: 'login', component: LoginComponent, canActivate: [NotauthGuard]},
+  { path: 'login', component: LoginComponent, canActivate: [NotauthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [NotauthGuard] },
-  
+  { path: '**', component: HomeComponent },
+
+
 ];
 
 @NgModule({
