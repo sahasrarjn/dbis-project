@@ -7,8 +7,11 @@
         <mat-list>
             <span class="header-extra-small">Description: </span> <span class="ques-desc">{{question.general.question_text}}</span>
         </mat-list>
-        <mat-list><span class="header-extra-small"> Tags: </span>
-            <span class="tag-item" *ngFor="let t of question.tags.tags">{{t}} </span>
+        <mat-list><span class="header-extra-small"> Basic tags: </span>
+            <span class="tag-item" *ngFor="let t of question.basic_tags.tags">{{t}} </span>
+        </mat-list>
+        <mat-list><span class="header-extra-small"> Related tags: </span>
+            <span class="tag-item" *ngFor="let t of question.related_tags.tags">{{t}} </span>
         </mat-list>
         <mat-list><div class="header-small">Exams in which this question is used:</div>
             <table class="table">

@@ -22,7 +22,8 @@ async function attempt_exam(sid, eid) {
     qres = await client.query(query);
     qres = qres.rows;
 
-    for (let i = 0; i < qres.length; i++) {
+    for (let i = 0; i < qres.length; i++) 
+    {
         qid = qres[i].question_id;
         query = `
             select max(statid)+1 as rid from student_exam_ques_stat
@@ -42,6 +43,7 @@ async function attempt_exam(sid, eid) {
         }
         catch{}
     }
+    return qres;
 
     return qres1;
 
