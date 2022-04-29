@@ -39,7 +39,7 @@ async function create_question(qtext, diff, ans, tc, auth, tags)
 		insert into question values(${qid}, '${qtext}', ${diff}, 'media/sol/${qid}.txt', 'media/testcases/${qid}.txt', 'public', ${auth})
 	`
 	console.log(query);
-	resp = await client.query(query);
+	await client.query(query);
 	for(let i=0; i<tags.length; i++)
 	{
 		query = `
@@ -53,6 +53,8 @@ async function create_question(qtext, diff, ans, tc, auth, tags)
 		`
 		qres = await client.query(query);
 	}
+	resp={}
+	resp['qid'] = qid;
 	return resp;
 }
 async function get_all_questions(diff_lower, diff_upper, author_id, tags)
