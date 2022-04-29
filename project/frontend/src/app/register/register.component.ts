@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { RegService } from '../services/reg.service';
 import { NewTeacherUser, NewUser } from './newuser';
 import * as shajs from 'sha.js';
-
+import { InstituteService } from '../services/institute.service';
 
 @Component({
   selector: 'app-register',
@@ -16,10 +16,22 @@ export class RegisterComponent implements OnInit {
   mynewuser: NewUser;
   mynewteacher: NewTeacherUser;
 
+  templates: any[] = [
+    { id: 0, name: "C++" },
+    { id: 1, name: "Python" },
+  ];
+
+  institutes: any;
+  facads: any;
+
   is_student: Boolean = false;
   is_teacher: Boolean = false;
 
   visible = true;
+
+  st_id: any;
+  inst_id: any;
+  fac_id: any;
 
   errormessage: String = "";
 
@@ -30,7 +42,7 @@ export class RegisterComponent implements OnInit {
     date_of_birth: new FormControl('', Validators.required),
     user_name: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    student_template: new FormControl('', Validators.required),
+    // student_template: new FormControl('', Validators.required),
     institute: new FormControl('', Validators.required),
     facad: new FormControl('', Validators.required),
   })
@@ -48,9 +60,27 @@ export class RegisterComponent implements OnInit {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private regserv: RegService, private _router: Router, private http: HttpClient) { }
+  constructor(private is: InstituteService, private regserv: RegService, private _router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.is.getAllInstitutes().subscribe(
+      res => {
+        console.log(res);
+        this.institutes = res;
+      },
+      err => {
+        console.log(err);
+      }
+    )
+
+    this.is.getAllFacads().subscribe(
+      res => {
+        this.facads = res;
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   validate(): Boolean {
@@ -60,8 +90,8 @@ export class RegisterComponent implements OnInit {
       this.regForm.get('date_of_birth').value == "" ||
       this.regForm.get('user_name').value == "" ||
       this.regForm.get('password').value == "" ||
-      this.regForm.get('student_template').value == ""
-      || this.regForm.get('institute').value == "" ||
+      // this.regForm.get('student_template').value == "" ||
+      this.regForm.get('institute').value == "" ||
       this.regForm.get('facad').value == "") {
       this.errormessage = "Please fill all the fields";
       return false;
@@ -96,9 +126,9 @@ export class RegisterComponent implements OnInit {
       date_of_birth: this.regForm.get('date_of_birth').value,
       user_name: this.regForm.get('user_name').value,
       password: pass_hash,
-      student_template: this.regForm.get('student_template').value,
-      institute: this.regForm.get('institute').value,
-      facad: this.regForm.get('facad').value,
+      student_template: this.st_id,
+      institute: this.inst_id,
+      facad: this.fac_id,
     }
 
     this.regserv.tryreg(this.mynewuser)

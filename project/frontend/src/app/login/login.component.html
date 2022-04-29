@@ -1,3 +1,5 @@
+<mat-card class="example-card">
+    <mat-card-content>
 <br>
 <div *ngIf="!is_teacher && !is_student">
     <h1 style="text-align: center; font-size: 42px; margin-bottom: 32px;"> Login </h1>
@@ -24,16 +26,21 @@
             Incorrect username/password! Try again.
         </div>
     </form>
-</div>
-<div *ngIf="is_teacher">
-    <h1 style="text-align: center;"> Login as Teacher </h1>
-
-    <form [formGroup]="teacherloginForm">
-        <label>User Name</label>
-        <input class="form-control form-control-lg" type="text" formControlName="username" placeholder="Enter username">
-        <label>Password</label>
-        <input class="form-control form-control-lg" type="password" formControlName="password"
-            placeholder="Enter password">
-        <button class="btn btn-lg btn-dark" (click)="onTeacherSubmit()" type="submit">Login</button>
-    </form>
-</div>
+        </div>
+        <div *ngIf="is_teacher">
+            <form [formGroup]="teacherloginForm">
+                <mat-form-field appearance="fill">
+                    <mat-label>User Name</mat-label>
+                    <input matInput type="text" formControlName="username" placeholder="Enter username">
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" placeholder="Enter password">
+                </mat-form-field>
+                <br>
+                <button mat-raised-button color="primary" (click)="onTeacherSubmit()" type="submit">Login</button>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>

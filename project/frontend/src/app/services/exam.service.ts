@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ExamService {
   baseurl = 'http://localhost:8081/';
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -15,19 +15,19 @@ export class ExamService {
     })
   };
 
-  getExamTypes(){
+  getExamTypes() {
     return this.http.get(this.baseurl + 'exam_types');
   }
 
-  getAllExams(){
+  getAllExams() {
     return this.http.get(this.baseurl + 'get_all_exams');
   }
 
-  getExamData(exam_id:any){
+  getExamData(exam_id: any) {
     return this.http.get(this.baseurl + 'get_exam_data?exam_id=' + exam_id);
   }
 
-  createRandomExam(exam_name:any, exam_type:any, min_diff:any, max_diff:any, tags:any, author:any){
+  createRandomExam(exam_name: any, exam_type: any, min_diff: any, max_diff: any, tags: any, author: any) {
     var JSONdata = {
       'exam_name': exam_name,   // string
       'exam_type': exam_type,   // int
@@ -36,10 +36,13 @@ export class ExamService {
       'tags': tags,             // list of int (or string?? todo)
       'author': author          // string 
     }
+
+    console.log(JSONdata);
+
     return this.http.post(this.baseurl + 'create_random_exam', JSONdata, this.httpOptions);
   }
 
-  createManualExam(exam_name:any, exam_type:any, qid:any, author: any){
+  createManualExam(exam_name: any, exam_type: any, qid: any, author: any) {
     var JSONdata = {
       'exam_name': exam_name,   // string
       'exam_type': exam_type,   // int

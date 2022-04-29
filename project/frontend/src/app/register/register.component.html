@@ -1,3 +1,19 @@
+<mat-card class="example-card">
+    <mat-card-header class="d-flex justify-content-center">
+        <b>
+            <h1 class="text-center">Register</h1>
+        </b>
+    </mat-card-header>
+    <mat-card-content class="d-flex justify-content-around">
+        <div *ngIf="!is_teacher && !is_student">
+            <!-- <h1 style="text-align: center; font-size: 42px; margin-bottom: 32px;"> Register </h1> -->
+            <div class="d-flex justify-content-around">
+                <button class="btn btn-lg btn-dark" (click)="activateStudentreg()" type="submit">Register as
+                    Student</button>
+                <button class="btn btn-lg btn-dark" (click)="activateTeacherreg()" type="submit">Register as
+                    Teacher</button>
+            </div>
+        </div>
 <br>
 <div *ngIf="!is_teacher && !is_student">
     <h1 style="text-align: center; font-size: 42px; margin-bottom: 32px;"> Register </h1>
@@ -6,110 +22,115 @@
         <button mat-raised-button  (click)="activateTeacherreg()" type="submit">Register as Teacher</button>
     </div>
 </div>
-<div *ngIf="is_student">
-    <h1 style="text-align: center;"> Register as Student</h1>
+    <div *ngIf="is_student">
+        <!-- <h1 style="text-align: center;"> Register as Student</h1> -->
 
-    <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label>Roll No</label>
-            <input class="form-control form-control-lg" type="text" formControlName="student_id"
-                placeholder="Enter your Roll no">
+        <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="fill">
+                <mat-label>Roll No</mat-label>
+                <input matInput type="text" formControlName="student_id" placeholder="Enter your Roll no">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput type="text" formControlName="first_name" placeholder="Enter your first name">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text" formControlName="last_name" placeholder="Enter your last name">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Username</mat-label>
+                <input matInput type="text" formControlName="user_name" placeholder="Enter your user name">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" placeholder="Enter password">
+            </mat-form-field>
+            <br>
+            <!-- Todo: Make a date selection form -->
+            <mat-form-field appearance="fill">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput type="text" formControlName="date_of_birth" placeholder="Enter your dob">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Student Template</mat-label>
+                <mat-select [(value)]="st_id">
+                    <mat-option *ngFor="let template of templates" [value]="template.id">
+                        {{template.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Institute</mat-label>
+                <mat-select [(value)]="inst_id">
+                    <mat-option *ngFor="let institute of institutes" [value]="institute.id">
+                        {{institute.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Facad</mat-label>
+                <mat-select [(value)]="fac_id">
+                    <mat-option *ngFor="let facad of facads" [value]="facad.teacher_id">
+                        {{facad.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+        <div class="text-center mt-3">
+            <button mat-raised-button color="primary" [disabled]="!validate()" (click)="onSubmit()"
+                type="submit">Register</button>
         </div>
-        <div class="form-group">
-            <label>First Name</label>
-            <input class="form-control form-control-lg" type="text" formControlName="first_name"
-                placeholder="Enter your first name">
-        </div>
-        <div class="form-group">
-            <label>Last Name</label>
-            <input class="form-control form-control-lg" type="text" formControlName="last_name"
-                placeholder="Enter your last name">
-        </div>
-        <div class="form-group">
-            <label>username</label>
-            <input class="form-control form-control-lg" type="text" formControlName="user_name"
-                placeholder="Enter your user name">
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" formControlName="password" class="form-control form-control-lg"
-                placeholder="Enter password">
-        </div>
-        <!-- Todo: Make a date selection form -->
-        <div class="form-group">
-            <label>Date of Birth</label>
-            <input class="form-control form-control-lg" type="text" formControlName="date_of_birth"
-                placeholder="Enter your dob">
-        </div>
-        <div class="form-group">
-            <label>Student Template</label>
-            <input class="form-control form-control-lg" type="number" formControlName="student_template"
-                placeholder="Enter your template">
-        </div>
-        <div class="form-group">
-            <label>Institute</label>
-            <input class="form-control form-control-lg" type="number" formControlName="institute"
-                placeholder="Enter your Institute">
-        </div>
-        <div class="form-group">
-            <label>Facad</label>
-            <input class="form-control form-control-lg" type="number" formControlName="facad"
-                placeholder="Enter your facad">
-        </div>
-    </form>
-    <div class="text-center mt-3">
-        <button class="btn btn-lg btn-dark" [disabled]="!validate()" (click)="onSubmit()"
-            type="submit">Register</button>
+        <br>
     </div>
-    <br>
-    <!-- <div *ngIf="errormessage">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Could not register! Try again with non-empty credentials.
-    </div> -->
+    <div *ngIf="is_teacher">
+        <!-- <h1 style="text-align: center;"> Register as Teacher </h1> -->
 
-</div>
-<div *ngIf="is_teacher">
-    <h1 style="text-align: center;"> Register as Teacher </h1>
-
-    <form [formGroup]="regFormTeacher" (ngSubmit)="onTeacherSubmit()">
-        <div class="form-group">
-            <label>Teacher ID</label>
-            <input class="form-control form-control-lg" type="text" formControlName="teacher_id"
-                placeholder="Enter your teacher id">
+        <form [formGroup]="regFormTeacher" (ngSubmit)="onTeacherSubmit()">
+            <mat-form-field appearance="fill">
+                <mat-label>Teacher ID</mat-label>
+                <input matInput type="text" formControlName="teacher_id" placeholder="Enter your Teacher no">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput type="text" formControlName="first_name" placeholder="Enter your first name">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text" formControlName="last_name" placeholder="Enter your last name">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Username</mat-label>
+                <input matInput type="text" formControlName="user_name" placeholder="Enter your user name">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" placeholder="Enter password">
+            </mat-form-field>
+            <br>
+            <!-- Todo: Make a date selection form -->
+            <mat-form-field appearance="fill">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput type="text" formControlName="date_of_birth" placeholder="Enter your dob">
+            </mat-form-field>
+        </form>
+        <div class="text-center mt-3">
+            <button mat-raised-button color="primary" [disabled]="!validate2()" (click)="onTeacherSubmit()"
+                type="submit">Register</button>
         </div>
-        <div class="form-group">
-            <label>First Name</label>
-            <input class="form-control form-control-lg" type="text" formControlName="first_name"
-                placeholder="Enter your first name">
-        </div>
-        <div class="form-group">
-            <label>Last Name</label>
-            <input class="form-control form-control-lg" type="text" formControlName="last_name"
-                placeholder="Enter your last name">
-        </div>
-        <div class="form-group">
-            <label>username</label>
-            <input class="form-control form-control-lg" type="text" formControlName="user_name"
-                placeholder="Enter your user name">
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" formControlName="password" class="form-control form-control-lg"
-                placeholder="Enter password">
-        </div>
-        <div class="form-group">
-            <label>Date of Birth</label>
-            <input class="form-control form-control-lg" type="text" formControlName="date_of_birth"
-                placeholder="Enter your dob">
-        </div>
-    </form>
-    <div class="text-center mt-3">
-        <button class="btn btn-lg btn-dark" [disabled]="!validate2()" (click)="onTeacherSubmit()"
-            type="submit">Register</button>
+        <br>
     </div>
-    <br>
-    <!-- <div *ngIf="errormessage" class="alert alert-danger" role="alert">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Could not register! Try again with non-empty credentials.
-    </div> -->
-</div>
+    </mat-card-content>
+</mat-card>

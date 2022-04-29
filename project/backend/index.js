@@ -217,14 +217,14 @@ app.get('/question_data', async function (req, res) {
 	res.send(qres);
 })
 
-app.post('/attempt_exam', async function(req, res) {
-	var {sid, eid} = req.body;
+app.post('/attempt_exam', async function (req, res) {
+	var { sid, eid } = req.body;
 	var qres = await student_lib.attempt_exam(sid, eid);
 	res.send(qres);
 })
 
 app.post('/create_question', async function (req, res) {
-	var {qtext, diff, ans, tc, auth, tags} = req.body;
+	var { qtext, diff, ans, tc, auth, tags } = req.body;
 	var qres = await question_lib.create_question(qtext, diff, ans, tc, auth, tags);
 	res.send(qres);
 })
@@ -327,32 +327,32 @@ app.get('/get_teacher', async function (req, res) {
 	/*
 	"questions": 
 	[
-        {
-            "question_id": 48,
-            "question_text": "Check whether a String is Palindrome or not",
-            "primary_difficulty": 1400
-        }
+		{
+			"question_id": 48,
+			"question_text": "Check whether a String is Palindrome or not",
+			"primary_difficulty": 1400
+		}
 	],
 	"students": 
 	[
-        {
-            "student_id": 20014,
-            "name": "Christopher Clancy"
-        }
+		{
+			"student_id": 20014,
+			"name": "Christopher Clancy"
+		}
 	],
 	"teacher": 
 	{
-        "teacher_id": 1001,
-        "name": "Connie Collins",
-        "date_of_birth": "1963-07-09T18:30:00.000Z",
-        "user_name": "Conni830"
-    }
+		"teacher_id": 1001,
+		"name": "Connie Collins",
+		"date_of_birth": "1963-07-09T18:30:00.000Z",
+		"user_name": "Conni830"
+	}
 	*/
 	var qres = await teacher_lib.get_teacher_data(tid);
 	res.send(qres);
 })
 
-app.get('/get_all_teachers', async function(req, res){
+app.get('/get_all_teachers', async function (req, res) {
 	var qres = await teacher_lib.get_all_teachers();
 	res.send(qres);
 })
@@ -372,6 +372,11 @@ app.get('/get_student', async function (req, res) {
 		}
 	*/
 	var qres = await student_lib.get_student_data(sid);
+	res.send(qres);
+})
+
+app.get('/get_all_teachers', async function (req, res) {
+	var qres = await teacher_lib.get_all_teachers();
 	res.send(qres);
 })
 

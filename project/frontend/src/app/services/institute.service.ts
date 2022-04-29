@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class InstituteService {
   baseurl = 'http://localhost:8081/';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -15,11 +15,15 @@ export class InstituteService {
     })
   };
 
-  getAllInstitutes(){
+  getAllInstitutes() {
     return this.http.get(this.baseurl + 'get_all_insti');
   }
 
-  getInsituteById(id){
+  getInsituteById(id) {
     return this.http.get(this.baseurl + 'get_insti?iid=' + id);
+  }
+
+  getAllFacads() {
+    return this.http.get(this.baseurl + 'get_all_teachers');
   }
 }
