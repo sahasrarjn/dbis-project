@@ -40,6 +40,7 @@ import { HomeComponent } from './home/home.component';
 import { AddQuestionComponent } from './add-question/add-question.component';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { AttemptExamComponent } from './attempt-exam/attempt-exam.component';
 
 
 
@@ -61,6 +62,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     InstituteDetailComponent,
     HomeComponent,
     AddQuestionComponent,
+    AttemptExamComponent,
   ],
   imports: [
     BrowserModule,

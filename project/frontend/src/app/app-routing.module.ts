@@ -17,6 +17,7 @@ import { TeacherComponent } from './teacher/teacher.component';
 import { HomeComponent } from './home/home.component';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { NotauthGuard } from './notauth.guard';
+import { AttemptExamComponent } from './attempt-exam/attempt-exam.component';
 
 const routes: Routes = [
   { path: 'questions', component: QuestionComponent, canActivate: [AuthGuard] },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'exams', component: ExamsComponent, canActivate: [AuthGuard] },
   { path: 'exam/:id', component: ExamDetailComponent, canActivate: [AuthGuard] },
   { path: 'prepare-exam', component: PrepareExamComponent, canActivate: [TeacherGuard] }, // Todo: Left to implement
+  { path: 'attempt-exam/:id', component: AttemptExamComponent, canActivate: [AuthGuard] },
 
   { path: 'institutes', component: InstitutesComponent, canActivate: [AuthGuard] },
   { path: 'institute/:id', component: InstituteDetailComponent, canActivate: [AuthGuard] },
