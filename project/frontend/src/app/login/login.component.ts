@@ -68,12 +68,8 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('user_name', this.myuser.user_name);
             localStorage.setItem('type', 'student');
-<<<<<<< HEAD
-            this._router.navigate(['']);
-=======
             localStorage.setItem('user_id', res.data.user_id);
-            this._router.navigate(['/questions']);
->>>>>>> 86dfa2770f681807c9191ff0a86bb4ca554a6cf8
+            this._router.navigate(['']);
           }
           else {
             alert("Invalid credentials. Try Again!")
@@ -110,12 +106,8 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token', this.token);
             localStorage.setItem('user_name', this.myuser.user_name);
             localStorage.setItem('type', 'teacher');
-<<<<<<< HEAD
-            this._router.navigate(['']);
-=======
             localStorage.setItem('user_id', this.user_id);
-            this._router.navigate(['/prepare-exam']);
->>>>>>> 86dfa2770f681807c9191ff0a86bb4ca554a6cf8
+            this._router.navigate(['']);
           }
           else {
             alert("Invalid credentials. Try Again!")
