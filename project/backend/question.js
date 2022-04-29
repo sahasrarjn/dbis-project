@@ -1,5 +1,13 @@
 var { query } = require('express');
 const client = require('./obj.js');
+const fs = require("fs");
+
+async function get_soln(qid)
+{
+	query = `select answer from question where question_id = ${qid}`;
+	qres = await client.query(query);
+	return qres.rows[0];
+}
 
 async function get_all_tags()
 {
@@ -19,9 +27,18 @@ async function create_question(qtext, diff, ans, tc, auth, tags)
 	`
 	qres = await client.query(query);
 	qid = qres.rows[0].qid;
+	fs.writeFileSync(`./media/sol/${qid}.txt`, ans, (err, file) => {
+		if (err) throw err;
+		console.log(file);
+	 });
+	 fs.writeFileSync(`./media/testcases/${qid}.txt`, tc, (err, file) => {
+		if (err) throw err;
+		console.log(file);
+	 });
 	query = `
-		insert into question values(${qid}, '${qtext}', ${diff}, '${ans}', '${tc}', 'public', ${auth})
+		insert into question values(${qid}, '${qtext}', ${diff}, 'media/sol/${qid}.txt', 'media/testcases/${qid}.txt', 'public', ${auth})
 	`
+	console.log(query);
 	resp = await client.query(query);
 	for(let i=0; i<tags.length; i++)
 	{
@@ -110,7 +127,7 @@ async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 		)
 		`
 	}
-	console.log(query1 + ' select * from y1');
+	// console.log(query1 + ' select * from y1');
 	qres = await client.query(query1+ ' select * from y1');
 	resp['direct'] = qres.rows;
 
@@ -166,7 +183,7 @@ async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 		`
 	}
 	query = query1+query2;
-	console.log(query)
+	// console.log(query)
 	qres = await client.query(query);
 	resp['related'] = qres.rows;
 	return resp;
@@ -270,6 +287,7 @@ module.exports =
     get_all_tags,
     get_all_questions,
     get_question_data,
-	create_question
+	create_question,
+	get_soln
 }
 

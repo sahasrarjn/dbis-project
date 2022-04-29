@@ -36,6 +36,18 @@ const { nextTick } = require('async');
 const client = new Client();
 client.connect();
 
+app.get('/sample_soln', async function(req, res){
+	var qid = req.query.qid;
+	qres = await question_lib.get_soln(qid);
+	res.send(qres);
+})
+
+app.get('/student_template', async function(req, res){
+	var sid = req.query.sid;
+	qres = await student_lib.get_template(sid);
+	res.send(qres);
+})
+
 app.get('/tags_list', async function (req, res) {
 	/*
 		[
@@ -147,7 +159,6 @@ app.get('/questions', async function (req, res) {
 	*/
 
 	var qres = await question_lib.get_all_questions(diff_lower, diff_upper, author_id, tags);
-	// console.log(qres);
 	res.send(qres);
 })
 
@@ -241,9 +252,7 @@ app.post('/attempt_exam', async function (req, res) {
 
 app.post('/create_question', async function (req, res) {
 	var {qtext, diff, ans, tc, auth, tags} = req.body;
-	console.log(req.body);
 	var qres = await question_lib.create_question(qtext, diff, ans, tc, auth, tags);
-	console.log(req.body);
 	res.send(qres);
 })
 
@@ -256,7 +265,6 @@ app.post('/create_random_exam', async function (req, res) {
 	var min_diff = req.body.min_diff;
 	var tags = req.body.tags;
 	var author = req.body.author;
-	// console.log(req.body);
 	var qres = await exam_lib.auto_create_exam(exam_name, exam_type, max_diff, min_diff, tags, author);
 	res.send(qres);
 })

@@ -44,8 +44,7 @@ export class MainService {
       "auth": auth,
       "tags": tags
     }
-    console.log(JSONdata);
-    return this.http.post(this.baseurl + 'dd_question', JSON.stringify(JSONdata), this.httpOptions);
+    return this.http.post(this.baseurl + 'create_question', JSON.stringify(JSONdata), this.httpOptions);
   }
 
 
