@@ -6,12 +6,12 @@ import { LoginService } from './login.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class StudentGuard implements CanActivate {
 
   constructor(private _login: LoginService, private _router: Router) { }
 
   canActivate(): boolean {
-    if (this._login.studentloggedIn() || this._login.teacherloggedIn()) {
+    if (this._login.studentloggedIn()) {
       return true;
     }
     else {
@@ -19,5 +19,5 @@ export class AuthGuard implements CanActivate {
       return false;
     }
   }
-
+  
 }

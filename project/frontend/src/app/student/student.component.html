@@ -35,7 +35,7 @@
                         <th scope="row">{{e.exam_id}}</th>
                         <td> {{e.exam_name}}</td>
                         <td> {{e.year}}</td>
-                        <td><button mat-raised-button (click)="navigate('report-card/' + e.exam_id)">View Report</button></td>
+                        <td><button mat-raised-button (click)="navigate_to_rc(e.exam_id)">View Report</button></td>
                     </tr>
                 </ng-container>
             </tbody>
