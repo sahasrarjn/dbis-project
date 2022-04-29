@@ -50,7 +50,6 @@ export class QuestionComponent implements OnInit {
     this.ms.getQuestions(this.diff_lower, this.diff_upper, this.selectedTags, this.author_id).subscribe(data => {
       // get 10 from data
       this.all_questions = data;
-      console.log(this.all_questions)
       this.direct_ques = this.all_questions['direct'];
       this.indirect_ques = this.all_questions['related'];
       this.all_questions = this.all_questions['direct'];
