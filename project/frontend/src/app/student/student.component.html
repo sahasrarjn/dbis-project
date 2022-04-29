@@ -1,22 +1,53 @@
 <mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-title>Student profile: {{sid}}</mat-card-title> 
-    </mat-card-header>
+    <div class="text-center card-title">Student profile: {{sid}}</div> 
     <mat-card-content>
-        <mat-list>Name: {{student.first_name}} {{student.last_name}}</mat-list>
-        <!-- <mat-list>Exam Type: {{student.exam_type}}</mat-list> -->
-        <mat-list>Username: {{student.user_name}}</mat-list>
-        <mat-list>Institute: {{student.institute}}, {{student.name}}</mat-list>
-        <mat-list>FacAd: <a href="teacher/{{student.facad}}">{{student.facad}}</a>, {{student.facad_name}}</mat-list>
+        <span class="header-small">Name</span>
+        <br>
+        {{student.first_name}} {{student.last_name}}
+        <br><br>
+        <span class="header-small">Username</span>
+        <br>
+        {{student.user_name}}
+        <br><br>
+        <span class="header-small">Institute</span>
+        <br>
+        {{student.name}}
+        <br><br>
+        <span class="header-small">FacAd</span>
+        <br>
+        <a href="teacher/{{student.facad}}">{{student.facad_name}}</a>
         
         <!-- Todo: Handle questions properly and add link to question detail view-->
-        <mat-list>Attempted exams:
-            <mat-list-item *ngFor="let e of attempted_exams">
-                Exam: {{e.exam_id}}, {{e.exam_name}}
-                Year: {{e.year}}
-                <a mat-button href="report-card/{{e.exam_id}}">View report</a>
-            </mat-list-item>
-        </mat-list>
+        <br><br>
+        <span class="header-small">Attempted exams</span>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                <th scope="col">Exam Id</th>
+                <th scope="col">Exam Name</th>
+                <th scope="col">Exam Year</th>
+                <th scope="col">Report Card Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container>
+                    <tr *ngFor="let e of attempted_exams.slice(table_idx*10, table_idx*10+10)">
+                        <th scope="row">{{e.exam_id}}</th>
+                        <td> {{e.exam_name}}</td>
+                        <td> {{e.year}}</td>
+                        <td><button mat-raised-button (click)="navigate('report-card/' + e.exam_id)">View Report</button></td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+
+        <div class="d-flex justify-content-around align-items-center">
+            <button mat-raised-button (click)="start()" [disabled]="table_idx == 0">Start</button>
+            <button mat-raised-button (click)="prev()" [disabled]="table_idx == 0">Prev</button>
+            <button mat-raised-button (click)="next()" [disabled]="table_idx == max_table_idx">Next</button>
+        </div>
+
+
     </mat-card-content>
   </mat-card>
 
