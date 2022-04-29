@@ -62,5 +62,51 @@
                 </tbody>
             </table>
         </mat-list>
-    </mat-card-content>
-  </mat-card>
+      </mat-card-content>
+
+      <h2>
+        Marks Histograms
+      </h2>
+      <div class="row d-flex justify-content-around">
+        <div class="col-5">
+          <div>
+            <div style="display: block">
+              <canvas baseChart
+                [data]="barChartData"
+                [options]="barChartOptions">
+              </canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-5">
+          <div>
+            <div style="display: block">
+              <canvas baseChart
+                [data]="instituteMarksGraph"
+                [options]="instituteMarksOptions">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <br>
+      <br>
+      <h2>
+        Time Distribution
+      </h2>
+      <div class="row d-flex justify-content-around">
+        <div class="col-3">
+          <div>
+            <div class="chart">
+              <canvas baseChart
+                      [data]="pieChartData"
+                      [type]="'pie'">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</mat-card>
