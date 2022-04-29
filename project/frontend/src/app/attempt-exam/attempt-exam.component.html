@@ -7,16 +7,10 @@
 <div class="container">
     <form class="d-flex flex-column" [formGroup]="examForm" (ngSubmit)="onSubmit()">
         <ng-container *ngFor="let q of exam.questions; let idx=index">
-            <div>{{idx+1}}. {{q.question_text}}</div>           
-            <mat-form-field  appearance="fill" class="mb-5">
-                
-                <mat-label>Your Code here</mat-label>
-                <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="10"> </textarea>
-                <!-- <mat-label for="first-name">Exam Name: </mat-label>
-                <textarea matInput id="first-name" type="text" formControlName="examName"> </textarea> -->
-            </mat-form-field>
+            <div>{{idx+1}}. {{q.question_text}}</div>
+            <app-editor></app-editor>
         </ng-container>
-        
+
         <button mat-button color="primary" (click)="onSubmit()">Submit</button>
     </form>
 </div>

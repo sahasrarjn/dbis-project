@@ -3,8 +3,7 @@ const client = require('./obj.js');
 
 const question_lib = require('./question.js');
 
-async function get_template(sid)
-{
+async function get_template(sid) {
     query = `
         select * from template
         where template_id = (select student_template from student where student_id = ${sid})
@@ -14,8 +13,7 @@ async function get_template(sid)
     return qres.rows[0];
 }
 
-async function attempt_exam(sid, eid)
-{
+async function attempt_exam(sid, eid) {
     query = `
         select question_id
         from exam_question

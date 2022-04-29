@@ -7,22 +7,26 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class StudentService {
   baseurl = 'http://localhost:8081/';
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getStudentbyId(sid:any){
+  getStudentbyId(sid: any) {
     return this.http.get(this.baseurl + 'get_student?sid=' + sid);
   }
 
-  getReportCard(sid:any, eid:any){
+  getReportCard(sid: any, eid: any) {
     return this.http.get(this.baseurl + 'get_report_card?sid=' + sid + '&eid=' + eid);
   }
 
-  getAttemptedExams(sid:any){
+  getAttemptedExams(sid: any) {
     return this.http.get(this.baseurl + 'get_attempted_exams?sid=' + sid);
   }
 
-  getAttemptedQues(sid:any){
+  getAttemptedQues(sid: any) {
     return this.http.get(this.baseurl + 'get_attempted_questions?sid=' + sid);
+  }
+
+  getStudentTemplate(sid: any) {
+    return this.http.get(this.baseurl + 'get_student_template?sid=' + sid);
   }
 
 }
