@@ -25,7 +25,7 @@ export class ExamsComponent implements OnInit {
       this.exams = (data as Array<any>).slice(this.start * 10 , this.start * 10 + 10);
       this.start = 0;
       for(let i=0; i<this.all_exams.length; i++) {
-        this.is_attempted[this.all_exams[i].exam_id] = false;
+        this.is_attempted[this.all_exams[i].exam_id] = true;
       }
     });    
 
