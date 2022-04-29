@@ -4,6 +4,7 @@ import { MainService } from '../services/main.service';
 import { FormControl } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { StudentService } from '../services/student.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -31,8 +32,11 @@ export class QuestionComponent implements OnInit {
   indirect_ques : any;
   check_next_disabled = false;
 
+  attempted_ques: any;
+
   constructor(private route : ActivatedRoute, 
-              private ms : MainService) { }
+              private ms : MainService,
+              private http: HttpClient) { }
 
   start = 0;
   all_questions;
@@ -43,6 +47,7 @@ export class QuestionComponent implements OnInit {
       this.tags = data;
       this.toggle_all_tags();
       this.get_questions();
+      this.getAttemptedQuestions();
     });
   }
 
@@ -137,6 +142,23 @@ export class QuestionComponent implements OnInit {
     });
 
     return this.questions;
+  }
+
+  getAttemptedQuestions(){
+    let user_id = parseInt(localStorage.getItem("user_id"));
+    this.http.get("http://localhost:8081/get_attempted_questions/" + "?sid=" + user_id).subscribe(data => {
+      this.attempted_ques = data;
+    });
+  }
+
+  checkIfAttempted(qid){
+    for(var i = 0; i < this.attempted_ques.length; i++){
+      if(this.attempted_ques[i].question_id == qid){
+        return true;
+      }
+    }
+
+    return false;
   }
 
 }

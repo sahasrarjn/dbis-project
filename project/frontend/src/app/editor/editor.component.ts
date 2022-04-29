@@ -12,6 +12,9 @@ import 'ace-builds/src-noconflict/theme-cobalt';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-beautify';
 
+import { templates } from '../attempt-exam/templates';
+
+
 @Component({
   selector: 'app-editor',
   // template: `<div
@@ -38,6 +41,8 @@ export class EditorComponent implements AfterViewInit {
   THEME: string = 'ambiance';
   LANG: string = 'c_cpp';
 
+  actual_lang: string = 'c_cpp';
+
   code: string = '';
 
   ngAfterViewInit(): void {
@@ -61,8 +66,9 @@ export class EditorComponent implements AfterViewInit {
     this.aceEditor = ace.edit(this.editor.nativeElement, editorOptions);
 
     this.aceEditor.setTheme('ace/theme/' + this.THEME);
-    this.aceEditor.session.setMode('ace/mode/' + this.LANG);
+    this.aceEditor.session.setMode('ace/mode/' + this.actual_lang);
 
+    console.log(this.input_code);
     this.aceEditor.session.setValue(
       this.input_code
     );
@@ -80,22 +86,37 @@ export class EditorComponent implements AfterViewInit {
   }
 
   public updateLang() {
-    this.aceEditor.session.setMode('ace/mode/' + this.LANG);
+
+    if (this.LANG == 'media/templates/2.cpp' || this.LANG == 'media/templates/3.cpp') {
+      this.actual_lang = 'c_cpp';
+    }
+    else {
+      this.actual_lang = 'python';
+    }
+
+    this.aceEditor.session.setMode('ace/mode/' + this.actual_lang);
     switch (this.LANG) {
-      case 'c_cpp': {
+      case 'media/templates/2.cpp': {
         this.aceEditor.session.setValue(
-          `#include<bits/stdc++.h>
-  using namespace std;
-  int main() {
-    cout << "Hello World" << endl;
-    return 0;
-  }`
+          templates[this.LANG]
         );
         break;
       }
-      case 'python': {
+      case 'media/templates/3.cpp': {
         this.aceEditor.session.setValue(
-          `print("Hello World")`
+          templates[this.LANG]
+        );
+        break;
+      }
+      case 'media/templates/0.py': {
+        this.aceEditor.session.setValue(
+          templates[this.LANG]
+        );
+        break;
+      }
+      case 'media/templates/1.py': {
+        this.aceEditor.session.setValue(
+          templates[this.LANG]
         );
       }
     }
