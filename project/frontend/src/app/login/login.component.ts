@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { User } from './user';
+import * as shajs from 'sha.js';
+
 
 @Component({
   selector: 'app-login',
@@ -45,9 +47,11 @@ export class LoginComponent implements OnInit {
     this.is_student = false;
   }
   onSubmit() {
+    let password =  this.loginForm.get('password').value;
+    let pass_hash = shajs('sha256').update({password}).digest('hex');
     this.myuser = {
       user_name: this.loginForm.get('username').value,
-      password: this.loginForm.get('password').value,
+      password: pass_hash,
     }
 
     this.logserv.trylogin(this.myuser)
@@ -77,9 +81,11 @@ export class LoginComponent implements OnInit {
   }
 
   onTeacherSubmit() {
+    let password =  this.teacherloginForm.get('password').value;
+    let pass_hash = shajs('sha256').update({password}).digest('hex');
     this.myuser = {
       user_name: this.teacherloginForm.get('username').value,
-      password: this.teacherloginForm.get('password').value,
+      password: pass_hash
     }
 
     this.logserv.tryteacherlogin(this.myuser)
@@ -103,7 +109,6 @@ export class LoginComponent implements OnInit {
           // this.notsuccess = "fail";
           alert("Invalid credentials. Try Again!")
           console.log(err);
-
         }
       )
   }
