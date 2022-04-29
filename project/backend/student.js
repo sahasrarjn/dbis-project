@@ -37,13 +37,15 @@ async function attempt_exam(sid, eid)
         rel = Math.floor(Math.random() * 10) + 1;
         query = `
             insert into student_exam_ques_stat values(${rid}, ${sid}, ${qid}, ${eid}, ${marks}, ${time}, ${diff}, ${rel})
-        `
-        console.log(query)
+            `
         //qres = await client.query(query);
-        qres = await client.query(query);
-        return qres;
-
+        try{
+            qres2 = await client.query(query);
+        }
+        catch{}
     }
+
+    return qres1;
 
 }
 async function get_student_data(sid) {
