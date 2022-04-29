@@ -36,6 +36,18 @@ const { nextTick } = require('async');
 const client = new Client();
 client.connect();
 
+app.get('/sample_soln', async function(req, res){
+	var qid = req.query.qid;
+	qres = await question_lib.get_soln(qid);
+	res.send(qres);
+})
+
+app.get('/student_template', async function(req, res){
+	var sid = req.query.sid;
+	qres = await student_lib.get_template(sid);
+	res.send(qres);
+})
+
 app.get('/tags_list', async function (req, res) {
 	/*
 		[

@@ -1,6 +1,13 @@
 var { query } = require('express');
 const client = require('./obj.js');
 
+async function get_soln(qid)
+{
+	query = `select answer from question where question_id = ${qid}`;
+	qres = await client.query(query);
+	return qres.rows[0];
+}
+
 async function get_all_tags()
 {
 	query = `
@@ -270,6 +277,7 @@ module.exports =
     get_all_tags,
     get_all_questions,
     get_question_data,
-	create_question
+	create_question,
+	get_soln
 }
 
