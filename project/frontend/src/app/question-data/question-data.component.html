@@ -50,7 +50,7 @@
                 </tbody>
             </table>
 
-        <span class="header-small">Demographics</span>
+        <span class="header-small">Institute Wise Demographics</span>
         <br>
         <br>
         <mat-form-field color="secondary" appearance="fill">
@@ -84,40 +84,51 @@
                 </tbody>
             </table>
         </ng-container>
-        <div style="width:50%; height: fit-content;">
-            <div style="display: block">
-            <canvas baseChart
-                [data]="time_taken_data"
-                [options]="barChartOptions"
-                [plugins]="barChartPlugins"
-                [type]="barChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)">
-            </canvas>
+
+
+        <span class="header-small">Plots</span>
+        <br>
+        <br>
+        <div class="row d-flex justify-content-between">
+            <div class="col-5" style="height: fit-content;">
+                <div style="display: block">
+                <canvas baseChart
+                    [data]="time_taken_data"
+                    [options]="barChartOptions"
+                    [plugins]="barChartPlugins"
+                    [type]="barChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)">
+                </canvas>
+                </div>
+            </div>
+            <div class="col-5" style="height: fit-content;">
+                <div style="display: block">
+                <canvas baseChart
+                    [data]="marks_data"
+                    [options]="barChartOptions"
+                    [plugins]="barChartPlugins"
+                    [type]="barChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)">
+                </canvas>
+                </div>
             </div>
         </div>
-        <div style="width:50%; height: fit-content;">
-            <div style="display: block">
-            <canvas baseChart
-                [data]="marks_data"
-                [options]="barChartOptions"
-                [plugins]="barChartPlugins"
-                [type]="barChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)">
-            </canvas>
-            </div>
-        </div>
-        <div style="width:50%; height: fit-content;">
-            <div style="display: block">
-            <canvas baseChart
-                [data]="relevance_data"
-                [options]="barChartOptions"
-                [plugins]="barChartPlugins"
-                [type]="barChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)">
-            </canvas>
+
+        
+        <div class="mt-5">
+            <div class="col-5" style="height: fit-content;">
+                <div style="display: block">
+                <canvas baseChart
+                    [data]="relevance_data"
+                    [options]="barChartOptions"
+                    [plugins]="barChartPlugins"
+                    [type]="barChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)">
+                </canvas>
+                </div>
             </div>
         </div>
 
