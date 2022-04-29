@@ -14,6 +14,7 @@ import { BaseChartDirective } from 'ng2-charts';
 export class QuestionDataComponent implements OnInit {
   id : any;
   question : any;
+  current_insti;
 
   public timeTakenChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -41,7 +42,7 @@ export class QuestionDataComponent implements OnInit {
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  constructor(private route : ActivatedRoute, private ms : MainService) {
+  constructor(private route : ActivatedRoute, private ms : MainService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -50,6 +51,10 @@ export class QuestionDataComponent implements OnInit {
       this.question = data;
       console.log(this.question);
     });
+  }
+
+  navigate(url){
+    this.router.navigate([url]);
   }
 
 
