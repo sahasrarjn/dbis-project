@@ -29,8 +29,20 @@
                 <mat-label>Max Difficulty</mat-label>
                 <input matInput type="number" [formControl]="maxdiff">
             </mat-form-field>
-            <button class="filter-button" mat-raised-button color="primary" (click)="filter()">Filter</button>
+            <button class="filter-button" mat-raised-button color="primary" (click)="filter()">Filter by difficulty</button>
         </div>
+        <!-- <div class="input-fields d-flex justify-content-around align-items-center">
+            <mat-form-field appearance="fill">
+                <mat-label>Author Filter</mat-label>
+                <mat-select color="secondary" (selectionChange)="changeAuthorFilter($event)">
+                    <ng-container *ngFor="let item of authors" >
+                        <mat-option color="secondary" [value]="item">
+                            {{item}}
+                        </mat-option>
+                    </ng-container>
+                </mat-select>
+            </mat-form-field>
+        </div> -->
         <div class="d-flex justify-content-center align-items-center">
             <mat-error *ngIf="true"></mat-error>
         </div>

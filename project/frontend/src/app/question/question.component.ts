@@ -11,6 +11,8 @@ import { FormControl } from '@angular/forms';
 export class QuestionComponent implements OnInit {
   questions : any;
   selectedQuestion : string[] = [];
+  author_filter;
+  authors = new Set();
 
   diff_lower : string = "";
   diff_upper : string = "";
@@ -39,6 +41,9 @@ export class QuestionComponent implements OnInit {
     this.ms.getQuestions(this.diff_lower, this.diff_upper, this.selectedTags, this.author_id).subscribe(data => {
       // get 10 from data
       this.all_questions = data;
+      for(let i = 0; i < this.all_questions.length; i++){
+        this.authors.add(this.all_questions[i].author);
+      }
       this.questions = (data as Array<any>).slice(this.start * 10 , this.start * 10 + 10);
       this.start = 0;
     });
@@ -88,6 +93,15 @@ export class QuestionComponent implements OnInit {
     this.diff_lower = min;
     this.diff_upper = max;
     this.get_questions();
+  }
+
+  changeAuthorFilter(author_){
+    let author = author_.value;
+    this.questions = this.all_questions.filter(question => {
+      question.author == author
+    });
+
+    return this.questions;
   }
 
 }
