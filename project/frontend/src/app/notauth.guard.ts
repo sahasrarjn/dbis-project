@@ -12,7 +12,7 @@ export class NotauthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this._login.studentloggedIn() || this._login.teacherloggedIn()) {
-      this._router.navigate(['']);
+      this._router.navigate(['exams']);
       return false;
     }
     else {

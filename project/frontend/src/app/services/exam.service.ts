@@ -51,14 +51,13 @@ export class ExamService {
     return this.http.post(this.baseurl + 'create_manual_exam', JSONdata, this.httpOptions);
   }
 
-  submitExam(exam_id, user_id, duration){
+  submitExam(exam_id, user_id){
     var JSONdata = {
       'eid': exam_id,
       'sid': user_id,
-      'duration': duration
     };
 
-    return this.http.post(this.baseurl + 'submit_exam', JSONdata, this.httpOptions);
+    return this.http.post(this.baseurl + 'attempt_exam', JSONdata, this.httpOptions);
   }
 
   getStartTime(exam_id, user_id){
