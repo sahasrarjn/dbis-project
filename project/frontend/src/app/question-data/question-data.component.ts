@@ -18,24 +18,69 @@ export class QuestionDataComponent implements OnInit {
   current_insti : any;
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min) ) + min;
+  }
 
-  public barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    scales: {
-      x: {},
-      y: {}
-    },
-    plugins: {
-      legend: {
-        display: true,
+  colors = ["rgba(53,100,52,1)", "#c83c47", "#3f51b5"];
+  public barChartOptions: ChartConfiguration['options'][] = [
+      {
+      responsive: true,
+      // We use these empty structures as placeholders for dynamic theming.
+      scales: {
+        x: {},
+        y: {}
       },
-      datalabels: {
-        anchor: 'end',
-        align: 'end'
-      }
-    }
-  };
+      plugins: {
+        legend: {
+          display: true,
+        },
+        datalabels: {
+          anchor: 'end',
+          align: 'end'
+        }
+      },
+      // backgroundColor: this.colors[this.getRndInteger(0, this.colors.length)],
+    },
+
+    {
+      responsive: true,
+      // We use these empty structures as placeholders for dynamic theming.
+      scales: {
+        x: {},
+        y: {}
+      },
+      plugins: {
+        legend: {
+          display: true,
+        },
+        datalabels: {
+          anchor: 'end',
+          align: 'end'
+        }
+      },
+      // backgroundColor: this.colors[this.getRndInteger(0, this.colors.length)],
+    },
+
+    {
+      responsive: true,
+      // We use these empty structures as placeholders for dynamic theming.
+      scales: {
+        x: {},
+        y: {}
+      },
+      plugins: {
+        legend: {
+          display: true,
+        },
+        datalabels: {
+          anchor: 'end',
+          align: 'end'
+        }
+      },
+      // backgroundColor:  this.colors[this.getRndInteger(0, this.colors.length)],
+    },
+  ];
   public barChartType: ChartType = 'bar';
   public barChartPlugins = [
     DataLabelsPlugin
