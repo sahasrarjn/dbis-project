@@ -3,9 +3,6 @@ const client = require('./obj.js');
 
 const question_lib = require('./question.js');
 
-<<<<<<< HEAD
-async function attempt_exam(sid, eid) {
-=======
 async function get_template(sid)
 {
     query = `
@@ -19,7 +16,6 @@ async function get_template(sid)
 
 async function attempt_exam(sid, eid)
 {
->>>>>>> 9232baf3b3b0c9bbab0f825aa00d9bfd2c558c0f
     query = `
         select question_id
         from exam_question
