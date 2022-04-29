@@ -15,6 +15,7 @@ import { StudentComponent } from './student/student.component';
 import { TeacherGuard } from './teacher.guard';
 import { TeacherComponent } from './teacher/teacher.component';
 import { HomeComponent } from './home/home.component';
+import { AddQuestionComponent } from './add-question/add-question.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -29,8 +30,11 @@ const routes: Routes = [
   { path: 'institute/:id', component: InstituteDetailComponent, canActivate: [AuthGuard] },
 
   { path: 'report-card', component: ReportCardComponent, canActivate: [] },
-  { path: 'student/:id', component: StudentComponent, canActivate: [TeacherGuard] }, // Todo: Update this to profile, and redirect to relevant component based on role
-  { path: 'teacher/:id', component: TeacherComponent, canActivate: [AuthGuard] }, // Todo: empty component, this is a public page, any user can access and see all exams prepared by teacher and other details
+  { path: 'student/:id', component: StudentComponent, canActivate: [TeacherGuard] },
+  { path: 'teacher/:id', component: TeacherComponent, canActivate: [AuthGuard] },
+  
+  { path: 'add-question', component: AddQuestionComponent, canActivate: [TeacherGuard] },
+
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ];

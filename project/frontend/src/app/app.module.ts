@@ -37,6 +37,7 @@ import { LoginService } from './services/login.service';
 import { InstitutesComponent } from './institutes/institutes.component';
 import { InstituteDetailComponent } from './institute-detail/institute-detail.component';
 import { HomeComponent } from './home/home.component';
+import { AddQuestionComponent } from './add-question/add-question.component';
 
 
 
@@ -58,6 +59,7 @@ import { HomeComponent } from './home/home.component';
     InstitutesComponent,
     InstituteDetailComponent,
     HomeComponent,
+    AddQuestionComponent,
   ],
   imports: [
     BrowserModule,
