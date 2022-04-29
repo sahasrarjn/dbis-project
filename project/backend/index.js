@@ -168,9 +168,25 @@ app.get('/question_data', async function (req, res) {
 			first_name as author_first_name
 			last_name as author_last_name
 		},
-		tags:
+		"basic_tags": 
 		{
-			tags: [tag1, tag2, ...]
+			"tags": 
+			[
+				"Bit Manipulation"
+			]
+		},
+		"related_tags": 
+		{
+			"tags": 
+			[
+				"Array",
+				"String",
+				"Greedy",
+				"Dynamic Programming",
+				"Bit Manipulation",
+				"Math",
+				"Divide and Conquer"
+			]
 		},
 		exams:
 		[
