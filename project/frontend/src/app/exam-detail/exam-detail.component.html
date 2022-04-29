@@ -1,7 +1,5 @@
 <mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-title>Exam: #{{exam.overall.exam_name}}</mat-card-title>
-    </mat-card-header>
+    <div class="header-small">Exam: #{{exam.overall.exam_name}}</div>
     <mat-card-content>
         <table class="table table-striped">
             <thead class="table-dark">
@@ -22,7 +20,7 @@
             </tbody>
         </table>
 
-        <h2>Statistics</h2>
+        <div class="header-small">Statistics</div>
         <table class="table table-striped">
             <thead class="table-dark">
               <tr>
@@ -42,7 +40,7 @@
 
         <!-- Todo: Handle questions properly and add link to question detail view-->
         <mat-list>
-            <h2>Questions:</h2>
+            <div class="header-small">Questions:</div>
             <table class="table">
                 <thead class="table-dark">
                   <tr>
@@ -64,9 +62,9 @@
         </mat-list>
       </mat-card-content>
 
-      <h2>
+      <div class="header-small">
         Marks Histograms
-      </h2>
+      </div>
       <div class="row d-flex justify-content-around">
         <div class="col-5">
           <div>
@@ -93,9 +91,9 @@
       
       <br>
       <br>
-      <h2>
+      <div class="header-small">
         Time Distribution
-      </h2>
+      </div>
       <div class="row d-flex justify-content-around">
         <div class="col-3">
           <div>
@@ -106,6 +104,9 @@
               </canvas>
             </div>
           </div>
+          <div class="text-center">
+            Pie chart showing distribution of institutes according to time taken
+        </div>
         </div>
       </div>
 

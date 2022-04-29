@@ -79,6 +79,7 @@ export class QuestionDataComponent implements OnInit {
     this.route.params.subscribe(params => { this.id = params['id'] });
     this.ms.getQuestionData(this.id).subscribe(data => {
       this.question = data;
+      console.log(this.question)
       this.setTimeTakenData(data['student_data']);
       this.setMarksData(data['student_data']);
       this.setRelevanceData(data['student_data']);

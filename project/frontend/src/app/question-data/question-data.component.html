@@ -5,12 +5,12 @@
     </mat-card-header>
     <mat-card-content>
         <mat-list>
-            <span class="header-small">Description: </span> <span class="ques-desc">{{question.general.question_text}}</span>
+            <span class="header-extra-small">Description: </span> <span class="ques-desc">{{question.general.question_text}}</span>
         </mat-list>
-        <mat-list><span class="header-small"> Tags: </span>
+        <mat-list><span class="header-extra-small"> Tags: </span>
             <span class="tag-item" *ngFor="let t of question.tags.tags">{{t}} </span>
         </mat-list>
-        <mat-list><span class="header-small">Exams in which this question is used:</span>
+        <mat-list><div class="header-small">Exams in which this question is used:</div>
             <table class="table">
                 <thead class="table-dark">
                   <tr>
@@ -28,7 +28,7 @@
                 </tbody>
             </table>
         </mat-list>
-        <span class="header-small">Stats</span>
+        <div class="header-small">Stats</div>
             <table class="table">
                 <thead class="table-dark">
                   <tr>
@@ -50,7 +50,7 @@
                 </tbody>
             </table>
 
-        <span class="header-small">Institute Wise Demographics</span>
+        <div class="header-small">Institute Wise Demographics</div>
         <br>
         <br>
         <mat-form-field color="secondary" appearance="fill">
@@ -86,7 +86,7 @@
         </ng-container>
 
 
-        <span class="header-small">Plots</span>
+        <div class="header-small">Plots</div>
         <br>
         <br>
         <div class="row d-flex justify-content-between">
