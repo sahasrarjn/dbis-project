@@ -7,7 +7,7 @@ import { LoginService } from './services/login.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'Question Bank Generator';
 
   constructor(public _loginserv: LoginService) { }
 }
