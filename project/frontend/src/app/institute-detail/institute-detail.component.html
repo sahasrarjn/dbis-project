@@ -1,23 +1,55 @@
 <mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-title>Institute: {{institute.general.institute_id}}, {{institute.general.name}}</mat-card-title>
-    </mat-card-header>
+    <div class="card-title text-center">{{institute.general.name}}</div>
     <mat-card-content>
-        <mat-list>Location: {{institute.general.location}}</mat-list>
+        <mat-list><span class="header-small">Location</span> 
+            <br>
+            {{institute.general.location}}
+        </mat-list>
 
         <!-- Todo: Handle students and exams properly and add link to question detail view-->
-        <mat-list>Students:
-            <mat-list-item *ngFor="let s of institute.students">
-                Student: <a href="student/{{s.student_id}}">{{s.student_id}}</a>, {{s.name}}
-            </mat-list-item>
-        </mat-list>
-        <mat-list>Exams (demographics):
-            <mat-list-item *ngFor="let e of institute.exams">
-                Exam: <a href="exam/{{e.exam_id}}">{{e.exam_id}}</a>, {{e.name}}
-                    Average marks: {{e.avg_marks}}
-                    Average time: {{e.avg_time}}
-                    Best rank: {{e.best_rank}}
-            </mat-list-item>
-        </mat-list>
+        <span class="header-small">Students</span> 
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                <th scope="col">Student Id</th>
+                <th scope="col">Student Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container>
+                    <tr *ngFor="let s of institute.students" class="link" (click)="navigate('student/' + s.student_id)">
+                        <th scope="row">{{s.student_id}}</th>
+                        <td> {{s.name}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+
+       <span class="header-small">Exams (demographics)</span>
+       <table class="table">
+            <thead class="table-dark">
+                <tr>
+                <th scope="col">Exam Id</th>
+                <th scope="col">Average Marks</th>
+                <th scope="col">Average Time</th>
+                <th scope="col">Best Rank</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container>
+                    <tr *ngFor="let e of institute.exams.slice(table_idx*10, table_idx* 10 +10)" class="link" (click)="navigate('exam/' + e.exam_id)">
+                        <th scope="row">{{e.exam_id}}</th>
+                        <td>{{e.avg_marks | number : '1.2-2'}}</td>
+                        <td>{{e.avg_time | number : '1.2-2'}}</td>
+                        <td>{{e.best_rank}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-around">
+            <button mat-raised-button (click)="start()" [disabled]="table_idx == 0">Start</button>
+            <button mat-raised-button (click)="prev()" [disabled]="table_idx == 0">Prev</button>
+            <button mat-raised-button (click)="next()" [disabled]="table_idx == max_table_idx">Next</button>
+        </div>
     </mat-card-content>
   </mat-card>
