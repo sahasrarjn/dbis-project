@@ -115,6 +115,7 @@ async function get_exam_data(exam_id)
 
 async function auto_create_exam(exam_name, exam_type, max_diff, min_diff, tags, author)
 {
+	resp={}
 	if (tags == null || tags=="")
 	{
 		tg = await question_lib.get_all_tags();
@@ -172,12 +173,14 @@ async function auto_create_exam(exam_name, exam_type, max_diff, min_diff, tags, 
 		`
 		await client.query(upd);
 	}
-	return ret.rows;
+	resp['exam_id'] = eid;
+	return resp;
 
 }
 
 async function manual_exam(exam_name, selected_questions, exam_type, author)
 {
+	resp={};
 	query = `
 		select 1+max(exam_id) as exam_id from exam
 	`
@@ -202,7 +205,8 @@ async function manual_exam(exam_name, selected_questions, exam_type, author)
 		`
 		await client.query(upd);
 	}
-	return ret.rows;
+	resp['exam_id']=eid;
+	return resp;
 }
 module.exports = 
 {

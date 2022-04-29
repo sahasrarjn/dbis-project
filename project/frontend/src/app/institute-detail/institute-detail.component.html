@@ -1,13 +1,9 @@
 <mat-card class="example-card">
-    <div class="card-title text-center">{{institute.general.name}}</div>
+    <div class="card-title text-center">{{institute.general.name}}<br><br>{{institute.general.location}}</div>
     <mat-card-content>
-        <mat-list><span class="header-small">Location</span> 
-            <br>
-            {{institute.general.location}}
-        </mat-list>
 
         <!-- Todo: Handle students and exams properly and add link to question detail view-->
-        <span class="header-small">Students</span> 
+        <div class="header-small">Students</div> 
         <table class="table">
             <thead class="table-dark">
                 <tr>
@@ -25,7 +21,7 @@
             </tbody>
         </table>
 
-       <span class="header-small">Exams (demographics)</span>
+       <div class="header-small">Exams (demographics)</div>
        <table class="table">
             <thead class="table-dark">
                 <tr>
@@ -52,4 +48,53 @@
             <button mat-raised-button (click)="next()" [disabled]="table_idx == max_table_idx">Next</button>
         </div>
     </mat-card-content>
+
+
+    <div class="header-small">Graphs</div>
+    <div class="row d-flex justify-content-around mb-5">
+        <div class="col-3">
+            <div>
+              <div class="chart">
+                <canvas baseChart
+                        [data]="avgTimeData"
+                        [type]="'pie'">
+                </canvas>
+              </div>
+              <div class="text-center">
+                Pie chart showing distribution of average time wrt exams
+              </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div>
+              <div class="chart">
+                <canvas baseChart
+                        [data]="avgMarksData"
+                        [type]="'pie'">
+                </canvas>
+              </div>
+              <div class="text-center">
+                Pie chart showing distribution of average marks wrt exams
+              </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <div class="row mt-5 justify-content-around">
+        <div class="col-8">
+            <div>
+              <div>
+                <canvas baseChart
+                  [data]="barChartData"
+                  [options]="barChartOptions">
+                </canvas>
+              </div>
+            </div>
+            <div class="text-center">
+                Bar chart showing distribution of best ranks
+            </div>
+          </div>
+    </div>
   </mat-card>

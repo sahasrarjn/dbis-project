@@ -3,7 +3,35 @@ const client = require('./obj.js');
 
 const exam_lib = require('./exams.js');
 
+async function get_teacher_data(tid)
+{
+	resp={};
+	query = `
+		select question_id, question_text, primary_difficulty
+		from question
+		where author=${tid}
+	`
+	qres = await client.query(query);
+	resp['questions'] = qres.rows;
 
+	query = `
+		select student_id, concat(first_name, ' ', last_name) as name
+		from student
+		where facad = ${tid}
+	`
+	qres = await client.query(query);
+	resp['students'] = qres.rows;
+
+	query = `
+		select teacher_id, concat(first_name, ' ', last_name) as name, date_of_birth, user_name
+		from teacher
+		where teacher_id = ${tid}
+	`
+	qres = await client.query(query);
+	resp['teacher'] = qres.rows[0];
+	return resp;
+
+}
 async function get_all_teachers() {
 	query = `
 		select teacher_id, CONCAT(first_name, ' ', last_name) as name
@@ -70,5 +98,6 @@ module.exports =
 	get_all_teachers,
 	get_own_students,
 	login,
-	register
+	register,
+	get_teacher_data
 }
