@@ -38,7 +38,7 @@ export class AttemptExamComponent implements OnInit {
     this.ss.getStudentTemplate(localStorage.getItem('user_id')).subscribe(
       res => {
         this.student_template = res['base_code'];
-        console.log(this.student_template);
+        console.log("here", this.student_template);
         this.get_code_template(this.student_template);
       },
       err => {

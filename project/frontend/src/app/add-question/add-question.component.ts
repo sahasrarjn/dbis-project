@@ -63,7 +63,7 @@ export class AddQuestionComponent implements OnInit {
     console.log(tags);
     this.ms.addQuestion(item.qtext, item.diff, item.ans, item.tc, this.author_id, tags).subscribe(data => {
       console.log(data);
-      this._router.navigate(['/question/' + data['question_id']]);
+      this._router.navigate(['/question/' + data['qid']]);
     });
     this.createForm.reset();
   }
