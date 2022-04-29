@@ -16,6 +16,9 @@ export class LoginComponent implements OnInit {
   is_teacher: boolean = false;
   is_student: boolean = false;
 
+  token: any;
+  user_id: any;
+
   loginForm = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
@@ -57,10 +60,11 @@ export class LoginComponent implements OnInit {
           this.notsuccess = "";
           // this.localcall();
           if (res.success) {
-            localStorage.setItem('token', res.token);
+            console.log(res);
+            localStorage.setItem('token', res.data.token);
             localStorage.setItem('user_name', this.myuser.user_name);
             localStorage.setItem('type', 'student');
-            localStorage.setItem('user_id', res.user_id);
+            localStorage.setItem('user_id', res.data.user_id);
             this._router.navigate(['/questions']);
           }
           else {
@@ -90,10 +94,13 @@ export class LoginComponent implements OnInit {
           this.notsuccess = "";
           // this.localcall();
           if (res.success) {
-            localStorage.setItem('token', res.token);
+            this.token = res.data.token;
+            this.user_id = res.data.user_id;
+
+            localStorage.setItem('token', this.token);
             localStorage.setItem('user_name', this.myuser.user_name);
             localStorage.setItem('type', 'teacher');
-            localStorage.setItem('user_id', res.user_id);
+            localStorage.setItem('user_id', this.user_id);
             this._router.navigate(['/prepare-exam']);
           }
           else {

@@ -88,10 +88,11 @@ export class RegisterComponent implements OnInit {
       this.regForm.get('last_name').value == "" ||
       this.regForm.get('date_of_birth').value == "" ||
       this.regForm.get('user_name').value == "" ||
-      this.regForm.get('password').value == "" ||
+      this.regForm.get('password').value == ""
       // this.regForm.get('student_template').value == "" ||
-      this.regForm.get('institute').value == "" ||
-      this.regForm.get('facad').value == "") {
+      // this.regForm.get('institute').value == "" ||
+      // this.regForm.get('facad').value == "") {
+    ) {
       this.errormessage = "Please fill all the fields";
       return false;
     }
@@ -127,6 +128,8 @@ export class RegisterComponent implements OnInit {
       institute: this.inst_id,
       facad: this.fac_id,
     }
+
+    console.log(this.mynewuser);
 
     this.regserv.tryreg(this.mynewuser)
       .subscribe(
