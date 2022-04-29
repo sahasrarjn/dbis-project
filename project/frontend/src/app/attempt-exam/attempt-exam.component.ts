@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExamService } from '../services/exam.service';
 import { StudentService } from '../services/student.service';
@@ -12,7 +13,7 @@ export class AttemptExamComponent implements OnInit {
 
   id;
   exam;
-  examForm;
+  examForm = new FormGroup({});
   remaining_time = 0;
   student_template: any;
 
@@ -27,6 +28,10 @@ export class AttemptExamComponent implements OnInit {
         this.remaining_time--;
       }, 1000);
       console.log("Attempt Exam", data);
+
+      for (let i = 0; i < this.exam.questions.length; i++) {
+        this.examForm.addControl('ques' + this.exam.questions[i].question_id, new FormControl(''));
+      }
     });
     this.ss.getStudentTemplate(this.id).subscribe(
       res => {
@@ -42,7 +47,10 @@ export class AttemptExamComponent implements OnInit {
   getSeconds() { return this.remaining_time % 60; }
 
   onSubmit() {
-
+    let user_id = parseInt(localStorage.getItem("user_id"));
+    this.es.submitExam(this.id, user_id).subscribe(data => {
+      this.router.navigate(['report-card'], { queryParams: { eid: this.id, sid: user_id } });
+    });
   }
 
 

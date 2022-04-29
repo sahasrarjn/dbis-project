@@ -50,4 +50,27 @@ export class ExamService {
 
     return this.http.post(this.baseurl + 'create_manual_exam', JSONdata, this.httpOptions);
   }
+
+  submitExam(exam_id, user_id){
+    var JSONdata = {
+      'eid': exam_id,
+      'sid': user_id,
+    };
+
+    return this.http.post(this.baseurl + 'attempt_exam', JSONdata, this.httpOptions);
+  }
+
+  getStartTime(exam_id, user_id){
+      return this.http.get(this.baseurl + 'get_start_time?eid=' + exam_id + '&sid=' + user_id);
+  }
+
+  startExam(exam_id, user_id){
+    var JSONdata = {
+      'eid': exam_id, 
+      'sid': user_id,
+      'stime': new Date().toISOString().slice(0, 19).replace("T", " ")
+    };
+
+    return this.http.post(this.baseurl + 'start_exam',JSONdata , this.httpOptions);
+  }
 }

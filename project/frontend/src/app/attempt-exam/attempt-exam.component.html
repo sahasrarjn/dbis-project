@@ -3,6 +3,8 @@
 <div class="text-center exam-details">Total Duration: {{exam.overall.duration}}</div>
 <div style="text-align:right">Time Remaining: {{getMins() + ':' + getSeconds()}}</div>
 
+<div class="warning">Warning: Do not refresh! The exam will restart on refreshing</div>
+
 
 <div class="container">
     <form class="d-flex flex-column" [formGroup]="examForm" (ngSubmit)="onSubmit()">
