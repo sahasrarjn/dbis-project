@@ -5,8 +5,13 @@ const exam_lib = require('./exams.js');
 async function get_all_institutes()
 {
 	query = `
-		select *
-		from institute
+		with x as
+		(
+			select count(*) as num_students, institute as institute_id
+			from student
+			group by institute_id
+		)
+		select * from institute natural join x
 	`
 	qres = await client.query(query);
 	return qres.rows;
