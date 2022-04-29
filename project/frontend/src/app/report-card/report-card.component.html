@@ -1,20 +1,34 @@
 <mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-title>Report Card of student {{student_id}} for exam {{exam_id}}</mat-card-title>
-    </mat-card-header>
+    <div class="card-title text-center">Report Card of student {{student_id}} for exam {{exam_id}}</div>
     <mat-card-content>
-        <mat-list>Marks: {{report_data.overall.marks}}</mat-list>
-        <mat-list>Time taken: {{report_data.overall.time_taken}}</mat-list>
-        <mat-list>Rank: {{report_data.overall.rank}}</mat-list>
+        <span class="header-small">Marks: </span> {{report_data.overall.marks}} <br><br>
+        <span class="header-small">Time taken: </span> {{report_data.overall.time_taken}} minutes<br><br>
+        <span class="header-small">Rank: </span> {{report_data.overall.rank}}<br><br>
 
         <!-- Todo: Handle questions properly and add link to question detail view-->
-        <mat-list>Questions:
-            <mat-list-item *ngFor="let q of report_data.ques_wise">
-                Question: {{q.question_id}}, {{q.question_text}}
-                Marks: {{q.marks}}
-                Time taken (minutes): {{q.time_taken}}
-            </mat-list-item>
-        </mat-list>
+        <span class="header-small">Questions</span>
+        <br>
+        <br>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                <th scope="col">Question Id</th>
+                <th scope="col">Question Description</th>
+                <th scope="col">Marks</th>
+                <th scope="col">Time taken (minutes)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container>
+                    <tr *ngFor="let q of report_data.ques_wise" class="link" (click)="navigate('question/' + q.question_id)">
+                        <th scope="row"> {{q.question_id}}</th>
+                        <td> {{q.question_text}}</td>
+                        <td> {{q.marks}}</td>
+                        <td>{{q.time_taken}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
     </mat-card-content>
   </mat-card>
 
