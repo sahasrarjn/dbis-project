@@ -1,34 +1,89 @@
 <!-- Handle styling -->
 <mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-title>Question: {{question.general.question_id}}</mat-card-title>
+    <mat-card-header class="d-flex justify-content-center">
+     <b><h1 class="text-center">Question: {{question.general.question_id}}</h1></b>
     </mat-card-header>
     <mat-card-content>
-        <mat-list><b class="question">Question: </b>
-            <p>{{question.general.question_text}}</p>
+        <mat-list>
+            <span class="header-small">Description: </span> <span class="ques-desc">{{question.general.question_text}}</span>
         </mat-list>
-        <mat-list>Tags:
+        <mat-list><span class="header-small"> Tags: </span>
             <span class="tag-item" *ngFor="let t of question.tags.tags">{{t}} </span>
         </mat-list>
-        <mat-list>Exams in which this question is used:
-            <mat-list-item *ngFor="let e of question.exams">Exam: <a href="exam/{{e.exam_id}}">{{e.exam_id}}</a>, {{e.exam_name}}</mat-list-item>
+        <mat-list><span class="header-small">Exams in which this question is used:</span>
+            <table class="table">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Exam Id</th>
+                    <th scope="col">Exam Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let e of question.exams">
+                        <tr  class="link" (click)="navigate('exam/' + e.exam_id)">
+                            <th scope="row">{{e.exam_id}}</th>
+                            <td>{{e.exam_name}}</td>
+                          </tr>
+                    </ng-container>
+                </tbody>
+            </table>
         </mat-list>
-        <mat-list>Difficulty: {{question.general.primary_difficulty}}</mat-list>
-        <mat-list>Author: <a href="teacher/{{question.general.author}}">{{question.general.author_first_name}} {{question.general.author_last_name}}</a></mat-list>
-        <mat-list>Stats:
-            <mat-list-item>Average time: {{question.stats.avg_time}}</mat-list-item>
-            <mat-list-item>Percentage: {{question.stats.perc}}</mat-list-item>
-            <mat-list-item>Student Rating: {{question.stats.student_rating}}</mat-list-item>
-        </mat-list>
-        <!-- Todo: Handle demographics properly -->
-        <mat-list>Demographics:
-            <mat-list-item *ngFor="let d of question.demographics">
-                Institute: {{d.institute}}, {{d.name}}
-                Average time: {{d.avg_time}}
-                Percentage: {{d.perc}}
-                Student Rating: {{d.student_rating}}
-            </mat-list-item>
-        </mat-list>
+        <span class="header-small">Stats</span>
+            <table class="table">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Average time</th>
+                    <th scope="col">Average Percentage</th>
+                    <th scope="col">Average Student Rating</th>
+                    <th scope="col">Difficulty</th>
+                    <th scope="col">Author</th>
+                  </tr>
+                </thead>
+                <tbody>
+                        <tr >
+                            <th scope="row">{{question.stats.avg_time}}</th>
+                            <td>{{question.stats.perc}}</td>
+                            <td>{{question.stats.student_rating}}</td>
+                            <td>{{question.general.primary_difficulty}}</td>
+                            <td><a href="teacher/{{question.general.author}}">{{question.general.author_first_name}} {{question.general.author_last_name}}</a></td>
+                        </tr>
+                </tbody>
+            </table>
+
+        <span class="header-small">Demographics</span>
+        <br>
+        <br>
+        <mat-form-field color="secondary" appearance="fill">
+            <mat-label color="secondary">Institute</mat-label>
+            <mat-select color="secondary" [(value)]="current_insti">
+                <ng-container *ngFor="let item of question.demographics" >
+                    <mat-option color="secondary" [value]="item">
+                        {{item.name}}
+                    </mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <ng-container *ngIf="current_insti">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                    <th scope="col">Institute</th>
+                    <th scope="col">Average time</th>
+                    <th scope="col">Percentage</th>
+                    <th scope="col">Student Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr >
+                            <th scope="row">{{current_insti.name}}</th>
+                            <td>{{current_insti.avg_time | number : '1.2-2'}}</td>
+                            <td>{{current_insti.perc | number : '1.2-2'}}</td>
+                            <td>{{current_insti.student_rating | number : '1.2-2'}}</td>
+                        </tr>
+                </tbody>
+            </table>
+        </ng-container>
         <div style="width:20%">
             <div style="display: block">
               <canvas baseChart
