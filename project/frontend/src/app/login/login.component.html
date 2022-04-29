@@ -24,7 +24,7 @@
                     <input matInput type="password" formControlName="password" placeholder="Enter password">
                 </mat-form-field>
                 <br>
-                <button mat-raised-button color="primary" type="submit">Login</button>
+                <button mat-raised-button color="primary" (click)="onSubmit()" type="submit">Login</button>
             </form>
         </div>
         <div *ngIf="is_teacher">
