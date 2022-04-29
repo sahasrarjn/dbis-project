@@ -31,6 +31,10 @@
             </mat-form-field>
             <button class="filter-button" mat-raised-button color="primary" (click)="filter()">Filter by difficulty</button>
         </div>
+        <div class="text-center">
+            <button mat-raised-button color="primary" (click)="toggleQues()">{{curr_ques == 'direct' ? 'Show Related Questions' : 'Show Exact Match questions'}}</button>
+        </div>
+
         <!-- <div class="input-fields d-flex justify-content-around align-items-center">
             <mat-form-field appearance="fill">
                 <mat-label>Author Filter</mat-label>
@@ -75,7 +79,7 @@
         <div class="buttons-div d-flex justify-content-around" style="padding-bottom: 32px">
             <button mat-raised-button color="primary" (click)="goto_start()" [disabled]="start == 0">Start</button>
             <button mat-raised-button color="primary" (click)="prev()" [disabled]="start == 0">Prev</button>
-            <button mat-raised-button color="primary" (click)="next()" [disabled]="start * 10 >= all_questions.length">Next</button>
+            <button mat-raised-button color="primary" (click)="next()" [disabled]="check_next_disabled">Next</button>
         </div>
     </section>
 </div>
