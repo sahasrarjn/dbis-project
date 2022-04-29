@@ -84,14 +84,43 @@
                 </tbody>
             </table>
         </ng-container>
-        <div style="width:20%">
+        <div style="width:50%; height: fit-content;">
             <div style="display: block">
-              <canvas baseChart
-                [data]="timeTakenChartData"
-                [options]="timeTakenChartOptions"
-                [type]="timeTakenChartType">
-              </canvas>
+            <canvas baseChart
+                [data]="time_taken_data"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [type]="barChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+            </canvas>
             </div>
         </div>
+        <div style="width:50%; height: fit-content;">
+            <div style="display: block">
+            <canvas baseChart
+                [data]="marks_data"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [type]="barChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+            </canvas>
+            </div>
+        </div>
+        <div style="width:50%; height: fit-content;">
+            <div style="display: block">
+            <canvas baseChart
+                [data]="relevance_data"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [type]="barChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+            </canvas>
+            </div>
+        </div>
+
+        
     </mat-card-content>
   </mat-card>
