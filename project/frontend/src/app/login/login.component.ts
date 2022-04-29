@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('user_name', this.myuser.user_name);
             localStorage.setItem('type', 'student');
             localStorage.setItem('user_id', res.data.user_id);
-            this._router.navigate(['/questions']);
+            this._router.navigate(['']);
           }
           else {
             alert("Invalid credentials. Try Again!")
@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
       user_name: this.teacherloginForm.get('username').value,
       password: pass_hash
     }
-
+// Nancy1999/10/02
     this.logserv.tryteacherlogin(this.myuser)
       .subscribe(
         (res: any) => {
@@ -107,7 +107,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('user_name', this.myuser.user_name);
             localStorage.setItem('type', 'teacher');
             localStorage.setItem('user_id', this.user_id);
-            this._router.navigate(['/prepare-exam']);
+            this._router.navigate(['']);
           }
           else {
             alert("Invalid credentials. Try Again!")

@@ -13,6 +13,8 @@
                 <a mat-button href="institutes">Institutes</a></mat-list-item>
             <mat-list-item role="listitem" class="list-item" *ngIf="_loginserv.teacherloggedIn()"> 
                 <a mat-button href="prepare-exam">Prepare exam</a></mat-list-item>
+            <mat-list-item role="listitem" class="list-item" *ngIf="_loginserv.teacherloggedIn()"> 
+                    <a mat-button href="add-question">Add question</a></mat-list-item>
         </div>
         <div style="float: right">
             <mat-list-item role="listitem" class="list-item-end"> <a mat-button *ngIf="!_loginserv.loggedIn()"

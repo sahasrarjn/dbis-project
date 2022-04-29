@@ -240,8 +240,10 @@ app.post('/attempt_exam', async function (req, res) {
 })
 
 app.post('/create_question', async function (req, res) {
-	var { qtext, diff, ans, tc, auth, tags } = req.body;
+	var {qtext, diff, ans, tc, auth, tags} = req.body;
+	console.log(req.body);
 	var qres = await question_lib.create_question(qtext, diff, ans, tc, auth, tags);
+	console.log(req.body);
 	res.send(qres);
 })
 

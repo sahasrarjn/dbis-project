@@ -1,0 +1,37 @@
+<div class="d-flex justify-content-center">
+    <h1>Add question</h1>
+</div>
+<div class="d-flex justify-content-center">
+    <form class="d-flex flex-column" [formGroup]="createForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field>
+            <mat-label for="qtext">Question text: </mat-label>
+            <textarea matInput id="qtext" type="text" formControlName="qtext"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label for="diff">Difficulty: </mat-label>
+            <input matInput id="diff" type="number" formControlName="diff">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label for="ans">Answer:  </mat-label>
+            <textarea matInput id="ans" type="text" formControlName="ans"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label for="tc">Testcase:  </mat-label>
+            <textarea matInput id="tc" type="text" formControlName="tc"></textarea>
+        </mat-form-field>
+
+        <div>
+            <mat-label>Tags: *</mat-label>
+            <div class="checkbox-div">
+                <div *ngFor="let item of all_tags; index as idx">
+                    <mat-checkbox class="example-margin" [formControlName]="all_tags[idx].tag_name">{{all_tags[idx].tag_name}}</mat-checkbox>
+                </div>
+            </div>
+        </div>
+        <ng-container class="error-msg" *ngIf="error_numtags"><p class="error-msg">You should select at least 2 tags</p></ng-container>
+        <ng-container class="error-success" *ngIf="submitted"><p class="error-success">Form submitted successfully</p></ng-container>
+        <button mat-button color="primary" type="submit" [disabled]="!createForm.valid">Submit</button>
+    </form>
+    
+</div>

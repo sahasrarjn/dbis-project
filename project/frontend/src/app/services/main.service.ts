@@ -30,8 +30,21 @@ export class MainService {
   }
 
   getQuestionData(id : any){
-    console.log(this.baseurl + 'question_data?qid=' + id);
+    // console.log(this.baseurl + 'question_data?qid=' + id);
     return this.http.get(this.baseurl + 'question_data?qid=' + id);
+  }
+
+  addQuestion(qtext:any, diff:any, ans:any, tc:any, auth:any, tags:any){
+    var JSONdata = {
+      "qtext": qtext,
+      "diff": diff,
+      "ans": ans,
+      "tc": tc,
+      "auth": auth,
+      "tags": tags
+    }
+    console.log(JSONdata);
+    return this.http.post(this.baseurl + 'dd_question', JSON.stringify(JSONdata), this.httpOptions);
   }
 
   
