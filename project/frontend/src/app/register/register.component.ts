@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegService } from '../services/reg.service';
 import { NewTeacherUser, NewUser } from './newuser';
+import * as shajs from 'sha.js';
 import { InstituteService } from '../services/institute.service';
 
 @Component({
@@ -117,13 +118,15 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    let password=  this.regForm.get('password').value;
+    let pass_hash = shajs('sha256').update({password}).digest('hex');
     this.mynewuser = {
       student_id: this.regForm.get('student_id').value,
       first_name: this.regForm.get('first_name').value,
       last_name: this.regForm.get('last_name').value,
       date_of_birth: this.regForm.get('date_of_birth').value,
       user_name: this.regForm.get('user_name').value,
-      password: this.regForm.get('password').value,
+      password: pass_hash,
       student_template: this.st_id,
       institute: this.inst_id,
       facad: this.fac_id,
@@ -145,13 +148,15 @@ export class RegisterComponent implements OnInit {
   }
 
   onTeacherSubmit() {
+    let password=  this.regFormTeacher.get('password').value;
+    let pass_hash = shajs('sha256').update({password}).digest('hex');
     this.mynewteacher = {
       teacher_id: this.regFormTeacher.get('teacher_id').value,
       first_name: this.regFormTeacher.get('first_name').value,
       last_name: this.regFormTeacher.get('last_name').value,
       date_of_birth: this.regFormTeacher.get('date_of_birth').value,
       user_name: this.regFormTeacher.get('user_name').value,
-      password: this.regFormTeacher.get('password').value,
+      password: pass_hash
     }
 
     this.regserv.tryregteacher(this.mynewteacher)

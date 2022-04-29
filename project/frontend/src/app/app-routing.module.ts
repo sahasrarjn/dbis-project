@@ -15,6 +15,7 @@ import { StudentComponent } from './student/student.component';
 import { TeacherGuard } from './teacher.guard';
 import { TeacherComponent } from './teacher/teacher.component';
 import { HomeComponent } from './home/home.component';
+import { NotauthGuard } from './notauth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,8 +32,9 @@ const routes: Routes = [
   { path: 'report-card', component: ReportCardComponent, canActivate: [] },
   { path: 'student/:id', component: StudentComponent, canActivate: [TeacherGuard] }, // Todo: Update this to profile, and redirect to relevant component based on role
   { path: 'teacher/:id', component: TeacherComponent, canActivate: [AuthGuard] }, // Todo: empty component, this is a public page, any user can access and see all exams prepared by teacher and other details
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent, canActivate: [NotauthGuard]},
+  { path: 'register', component: RegisterComponent, canActivate: [NotauthGuard] },
+  { path: '**', component: HomeComponent }
 ];
 
 @NgModule({

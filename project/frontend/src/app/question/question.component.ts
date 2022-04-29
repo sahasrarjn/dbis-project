@@ -11,6 +11,8 @@ import { FormControl } from '@angular/forms';
 export class QuestionComponent implements OnInit {
   questions : any;
   selectedQuestion : string[] = [];
+  author_filter;
+  authors = new Set();
 
   diff_lower : string = "";
   diff_upper : string = "";
@@ -22,10 +24,15 @@ export class QuestionComponent implements OnInit {
   mindiff = new FormControl('');
   maxdiff = new FormControl('');
 
+  direct_ques;
+  indirect_ques;
+  check_next_disabled = false;
+
   constructor(private route : ActivatedRoute, private ms : MainService) { }
 
   start = 0;
   all_questions;
+  curr_ques = 'direct';
   // todo (gucci) : handle pagination of data (questions)
   ngOnInit(): void {
     this.ms.getTags().subscribe(data => {
@@ -39,8 +46,19 @@ export class QuestionComponent implements OnInit {
     this.ms.getQuestions(this.diff_lower, this.diff_upper, this.selectedTags, this.author_id).subscribe(data => {
       // get 10 from data
       this.all_questions = data;
-      this.questions = (data as Array<any>).slice(this.start * 10 , this.start * 10 + 10);
+      console.log(this.all_questions)
+      this.direct_ques = this.all_questions['direct'];
+      this.indirect_ques = this.all_questions['related'];
+      this.all_questions = this.all_questions['direct'];
+      for(let i = 0; i < this.all_questions.length; i++){
+        this.authors.add(this.all_questions[i].author);
+      }
+      this.questions = this.all_questions.slice(this.start * 10 , this.start * 10 + 10);
       this.start = 0;
+
+      if(this.all_questions.length <= 10){
+        this.check_next_disabled = true;
+      }
     });
   }
 
@@ -55,6 +73,19 @@ export class QuestionComponent implements OnInit {
     }
   }
 
+  toggleQues(){
+    if(this.curr_ques == 'direct'){
+      this.all_questions = this.indirect_ques;
+      this.curr_ques = 'indirect';
+    }
+    else{
+      this.all_questions = this.direct_ques;
+      this.curr_ques = 'direct';
+    }
+
+    this.goto_start();
+  }
+
   tags_select(){
     this.get_questions();
   }
@@ -65,6 +96,9 @@ export class QuestionComponent implements OnInit {
   goto_start(){
     this.start = 0;
     this.questions = (this.all_questions as Array<any>).slice(this.start * 10 , this.start * 10 + 10);
+    if(this.all_questions.length <= 10){
+      this.check_next_disabled = true;
+    }
   }
 
   prev(){
@@ -75,6 +109,9 @@ export class QuestionComponent implements OnInit {
   next(){
     this.start = Math.min(this.start+1, Math.ceil(this.all_questions.length)/10);
     this.questions = (this.all_questions as Array<any>).slice(this.start * 10 , this.start * 10 + 10);
+    if(this.start*10 + 10 >= this.all_questions.length){
+      this.check_next_disabled = true;
+    }
   }
 
   filter(){
@@ -88,6 +125,15 @@ export class QuestionComponent implements OnInit {
     this.diff_lower = min;
     this.diff_upper = max;
     this.get_questions();
+  }
+
+  changeAuthorFilter(author_){
+    let author = author_.value;
+    this.questions = this.all_questions.filter(question => {
+      question.author == author
+    });
+
+    return this.questions;
   }
 
 }

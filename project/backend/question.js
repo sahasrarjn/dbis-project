@@ -42,7 +42,7 @@ async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 {
 	if (diff_lower == null || diff_lower=="")
 		diff_lower = 0;
-	if (diff_upper == null || diff_lower =="")
+	if (diff_upper == null || diff_upper =="")
 		diff_upper = 10000;
 	if (tags == null || tags=="")
 	{
@@ -65,11 +65,62 @@ async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 		tgstr = '(0)';
 	}
 
+	if (author_id == null || author_id=="")
+	{   
+		resp = {}
+		query1 = `
+		with x1 as
+		(
+			select question_id, question_text, question.primary_difficulty, CONCAT(teacher.first_name, ' ', teacher.last_name) as author, question.author as author_id
+			from question, teacher
+			where question.author = teacher.teacher_id and
+				question.primary_difficulty >= ${diff_lower} and question.primary_difficulty <= ${diff_upper} and
+				question_id in
+				(select question_id from question_tags where tag_id in ${tgstr})
+		),
+		y1 as
+		(
+			select x1.question_id, question_text, x1.primary_difficulty, author, ARRAY_AGG(tag_name) as tags, author_id
+			from x1, ques_tags_names
+			where x1.question_id = ques_tags_names.question_id
+			group by x1.question_id, question_text, x1.primary_difficulty, author, author_id
+		)
+
+		`
+	}
+	else
+	{   
+		query1 = `
+		with x1 as
+		(
+			select question_id, question_text, question.primary_difficulty, CONCAT(teacher.first_name, ' ', teacher.last_name) as author, question.author as author_id
+			from question, teacher
+			where question.author = teacher.teacher_id and
+				question.primary_difficulty >= ${diff_lower} and question.primary_difficulty <= ${diff_upper} and
+				question.author = ${author_id} and
+				question_id in
+				(select question_id from question_tags where tag_id in ${tgstr})
+		),
+		y1 as
+		(
+			select x1.question_id, question_text, primary_difficulty, author, ARRAY_AGG(tag_name) as tags, author_id
+			from x1, ques_tags_names
+			where x1.question_id = ques_tags_names.question_id
+			group by x1.question_id, question_text, x1.primary_difficulty, author, author_id
+		)
+		`
+	}
+	console.log(query1 + ' select * from y1');
+	qres = await client.query(query1+ ' select * from y1');
+	resp['direct'] = qres.rows;
+
+	
 
 	if (author_id == null || author_id=="")
 	{   
-		query = `
-		with x as
+		query2 = `
+		,
+		x as
 		(
 			select question_id, question_text, question.primary_difficulty, CONCAT(teacher.first_name, ' ', teacher.last_name) as author, question.author as author_id
 			from question, teacher
@@ -86,12 +137,14 @@ async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 			group by x.question_id, question_text, x.primary_difficulty, author, author_id
 		)
 		select * from y
+		where question_id not in (select question_id from y1)
 		`
 	}
 	else
 	{   
-		query = `
-		with x as
+		query2 = `
+		,
+		x as
 		(
 			select question_id, question_text, question.primary_difficulty, CONCAT(teacher.first_name, ' ', teacher.last_name) as author, question.author as author_id
 			from question, teacher
@@ -109,11 +162,14 @@ async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 			group by x.question_id, question_text, x.primary_difficulty, author, author_id
 		)
 		select * from y
+		where question_id not in (select question_id from y1)
 		`
 	}
-	// console.log(query)
+	query = query1+query2;
+	console.log(query)
 	qres = await client.query(query);
-	return qres.rows;
+	resp['related'] = qres.rows;
+	return resp;
 }
 
 async function get_question_data(qid)
@@ -127,11 +183,18 @@ async function get_question_data(qid)
     `
     qres = await client.query(query);
     resp['general'] = qres.rows[0];
+
+	query = `
+        select ARRAY_AGG(tag_name) as tags from ques_tags_names where question_id = ${qid}
+    `
+    qres = await client.query(query);
+    resp['basic_tags'] = qres.rows[0];
+
     query = `
         select ARRAY_AGG(tag_name) as tags from all_ques_tags_names where question_id = ${qid}
     `
     qres = await client.query(query);
-    resp['tags'] = qres.rows[0];
+    resp['related_tags'] = qres.rows[0];
     query = `
         with x as
         (
