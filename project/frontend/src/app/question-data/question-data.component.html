@@ -24,8 +24,8 @@
                 <tbody>
                     <ng-container *ngFor="let e of question.exams">
                         <tr  class="link" (click)="navigate('exam/' + e.exam_id)">
-                            <th scope="row">{{e.exam_id}}</th>
-                            <td>{{e.exam_name}}</td>
+                            <th scope="row">{{e.exam_id ? e.exam_id : '-'}}</th>
+                            <td>{{e.exam_name ? e.exam_name : '-'}}</td>
                           </tr>
                     </ng-container>
                 </tbody>
@@ -44,10 +44,10 @@
                 </thead>
                 <tbody>
                         <tr >
-                            <th scope="row">{{question.stats.avg_time}}</th>
-                            <td>{{question.stats.perc}}</td>
-                            <td>{{question.stats.student_rating}}</td>
-                            <td>{{question.general.primary_difficulty}}</td>
+                            <th scope="row">{{question.stats.avg_time ? question.stats.avg_time : '-'}}</th>
+                            <td>{{question.stats.perc ? question.stats.perc : '-'}}</td>
+                            <td>{{question.stats.student_rating ? question.stats.student_rating : '-'}}</td>
+                            <td>{{question.general.primary_difficulty ? question.general.primary_difficulty : '-'}}</td>
                             <td><a href="teacher/{{question.general.author}}">{{question.general.author_first_name}} {{question.general.author_last_name}}</a></td>
                         </tr>
                 </tbody>
