@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token', res.token);
             localStorage.setItem('user_name', this.myuser.user_name);
             localStorage.setItem('type', 'student');
+            localStorage.setItem('user_id', res.user_id);
             this._router.navigate(['/questions']);
           }
           else {
@@ -92,6 +93,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token', res.token);
             localStorage.setItem('user_name', this.myuser.user_name);
             localStorage.setItem('type', 'teacher');
+            localStorage.setItem('user_id', res.user_id);
             this._router.navigate(['/prepare-exam']);
           }
           else {

@@ -1,39 +1,50 @@
-<br>
-<div *ngIf="!is_teacher && !is_student">
-    <h1 style="text-align: center; font-size: 42px; margin-bottom: 32px;"> Login </h1>
-    <div class="d-flex justify-content-around">
-        <button class="btn btn-lg btn-dark" (click)="activateStudentLogin()" type="submit">Login as Student</button>
-        <button class="btn btn-lg btn-dark" (click)="activateTeacherLogin()" type="submit">Login as Teacher</button>
-    </div>
-    <div class="text-center mt-5">
-        Don't have an account? <a href="register">Register Now!</a>
-    </div>
-</div>
-<div *ngIf="is_student">
-    <h1 style="text-align: center;"> Login as Student</h1>
-
-    <form [formGroup]="loginForm">
-        <label>User Name</label>
-        <input class="form-control form-control-lg" type="text" formControlName="username" placeholder="Enter username">
-        <label>Password</label>
-        <input class="form-control form-control-lg" type="password" formControlName="password"
-            placeholder="Enter password">
-        <button class="btn btn-lg btn-dark" (click)="onSubmit()" type="submit">Login</button>
-        <div *ngIf="notsuccess" class="alert alert-danger" role="alert">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            Incorrect username/password! Try again.
+<mat-card class="example-card">
+    <mat-card-header class="d-flex justify-content-center">
+        <b>
+            <h1 class="text-center">Login</h1>
+        </b>
+    </mat-card-header>
+    <mat-card-content>
+        <div *ngIf="!is_teacher && !is_student">
+            <div class="d-flex justify-content-around">
+                <button class="btn btn-lg btn-dark" (click)="activateStudentLogin()" type="submit">Login as
+                    Student</button>
+                <button class="btn btn-lg btn-dark" (click)="activateTeacherLogin()" type="submit">Login as
+                    Teacher</button>
+            </div>
+            <div class="text-center mt-5">
+                Don't have an account? <a href="register">Register Now!</a>
+            </div>
         </div>
-    </form>
-</div>
-<div *ngIf="is_teacher">
-    <h1 style="text-align: center;"> Login as Teacher </h1>
-
-    <form [formGroup]="teacherloginForm">
-        <label>User Name</label>
-        <input class="form-control form-control-lg" type="text" formControlName="username" placeholder="Enter username">
-        <label>Password</label>
-        <input class="form-control form-control-lg" type="password" formControlName="password"
-            placeholder="Enter password">
-        <button class="btn btn-lg btn-dark" (click)="onTeacherSubmit()" type="submit">Login</button>
-    </form>
-</div>
+        <div *ngIf="is_student">
+            <form [formGroup]="loginForm">
+                <mat-form-field appearance="fill">
+                    <mat-label>User Name</mat-label>
+                    <input matInput type="text" formControlName="username" placeholder="Enter username">
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" placeholder="Enter password">
+                </mat-form-field>
+                <br>
+                <button mat-raised-button color="primary" (click)="onSubmit()" type="submit">Login</button>
+            </form>
+        </div>
+        <div *ngIf="is_teacher">
+            <form [formGroup]="teacherloginForm">
+                <mat-form-field appearance="fill">
+                    <mat-label>User Name</mat-label>
+                    <input matInput type="text" formControlName="username" placeholder="Enter username">
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" placeholder="Enter password">
+                </mat-form-field>
+                <br>
+                <button mat-raised-button color="primary" (click)="onTeacherSubmit()" type="submit">Login</button>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>

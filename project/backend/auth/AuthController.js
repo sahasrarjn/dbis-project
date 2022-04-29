@@ -25,6 +25,7 @@ router.post("/login/student", async function (req, res) {
             .json({
                 success: false,
                 data: {
+                    user_id: qres.user_id,
                     user_name: qres.user_name,
                     password: qres.password,
                     token: "invalid",
@@ -49,6 +50,7 @@ router.post("/login/student", async function (req, res) {
             .json({
                 success: true,
                 data: {
+                    user_id: qres.user_id,
                     user_name: qres.user_name,
                     password: qres.password,
                     token: token,
@@ -71,6 +73,7 @@ router.post("/login/teacher", async function (req, res) {
             .json({
                 success: false,
                 data: {
+                    user_id: qres.user_id,
                     user_name: qres.user_name,
                     password: qres.password,
                     token: "invalid",
@@ -95,6 +98,7 @@ router.post("/login/teacher", async function (req, res) {
             .json({
                 success: true,
                 data: {
+                    user_id: qres.user_id,
                     user_name: qres.user_name,
                     password: qres.password,
                     token: token,
@@ -133,6 +137,7 @@ router.post("/register/student", async function (req, res) {
         res.status(200).json({
             success: true,
             data: {
+                user_id: qres.user_id,
                 user_name: qres.user_name,
                 password: qres.password,
                 token: token,
@@ -177,6 +182,7 @@ router.post("/register/teacher", async function (req, res) {
         res.status(200).json({
             success: true,
             data: {
+                user_id: qres.user_id,
                 user_name: qres.user_name,
                 password: qres.password,
                 token: token,

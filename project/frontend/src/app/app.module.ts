@@ -18,7 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
@@ -37,7 +37,7 @@ import { LoginService } from './login.service';
 import { InstitutesComponent } from './institutes/institutes.component';
 import { InstituteDetailComponent } from './institute-detail/institute-detail.component';
 import { HomeComponent } from './home/home.component';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 
@@ -79,7 +79,8 @@ import { HomeComponent } from './home/home.component';
     MatFormFieldModule,
     MatInputModule,
     MatTooltipModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
   ],
   providers: [RegService, LoginService],
   bootstrap: [AppComponent]
