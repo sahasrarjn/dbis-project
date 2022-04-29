@@ -13,6 +13,8 @@ export class ExamsComponent implements OnInit {
   exams : any;
   all_exams : any;
   start : any = 0;
+  sid : any = 0;
+  is_student : any = false;
 
   is_attempted : any = {};
   attempted_exams : any;
@@ -20,17 +22,30 @@ export class ExamsComponent implements OnInit {
   constructor(private route:ActivatedRoute, private es:ExamService, private ss : StudentService, private _login : LoginService) { }
 
   ngOnInit(): void {
+    this.sid = localStorage.getItem('user_id'); // will be used only for student
+    
+    if(this._login.studentloggedIn()){
+      this.is_student = true;
+    }
+
     this.es.getAllExams().subscribe(data => {
       this.all_exams = data;
       this.exams = (data as Array<any>).slice(this.start * 10 , this.start * 10 + 10);
       this.start = 0;
+      
+      var defaultBool = true;
+      
+      if(this.is_student){
+        defaultBool = false;
+      }
+
       for(let i=0; i<this.all_exams.length; i++) {
-        this.is_attempted[this.all_exams[i].exam_id] = true;
+        this.is_attempted[this.all_exams[i].exam_id] = defaultBool;
       }
     });    
 
 
-    if(this._login.studentloggedIn()){
+    if(this.is_student){
       this.handleQuesButton();
     }
   }

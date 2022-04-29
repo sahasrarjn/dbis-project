@@ -12,6 +12,10 @@
                         <mat-panel-description>
                             {{e.exam_name}}
                         </mat-panel-description>
+                        <a mat-button href="report-card?eid={{e.exam_id}}&sid={{this.sid}}" *ngIf="is_attempted[e.exam_id] && is_student">
+                            <mat-icon>launch</mat-icon>
+                            View report
+                        </a>
                         <a mat-button href="exam/{{e.exam_id}}" *ngIf="is_attempted[e.exam_id]">
                             <mat-icon>launch</mat-icon>
                             Detailed View

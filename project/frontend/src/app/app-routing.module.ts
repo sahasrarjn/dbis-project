@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'institutes', component: InstitutesComponent, canActivate: [AuthGuard] },
   { path: 'institute/:id', component: InstituteDetailComponent, canActivate: [AuthGuard] },
 
-  { path: 'report-card', component: ReportCardComponent, canActivate: [] },
+  { path: 'report-card', component: ReportCardComponent, canActivate: [AuthGuard] },
   { path: 'student/:id', component: StudentComponent, canActivate: [TeacherGuard] },
   { path: 'teacher/:id', component: TeacherComponent, canActivate: [AuthGuard] },
 
