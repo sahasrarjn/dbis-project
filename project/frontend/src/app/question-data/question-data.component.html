@@ -1,5 +1,5 @@
 <!-- Handle styling -->
-<mat-card class="example-card">
+<mat-card class="example-card pb-5">
     <mat-card-header class="d-flex justify-content-center">
      <b><h1 class="text-center">Question: {{question.general.question_id}}</h1></b>
     </mat-card-header>
@@ -94,7 +94,7 @@
                 <div style="display: block">
                 <canvas baseChart
                     [data]="time_taken_data"
-                    [options]="barChartOptions"
+                    [options]="barChartOptions[0]"
                     [plugins]="barChartPlugins"
                     [type]="barChartType"
                     (chartHover)="chartHovered($event)"
@@ -106,7 +106,7 @@
                 <div style="display: block">
                 <canvas baseChart
                     [data]="marks_data"
-                    [options]="barChartOptions"
+                    [options]="barChartOptions[1]"
                     [plugins]="barChartPlugins"
                     [type]="barChartType"
                     (chartHover)="chartHovered($event)"
@@ -117,12 +117,25 @@
         </div>
 
         
-        <div class="mt-5">
+        <div class=" row mt-5 d-flex justify-content-between">
             <div class="col-5" style="height: fit-content;">
                 <div style="display: block">
                 <canvas baseChart
                     [data]="relevance_data"
-                    [options]="barChartOptions"
+                    [options]="barChartOptions[2]"
+                    [plugins]="barChartPlugins"
+                    [type]="barChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)">
+                </canvas>
+                </div>
+            </div>
+
+            <div class="col-5" style="height: fit-content;">
+                <div style="display: block">
+                <canvas baseChart
+                    [data]="rating_data"
+                    [options]="barChartOptions[2]"
                     [plugins]="barChartPlugins"
                     [type]="barChartType"
                     (chartHover)="chartHovered($event)"
