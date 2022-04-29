@@ -11,21 +11,22 @@
         </mat-form-field>
 
         <div>
-            <mat-label for="last-name" [matTooltip]="tooltip_text" matTooltipClass="my-tooltip">Exam Type: * </mat-label>
+            <mat-label for="last-name" [matTooltip]="tooltip_text" matTooltipClass="my-tooltip">Exam Type: *
+            </mat-label>
             <br>
             <mat-radio-group formControlName="examType" aria-label="Select an option">
                 <ng-container *ngFor="let item of EXAM_TYPE_DATA">
-                    <mat-radio-button  value="{{item.name}}">{{item.name}}  </mat-radio-button>
+                    <mat-radio-button value="{{item.name}}">{{item.name}} </mat-radio-button>
                 </ng-container>
             </mat-radio-group>
         </div>
-        
+
         <mat-form-field>
             <mat-label for="mindiff">Min Difficulty: </mat-label>
             <input matInput id="mindiff" type="number" formControlName="min_diff">
         </mat-form-field>
         <mat-form-field>
-            <mat-label for="maxdiff">Max Difficulty:  </mat-label>
+            <mat-label for="maxdiff">Max Difficulty: </mat-label>
             <input matInput id="maxdiff" type="number" formControlName="max_diff">
         </mat-form-field>
 
@@ -33,16 +34,24 @@
             <mat-label>Tags: *</mat-label>
             <div class="checkbox-div">
                 <div *ngFor="let item of all_tags; index as idx">
-                    <mat-checkbox class="example-margin" [formControlName]="all_tags[idx].tag_name">{{all_tags[idx].tag_name}}</mat-checkbox>
+                    <mat-checkbox class="example-margin" [formControlName]="all_tags[idx].tag_name">
+                        {{all_tags[idx].tag_name}}</mat-checkbox>
                 </div>
             </div>
         </div>
-        <ng-container class="error-msg" *ngIf="error_diff"><p class="error-msg">Difference between minimum and maximum difficulty should be at least 300</p></ng-container>
-        <ng-container class="error-msg" *ngIf="error_numtags"><p class="error-msg">You should select at least 2 tags</p></ng-container>
-        <ng-container class="error-msg" *ngIf="error_range"><p class="error-msg">Minimum difficulty should be 1000 and maximum should be 2000</p></ng-container>
-        <ng-container class="error-success" *ngIf="submitted"><p class="error-success">Form submitted successfully</p></ng-container>
+        <ng-container class="error-msg" *ngIf="error_diff">
+            <p class="error-msg">Difference between minimum and maximum difficulty should be at least 300</p>
+        </ng-container>
+        <ng-container class="error-msg" *ngIf="error_numtags">
+            <p class="error-msg">You should select at least 2 tags</p>
+        </ng-container>
+        <ng-container class="error-msg" *ngIf="error_range">
+            <p class="error-msg">Minimum difficulty should be 1000 and maximum should be 2000</p>
+        </ng-container>
+        <ng-container class="error-success" *ngIf="submitted">
+            <p class="error-success">Form submitted successfully</p>
+        </ng-container>
         <button mat-button color="primary" type="submit" [disabled]="!profileForm.valid">Submit</button>
     </form>
-    
-</div>
 
+</div>

@@ -25,6 +25,7 @@ router.post("/login/student", async function (req, res) {
             .json({
                 success: false,
                 data: {
+                    user_id: qres.student_id,
                     user_name: qres.user_name,
                     password: qres.password,
                     token: "invalid",
@@ -49,6 +50,7 @@ router.post("/login/student", async function (req, res) {
             .json({
                 success: true,
                 data: {
+                    user_id: qres.student_id,
                     user_name: qres.user_name,
                     password: qres.password,
                     token: token,
@@ -65,12 +67,15 @@ router.post("/login/teacher", async function (req, res) {
 
     qres = qres["loginstatus"];
 
+    // console.log(qres);
+
     if (qres == "failed") {
         res
             .status(200)
             .json({
                 success: false,
                 data: {
+                    user_id: qres.teacher_id,
                     user_name: qres.user_name,
                     password: qres.password,
                     token: "invalid",
@@ -95,6 +100,7 @@ router.post("/login/teacher", async function (req, res) {
             .json({
                 success: true,
                 data: {
+                    user_id: qres.teacher_id,
                     user_name: qres.user_name,
                     password: qres.password,
                     token: token,
@@ -133,6 +139,7 @@ router.post("/register/student", async function (req, res) {
         res.status(200).json({
             success: true,
             data: {
+                user_id: qres.student_id,
                 user_name: qres.user_name,
                 password: qres.password,
                 token: token,
@@ -177,6 +184,7 @@ router.post("/register/teacher", async function (req, res) {
         res.status(200).json({
             success: true,
             data: {
+                user_id: qres.student_id,
                 user_name: qres.user_name,
                 password: qres.password,
                 token: token,
