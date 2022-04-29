@@ -3,8 +3,7 @@ const client = require('./obj.js');
 
 const question_lib = require('./question.js');
 
-async function attempt_exam(sid, eid)
-{
+async function attempt_exam(sid, eid) {
     query = `
         select question_id
         from exam_question
@@ -13,25 +12,24 @@ async function attempt_exam(sid, eid)
     qres = await client.query(query);
     qres = qres.rows;
 
-    for (let i = 0; i < qres.length; i++) 
-    {
+    for (let i = 0; i < qres.length; i++) {
         qid = qres[i].question_id;
         query = `
             select max(statid)+1 as rid from student_exam_ques_stat
         `
         qres1 = await client.query(query);
         rid = qres1.rows[0].rid;
-        marks = Math.floor(Math.random()*2);
-        time = 5+Math.floor(Math.random()*10);
-        diff = 100*Math.floor(Math.random()*11)+1000;
-        rel = Math.floor(Math.random()*10)+1;
+        marks = Math.floor(Math.random() * 2);
+        time = 5 + Math.floor(Math.random() * 10);
+        diff = 100 * Math.floor(Math.random() * 11) + 1000;
+        rel = Math.floor(Math.random() * 10) + 1;
         query = `
             insert into student_exam_ques_stat values(${rid}, ${sid}, ${qid}, ${eid}, ${marks}, ${time}, ${diff}, ${rel})
         `
         console.log(query)
         //qres = await client.query(query);
         await client.query(query);
-        
+
     }
 
 }
@@ -145,13 +143,20 @@ async function login(user_name, password) {
     return resp;
 }
 
-async function register(roll_no, user_name, password, first_name, last_name,
+async function register(user_name, password, first_name, last_name,
     date_of_birth, student_template, institute, facad) {
     resp = {}
+
+    query = `
+		select 1+max(student_id) as student_id from student
+	`
+    qres = await client.query(query);
+    new_id = qres.rows[0].student_id;
+
     query = `
     insert into student(student_id, user_name, password, first_name, last_name, 
         date_of_birth, student_template, institute, facad)
-    values(${roll_no}, '${user_name}', '${password}', '${first_name}', '${last_name}','${date_of_birth}',
+    values(${new_id}, '${user_name}', '${password}', '${first_name}', '${last_name}','${date_of_birth}',
     ${student_template},${institute},${facad})`
 
     after_query = `select * from student where user_name = '${user_name}'`

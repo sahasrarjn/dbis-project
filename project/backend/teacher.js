@@ -3,9 +3,8 @@ const client = require('./obj.js');
 
 const exam_lib = require('./exams.js');
 
-async function get_teacher_data(tid)
-{
-	resp={};
+async function get_teacher_data(tid) {
+	resp = {};
 	query = `
 		select question_id, question_text, primary_difficulty
 		from question
@@ -69,14 +68,20 @@ async function login(user_name, password) {
 	return resp;
 }
 
-async function register(roll_no, user_name, password, first_name, last_name,
+async function register(user_name, password, first_name, last_name,
 	date_of_birth) {
 	resp = {}
 
 	query = `
+		select 1+max(teacher_id) as teacher_id from teacher
+	`
+	qres = await client.query(query);
+	t_id = qres.rows[0].teacher_id;
+
+	query = `
     insert into teacher(teacher_id, user_name, password, first_name, last_name, 
         date_of_birth)
-    values(${roll_no}, '${user_name}', '${password}', '${first_name}', '${last_name}','${date_of_birth}')`
+    values(${t_id}, '${user_name}', '${password}', '${first_name}', '${last_name}','${date_of_birth}')`
 
 	after_query = `select * from teacher where user_name = '${user_name}'`
 

@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
 
   institutes: any;
   facads: any;
+  students: any;
 
   is_student: Boolean = false;
   is_teacher: Boolean = false;
@@ -33,10 +34,12 @@ export class RegisterComponent implements OnInit {
   inst_id: any;
   fac_id: any;
 
+  max_st_id: any;
+  max_t_id: any;
+
   errormessage: String = "";
 
   regForm = new FormGroup({
-    student_id: new FormControl('', Validators.required),
     first_name: new FormControl('', Validators.required),
     last_name: new FormControl('', Validators.required),
     date_of_birth: new FormControl('', Validators.required),
@@ -48,7 +51,6 @@ export class RegisterComponent implements OnInit {
   })
 
   regFormTeacher = new FormGroup({
-    teacher_id: new FormControl('', Validators.required),
     first_name: new FormControl('', Validators.required),
     last_name: new FormControl('', Validators.required),
     date_of_birth: new FormControl('', Validators.required),
@@ -63,6 +65,7 @@ export class RegisterComponent implements OnInit {
   constructor(private is: InstituteService, private regserv: RegService, private _router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
+
     this.is.getAllInstitutes().subscribe(
       res => {
         console.log(res);
@@ -84,8 +87,7 @@ export class RegisterComponent implements OnInit {
   }
 
   validate(): Boolean {
-    if (this.regForm.get('student_id').value == "" ||
-      this.regForm.get('first_name').value == "" ||
+    if (this.regForm.get('first_name').value == "" ||
       this.regForm.get('last_name').value == "" ||
       this.regForm.get('date_of_birth').value == "" ||
       this.regForm.get('user_name').value == "" ||
@@ -103,8 +105,7 @@ export class RegisterComponent implements OnInit {
   }
 
   validate2(): Boolean {
-    if (this.regFormTeacher.get('teacher_id').value == "" ||
-      this.regFormTeacher.get('first_name').value == "" ||
+    if (this.regFormTeacher.get('first_name').value == "" ||
       this.regFormTeacher.get('last_name').value == "" ||
       this.regFormTeacher.get('date_of_birth').value == "" ||
       this.regFormTeacher.get('user_name').value == "" ||
@@ -118,10 +119,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    let password=  this.regForm.get('password').value;
-    let pass_hash = shajs('sha256').update({password}).digest('hex');
+    let password = this.regForm.get('password').value;
+    let pass_hash = shajs('sha256').update({ password }).digest('hex');
     this.mynewuser = {
-      student_id: this.regForm.get('student_id').value,
       first_name: this.regForm.get('first_name').value,
       last_name: this.regForm.get('last_name').value,
       date_of_birth: this.regForm.get('date_of_birth').value,
@@ -148,10 +148,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onTeacherSubmit() {
-    let password=  this.regFormTeacher.get('password').value;
-    let pass_hash = shajs('sha256').update({password}).digest('hex');
+    let password = this.regFormTeacher.get('password').value;
+    let pass_hash = shajs('sha256').update({ password }).digest('hex');
     this.mynewteacher = {
-      teacher_id: this.regFormTeacher.get('teacher_id').value,
       first_name: this.regFormTeacher.get('first_name').value,
       last_name: this.regFormTeacher.get('last_name').value,
       date_of_birth: this.regFormTeacher.get('date_of_birth').value,

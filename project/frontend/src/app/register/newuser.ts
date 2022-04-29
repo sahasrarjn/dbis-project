@@ -1,5 +1,4 @@
 export class NewUser {
-    student_id = '';
     first_name = '';
     last_name = '';
     date_of_birth = '';
@@ -10,7 +9,6 @@ export class NewUser {
     facad = 0;
 
     constructor(
-        student_id: string,
         first_name: string,
         last_name: string,
         date_of_birth: string,
@@ -20,7 +18,6 @@ export class NewUser {
         institute: number,
         facad: number,
     ) {
-        this.student_id = student_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.date_of_birth = date_of_birth;
@@ -33,7 +30,6 @@ export class NewUser {
 }
 
 export class NewTeacherUser {
-    teacher_id = '';
     first_name = '';
     last_name = '';
     date_of_birth = '';
@@ -41,14 +37,12 @@ export class NewTeacherUser {
     password = '';
 
     constructor(
-        teacher_id: string,
         first_name: string,
         last_name: string,
         date_of_birth: string,
         user_name: string,
         password: string,
     ) {
-        this.teacher_id = teacher_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.date_of_birth = date_of_birth;

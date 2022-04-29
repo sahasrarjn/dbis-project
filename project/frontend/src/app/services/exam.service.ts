@@ -37,8 +37,6 @@ export class ExamService {
       'author': author          // string 
     }
 
-    console.log(JSONdata);
-
     return this.http.post(this.baseurl + 'create_random_exam', JSONdata, this.httpOptions);
   }
 
@@ -46,9 +44,10 @@ export class ExamService {
     var JSONdata = {
       'exam_name': exam_name,   // string
       'exam_type': exam_type,   // int
-      'qid': qid,               // list of int
+      'qids': qid,               // list of int
       'author': author          // string
     }
+
     return this.http.post(this.baseurl + 'create_manual_exam', JSONdata, this.httpOptions);
   }
 }

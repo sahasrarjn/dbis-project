@@ -24,6 +24,7 @@ export class PrepareExamComponent implements OnInit {
   // params for the form
 
   // common params
+  error_ques = false;
   error_diff = false;
   error_numtags = false;
   submitted = false;
@@ -37,6 +38,11 @@ export class PrepareExamComponent implements OnInit {
 
   // Manual exam
   qid: any = new FormControl('');
+  all_questions: any;
+  selectedTags: string[] = [];
+  num_ques = 0;
+  final_questions: any = [];
+  req_ques: any;
 
   //map tagid to tagname
 
@@ -44,6 +50,7 @@ export class PrepareExamComponent implements OnInit {
   final_tagids: any = [];
   exam_map: any = {};
   final_exam_type: any;
+  exam_num_ques: any = {};
 
 
   // todo : create post form to create exam
@@ -55,6 +62,11 @@ export class PrepareExamComponent implements OnInit {
     min_diff: new FormControl('', Validators.required)
   });
 
+  manualForm = new FormGroup({
+    examName: new FormControl('', Validators.required),
+    examType: new FormControl('', Validators.required)
+  });
+
   constructor(private route: ActivatedRoute, private es: ExamService, private ms: MainService, private _router: Router) { }
 
   ngOnInit(): void {
@@ -62,6 +74,7 @@ export class PrepareExamComponent implements OnInit {
       this.all_exam_types = data;
       for (let i = 0; i < this.all_exam_types.length; i++) {
         this.exam_map[this.all_exam_types[i].type] = this.all_exam_types[i].id;
+        this.exam_num_ques[this.all_exam_types[i].type] = this.all_exam_types[i].num_ques;
       }
       console.log("all_exam_types", data)
       console.log("exam_map", this.exam_map)
@@ -69,24 +82,75 @@ export class PrepareExamComponent implements OnInit {
 
     this.ms.getTags().subscribe(data => {
       this.all_tags = data;
+
       console.log("all_tags", data);
 
       // console.log("there");
 
       for (let i = 0; i < this.all_tags.length; i++) {
         this.tagmap[this.all_tags[i]['tag_name']] = this.all_tags[i]['tag_id'];
+        this.selectedTags.push(this.all_tags[i]['tag_id']);
       }
+
+      this.getQuestions();
 
       for (let i = 0; i < this.all_tags_in_form.length; i++) {
         this.profileForm.addControl(this.all_tags[i].tag_name, new FormControl(false));
       }
-
-      // console.log("here", this.all_tags.length);
     });
-
 
   }
 
+  getQuestions() {
+    this.ms.getQuestions("", "", this.selectedTags, "").subscribe(data => {
+      // get 10 from data
+      this.all_questions = data;
+      console.log(this.all_questions)
+
+      this.all_questions = this.all_questions['direct'];
+
+      for (let i = 0; i < this.all_questions.length; i++) {
+        this.manualForm.addControl(this.all_questions[i].question_id, new FormControl(false));
+      }
+
+    });
+  }
+
+
+  onManualSubmit() {
+    this.error_ques = false;
+    let item = this.manualForm.value;
+
+    this.num_ques = 0;
+
+    for (let i = 0; i < this.all_questions.length; i++) {
+      if (item[this.all_questions[i].question_id]) {
+        this.final_questions.push(this.all_questions[i].question_id);
+        this.num_ques++;
+      }
+    }
+
+    this.final_exam_type = this.exam_map[item.examType];
+
+    if (this.num_ques != this.exam_num_ques[item.examType]) {
+      this.error_ques = true;
+      return;
+    }
+
+    this.es.createManualExam(item.examName, this.final_exam_type, this.final_questions, this.author).
+      subscribe(
+        res => {
+          console.log(res);
+          this._router.navigate(['/exam/' + res['exam_id']]);
+        },
+        err => {
+          console.log(err);
+        });
+
+    this.submitted = true;
+    this.manualForm.reset();
+
+  }
 
 
   onSubmit() {
@@ -111,11 +175,6 @@ export class PrepareExamComponent implements OnInit {
     for (let i = 0; i < this.all_tags.length; i++) {
       if (this.profileForm.get(this.all_tags[i].tag_name).value) {
         num_tags++;
-        // console.log(this.all_tags[i].tag_name);
-        // console.log(this.tagmap)
-        // console.log(this.tagmap.get(this.all_tags[i].tag_name));
-        console.log(this.tagmap);
-        console.log(this.tagmap[this.all_tags[i].tag_name]);
         this.final_tagids.push(this.tagmap[this.all_tags[i]['tag_name']]);
       }
     }
@@ -126,14 +185,13 @@ export class PrepareExamComponent implements OnInit {
     }
 
     this.final_exam_type = this.exam_map[item.examType];
-    console.log(this.final_exam_type);
 
     this.es.createRandomExam(item.examName, this.final_exam_type, min_diff,
       max_diff, this.final_tagids, this.author)
       .subscribe(
         res => {
           console.log(res);
-          this._router.navigate(['/exams']);
+          this._router.navigate(['/exam/' + res['exam_id']]);
         },
         err => {
           console.log(err);

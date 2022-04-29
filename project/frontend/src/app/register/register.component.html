@@ -17,11 +17,6 @@
 
             <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
                 <mat-form-field appearance="fill">
-                    <mat-label>Roll No</mat-label>
-                    <input matInput type="text" formControlName="student_id" placeholder="Enter your Roll no">
-                </mat-form-field>
-                <br>
-                <mat-form-field appearance="fill">
                     <mat-label>First Name</mat-label>
                     <input matInput type="text" formControlName="first_name" placeholder="Enter your first name">
                 </mat-form-field>
@@ -85,11 +80,6 @@
             <!-- <h1 style="text-align: center;"> Register as Teacher </h1> -->
 
             <form [formGroup]="regFormTeacher" (ngSubmit)="onTeacherSubmit()">
-                <mat-form-field appearance="fill">
-                    <mat-label>Teacher ID</mat-label>
-                    <input matInput type="text" formControlName="teacher_id" placeholder="Enter your Teacher no">
-                </mat-form-field>
-                <br>
                 <mat-form-field appearance="fill">
                     <mat-label>First Name</mat-label>
                     <input matInput type="text" formControlName="first_name" placeholder="Enter your first name">

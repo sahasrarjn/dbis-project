@@ -112,10 +112,10 @@ router.post("/login/teacher", async function (req, res) {
 
 router.post("/register/student", async function (req, res) {
 
-    const { student_id, user_name, password, first_name, last_name,
+    const { user_name, password, first_name, last_name,
         date_of_birth, student_template, institute, facad } = req.body;
 
-    var qres = await student_lib.register(student_id, user_name, password, first_name, last_name,
+    var qres = await student_lib.register(user_name, password, first_name, last_name,
         date_of_birth, student_template, institute, facad);
 
     let token;
@@ -157,10 +157,10 @@ router.post("/register/student", async function (req, res) {
 
 router.post("/register/teacher", async function (req, res) {
 
-    const { teacher_id, user_name, password, first_name, last_name,
+    const { user_name, password, first_name, last_name,
         date_of_birth } = req.body;
 
-    var qres = await teacher_lib.register(teacher_id, user_name, password, first_name, last_name,
+    var qres = await teacher_lib.register(user_name, password, first_name, last_name,
         date_of_birth);
 
     let token;
