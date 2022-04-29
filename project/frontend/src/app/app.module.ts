@@ -41,6 +41,7 @@ import { AddQuestionComponent } from './add-question/add-question.component';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AttemptExamComponent } from './attempt-exam/attempt-exam.component';
+import { EditorComponent } from './editor/editor.component';
 
 
 
@@ -63,6 +64,7 @@ import { AttemptExamComponent } from './attempt-exam/attempt-exam.component';
     HomeComponent,
     AddQuestionComponent,
     AttemptExamComponent,
+    EditorComponent,
   ],
   imports: [
     BrowserModule,

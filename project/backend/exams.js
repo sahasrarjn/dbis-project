@@ -73,7 +73,7 @@ async function get_exam_data(exam_id)
 		(
 			select student_id, sum(marks) as marks, sum(time_taken) as time_taken
 			from student_exam_ques_stat
-			where exam_id = 40003
+			where exam_id = ${exam_id}
 			group by student_id
 		),
 		y as

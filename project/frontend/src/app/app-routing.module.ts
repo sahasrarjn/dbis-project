@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { NotauthGuard } from './notauth.guard';
 import { AttemptExamComponent } from './attempt-exam/attempt-exam.component';
+import { EditorComponent } from './editor/editor.component';
 
 const routes: Routes = [
   { path: 'questions', component: QuestionComponent, canActivate: [AuthGuard] },
@@ -39,6 +40,7 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent, canActivate: [NotauthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [NotauthGuard] },
+  { path: 'editor', component: EditorComponent },
   { path: '**', component: HomeComponent },
 
 
