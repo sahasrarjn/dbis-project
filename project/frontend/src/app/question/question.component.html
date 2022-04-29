@@ -40,9 +40,7 @@
                     <mat-expansion-panel style="margin-bottom: 0.2cm;">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <mat-list-option checkboxPosition="before" [value]="q.id">
-                                    {{q.question_id}}
-                                </mat-list-option>  
+                                <mat-list-item>{{q.question_id}}</mat-list-item>  
                             </mat-panel-title>
                             <mat-panel-description>
                                 Author: {{q.author}}, Difficulty: {{q.primary_difficulty}}

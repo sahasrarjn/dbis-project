@@ -11,6 +11,33 @@ async function get_all_tags()
 	return qres.rows;
 }
 
+async function create_question(qtext, diff, ans, tc, auth, tags)
+{
+	query = `
+		select max(question_id)+1 as qid
+		from question
+	`
+	qres = await client.query(query);
+	qid = qres.rows[0].qid;
+	query = `
+		insert into question values(${qid}, '${qtext}', ${diff}, '${ans}', '${tc}', 'public', ${auth})
+	`
+	resp = await client.query(query);
+	for(let i=0; i<tags.length; i++)
+	{
+		query = `
+			select max(id)+1 as rid
+			from question_tags
+		`
+		qres = await client.query(query);
+		rid = qres.rows[0].rid;
+		query = `
+			insert into question_tags values(${rid}, ${qid}, ${tags[i]})
+		`
+		qres = await client.query(query);
+	}
+	return resp;
+}
 async function get_all_questions(diff_lower, diff_upper, author_id, tags)
 {
 	if (diff_lower == null || diff_lower=="")
@@ -122,11 +149,11 @@ async function get_question_data(qid)
     query = `
         with x as
         (
-            select avg(time_taken) as avg_time, 100*avg(marks) as perc, avg(relevance) as student_rating
+            select avg(time_taken) as avg_time, 100*avg(marks) as perc, avg(relevance) as student_rating, avg(rating) as stud_diff
             from student_exam_ques_stat
             where question_id = ${qid}
         )
-        select round(avg_time, 2) as avg_time, round(perc, 2) as perc, round(student_rating, 0) as student_rating
+        select round(avg_time, 2) as avg_time, round(perc, 2) as perc, round(student_rating, 0) as student_rating, round(stud_diff, 0) as stud_diff
         from x
     `
     qres = await client.query(query);
@@ -135,19 +162,19 @@ async function get_question_data(qid)
     query = `
         with x as
         (
-            select student_id, avg(time_taken) as avg_time, 100*avg(marks) as perc, avg(relevance) as student_rating
+            select student_id, avg(time_taken) as avg_time, 100*avg(marks) as perc, avg(relevance) as student_rating,  avg(rating) as stud_diff
             from student_exam_ques_stat
             where question_id = ${qid}
             group by student_id
         ),
         y as
         (
-            select institute, avg(round(avg_time, 2)) as avg_time, avg(round(perc, 2)) as perc, avg(round(student_rating, 0)) as student_rating
+            select institute, avg(round(avg_time, 2)) as avg_time, avg(round(perc, 2)) as perc, avg(round(student_rating, 0)) as student_rating, avg(round(stud_diff, 0)) as stud_diff
             from x, student
             where x.student_id = student.student_id
             group by institute
         )
-        select institute, institute.name, avg_time, perc, student_rating
+        select institute, institute.name, avg_time, perc, student_rating, stud_diff
         from y, institute
         where y.institute = institute.institute_id
 
@@ -179,6 +206,7 @@ module.exports =
 {
     get_all_tags,
     get_all_questions,
-    get_question_data
+    get_question_data,
+	create_question
 }
 

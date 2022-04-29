@@ -13,6 +13,7 @@ app.options('*', cors());
 app.use(cors());
 app.use(upload.array());
 app.use(express.static('public'));
+app.use('/media', express.static('media'));
 app.use(bodyParser.json());
 
 var AuthController = require('./auth/AuthController');
@@ -183,6 +184,7 @@ app.get('/question_data', async function (req, res) {
 			avg_time
 			perc
 			student_rating
+			stud_diff
 		},
 		demographics:
 		[
@@ -192,6 +194,7 @@ app.get('/question_data', async function (req, res) {
 				avg_time
 				perc
 				student_rating
+				stud_diff
 			}
 		],
 		student_data: 
@@ -211,6 +214,18 @@ app.get('/question_data', async function (req, res) {
 	*/
 
 	var qres = await question_lib.get_question_data(qid);
+	res.send(qres);
+})
+
+app.post('/attempt_exam', async function (req, res) {
+	var { sid, eid } = req.body;
+	var qres = await student_lib.attempt_exam(sid, eid);
+	res.send(qres);
+})
+
+app.post('/create_question', async function (req, res) {
+	var { qtext, diff, ans, tc, auth, tags } = req.body;
+	var qres = await question_lib.create_question(qtext, diff, ans, tc, auth, tags);
 	res.send(qres);
 })
 
@@ -304,6 +319,41 @@ app.get('/get_exam_data', async function (req, res) {
 	*/
 
 	var qres = await exam_lib.get_exam_data(exam_id);
+	res.send(qres);
+})
+
+app.get('/get_teacher', async function (req, res) {
+	tid = req.query.tid;
+	/*
+	"questions": 
+	[
+		{
+			"question_id": 48,
+			"question_text": "Check whether a String is Palindrome or not",
+			"primary_difficulty": 1400
+		}
+	],
+	"students": 
+	[
+		{
+			"student_id": 20014,
+			"name": "Christopher Clancy"
+		}
+	],
+	"teacher": 
+	{
+		"teacher_id": 1001,
+		"name": "Connie Collins",
+		"date_of_birth": "1963-07-09T18:30:00.000Z",
+		"user_name": "Conni830"
+	}
+	*/
+	var qres = await teacher_lib.get_teacher_data(tid);
+	res.send(qres);
+})
+
+app.get('/get_all_teachers', async function (req, res) {
+	var qres = await teacher_lib.get_all_teachers();
 	res.send(qres);
 })
 
@@ -482,7 +532,8 @@ app.get('/get_all_insti', async function (req, res) {
 	{
 		"institute_id": 1,
 		"name": "Indian Institute of Technology Madras",
-		"location": "Tamil Nadu"
+		"location": "Tamil Nadu",
+		"num_students": "10"
 	}
 	*/
 	var qres = await insti_lib.get_all_institutes();

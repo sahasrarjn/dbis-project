@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegService } from '../reg.service';
+import { RegService } from '../services/reg.service';
 import { NewTeacherUser, NewUser } from './newuser';
 import { InstituteService } from '../services/institute.service';
 

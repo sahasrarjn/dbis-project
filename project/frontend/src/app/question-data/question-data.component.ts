@@ -18,24 +18,69 @@ export class QuestionDataComponent implements OnInit {
   current_insti : any;
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min) ) + min;
+  }
 
-  public barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    scales: {
-      x: {},
-      y: {}
-    },
-    plugins: {
-      legend: {
-        display: true,
+  colors = ["rgba(53,100,52,1)", "#c83c47", "#3f51b5"];
+  public barChartOptions: ChartConfiguration['options'][] = [
+      {
+      responsive: true,
+      // We use these empty structures as placeholders for dynamic theming.
+      scales: {
+        x: {},
+        y: {}
       },
-      datalabels: {
-        anchor: 'end',
-        align: 'end'
-      }
-    }
-  };
+      plugins: {
+        legend: {
+          display: true,
+        },
+        datalabels: {
+          anchor: 'end',
+          align: 'end'
+        }
+      },
+      // backgroundColor: this.colors[this.getRndInteger(0, this.colors.length)],
+    },
+
+    {
+      responsive: true,
+      // We use these empty structures as placeholders for dynamic theming.
+      scales: {
+        x: {},
+        y: {}
+      },
+      plugins: {
+        legend: {
+          display: true,
+        },
+        datalabels: {
+          anchor: 'end',
+          align: 'end'
+        }
+      },
+      // backgroundColor: this.colors[this.getRndInteger(0, this.colors.length)],
+    },
+
+    {
+      responsive: true,
+      // We use these empty structures as placeholders for dynamic theming.
+      scales: {
+        x: {},
+        y: {}
+      },
+      plugins: {
+        legend: {
+          display: true,
+        },
+        datalabels: {
+          anchor: 'end',
+          align: 'end'
+        }
+      },
+      // backgroundColor:  this.colors[this.getRndInteger(0, this.colors.length)],
+    },
+  ];
   public barChartType: ChartType = 'bar';
   public barChartPlugins = [
     DataLabelsPlugin
@@ -62,6 +107,13 @@ export class QuestionDataComponent implements OnInit {
     ]
   };
 
+  rating_data: ChartData<'bar'> = {
+    labels: [],
+    datasets: [
+      { data: [], label: 'Number of students vs Rating' }
+    ]
+  };
+
   
 
   // events
@@ -79,9 +131,11 @@ export class QuestionDataComponent implements OnInit {
     this.route.params.subscribe(params => { this.id = params['id'] });
     this.ms.getQuestionData(this.id).subscribe(data => {
       this.question = data;
+      console.log(this.question);
       this.setTimeTakenData(data['student_data']);
       this.setMarksData(data['student_data']);
       this.setRelevanceData(data['student_data']);
+      this.graphRatingData();
     });
   }
 
@@ -146,6 +200,21 @@ export class QuestionDataComponent implements OnInit {
     for (let entry of arr){
       this.relevance_data.labels.push(entry[0]);
       this.relevance_data.datasets[0].data.push(entry[1]);
+    }
+  }
+
+  graphRatingData(){
+    let ratings = [];
+    for(var i = 0; i < this.question.demographics.length; i++){
+      ratings.push(parseFloat(this.question.demographics[i].student_rating));
+    }
+
+    let max_rating = Math.max(...ratings);
+    if(!Number.isInteger(max_rating)) max_rating = Math.ceil(max_rating);
+
+    for(var i = 0; i < max_rating; i++){
+      this.rating_data.labels.push(`${i}-${i+1}`);
+      this.rating_data.datasets[0].data.push(this.question.demographics.filter(d => parseFloat(d.student_rating) >= i && parseFloat(d.student_rating) < i+1).length);
     }
   }
 

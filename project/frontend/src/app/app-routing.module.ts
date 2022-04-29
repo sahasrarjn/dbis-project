@@ -18,19 +18,19 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'questions', component: QuestionComponent },
-  { path: 'question/:id', component: QuestionDataComponent },
+  { path: 'questions', component: QuestionComponent, canActivate: [AuthGuard] },
+  { path: 'question/:id', component: QuestionDataComponent, canActivate: [AuthGuard] },
 
-  { path: 'exams', component: ExamsComponent },
-  { path: 'exam/:id', component: ExamDetailComponent },
-  { path: 'prepare-exam', component: PrepareExamComponent }, // Todo (gucci): left to implement (form banana hai)
+  { path: 'exams', component: ExamsComponent, canActivate: [AuthGuard] },
+  { path: 'exam/:id', component: ExamDetailComponent, canActivate: [AuthGuard] },
+  { path: 'prepare-exam', component: PrepareExamComponent, canActivate: [TeacherGuard] }, // Todo: Left to implement
 
-  { path: 'institutes', component: InstitutesComponent },
-  { path: 'institute/:id', component: InstituteDetailComponent },
+  { path: 'institutes', component: InstitutesComponent, canActivate: [AuthGuard] },
+  { path: 'institute/:id', component: InstituteDetailComponent, canActivate: [AuthGuard] },
 
-  { path: 'report-card/:eid', component: ReportCardComponent },
-  { path: 'student/:id', component: StudentComponent }, // Todo: Update this to profile, and redirect to relevant component based on role
-  { path: 'teacher/:id', component: TeacherComponent }, // Todo: empty component, this is a public page, any user can access and see all exams prepared by teacher and other details
+  { path: 'report-card', component: ReportCardComponent, canActivate: [] },
+  { path: 'student/:id', component: StudentComponent, canActivate: [TeacherGuard] }, // Todo: Update this to profile, and redirect to relevant component based on role
+  { path: 'teacher/:id', component: TeacherComponent, canActivate: [AuthGuard] }, // Todo: empty component, this is a public page, any user can access and see all exams prepared by teacher and other details
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ];

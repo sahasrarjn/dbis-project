@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <mat-card class="example-card">
     <mat-card-header class="d-flex justify-content-center">
         <b>
@@ -15,6 +16,32 @@
             <div class="text-center mt-5">
                 Don't have an account? <a href="register">Register Now!</a>
             </div>
+=======
+<br>
+<div *ngIf="!is_teacher && !is_student">
+    <h1 style="text-align: center; font-size: 42px; margin-bottom: 32px;"> Login </h1>
+    <div class="d-flex justify-content-around">
+        <button mat-raised-button (click)="activateStudentLogin()" type="submit">Login as Student</button>
+        <button mat-raised-button  (click)="activateTeacherLogin()" type="submit">Login as Teacher</button>
+    </div>
+    <div class="text-center mt-5">
+        Don't have an account? <a href="register">Register Now!</a>
+    </div>
+</div>
+<div *ngIf="is_student">
+    <h1 style="text-align: center;"> Login as Student</h1>
+
+    <form [formGroup]="loginForm">
+        <label>User Name</label>
+        <input class="form-control form-control-lg" type="text" formControlName="username" placeholder="Enter username">
+        <label>Password</label>
+        <input class="form-control form-control-lg" type="password" formControlName="password"
+            placeholder="Enter password">
+        <button class="btn btn-lg btn-dark" (click)="onSubmit()" type="submit">Login</button>
+        <div *ngIf="notsuccess" class="alert alert-danger" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Incorrect username/password! Try again.
+>>>>>>> b14173f448653668361348090726be87ee97289f
         </div>
         <div *ngIf="is_student">
             <form [formGroup]="loginForm">

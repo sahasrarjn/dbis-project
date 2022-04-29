@@ -10,13 +10,15 @@
                             {{i.institute_id}}
                         </mat-panel-title>
                         <mat-panel-description>
-                            {{i.name}}, {{i.location}}
+                            {{i.name}}
                         </mat-panel-description>
                         <a mat-button href="institute/{{i.institute_id}}">
                             <mat-icon>launch</mat-icon>
                             Detailed View
                         </a>
                     </mat-expansion-panel-header> 
+                    Location:  {{i.location}}<br>
+                    Number of students: {{i.num_students}}
                 </mat-expansion-panel>
             </div>
         </mat-selection-list>

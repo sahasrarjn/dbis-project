@@ -34,8 +34,8 @@ export class StudentComponent implements OnInit {
     });
   }
 
-  navigate(url){
-    this.router.navigate([url]);
+  navigate_to_rc(eid){
+    this.router.navigate(['report-card'], {queryParams: {eid: eid, sid: this.sid}});
   }
 
   start(){

@@ -1,1 +1,43 @@
-<p>teacher works!</p>
+<mat-card class="example-card">
+    <div class="text-center card-title">Teacher profile: {{tid}}</div> 
+    <mat-card-content>
+        <span class="header-small">Name</span>
+        <br>
+        {{teacher.name}}
+        <br><br>
+        <span class="header-small">Username</span>
+        <br>
+        {{teacher.user_name}}
+        <br><br>
+
+        <span class="header-small">Questions added</span>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                <th scope="col">Question Id</th>
+                <th scope="col">Question text</th>
+                <th scope="col">Primary difficulty</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container>
+                    <tr *ngFor="let q of questions_added" class="link" (click)="navigate('question/'+q.question_id)">
+                        <th scope="row">{{q.question_id}}</th>
+                        <td> {{q.question_text}}</td>
+                        <td> {{q.primary_difficulty}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+
+        <div class="d-flex justify-content-around align-items-center">
+            <button mat-raised-button (click)="start()" [disabled]="table_idx == 0">Start</button>
+            <button mat-raised-button (click)="prev()" [disabled]="table_idx == 0">Prev</button>
+            <button mat-raised-button (click)="next()" [disabled]="table_idx == max_table_idx">Next</button>
+        </div>
+
+
+    </mat-card-content>
+  </mat-card>
+
+
