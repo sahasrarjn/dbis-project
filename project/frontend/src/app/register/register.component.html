@@ -2,8 +2,8 @@
 <div *ngIf="!is_teacher && !is_student">
     <h1 style="text-align: center; font-size: 42px; margin-bottom: 32px;"> Register </h1>
     <div class="d-flex justify-content-around">
-        <button class="btn btn-lg btn-dark" (click)="activateStudentreg()" type="submit">Register as Student</button>
-        <button class="btn btn-lg btn-dark" (click)="activateTeacherreg()" type="submit">Register as Teacher</button>
+        <button mat-raised-button  (click)="activateStudentreg()" type="submit">Register as Student</button>
+        <button mat-raised-button  (click)="activateTeacherreg()" type="submit">Register as Teacher</button>
     </div>
 </div>
 <div *ngIf="is_student">
