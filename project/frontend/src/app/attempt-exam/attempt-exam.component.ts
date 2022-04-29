@@ -16,6 +16,7 @@ export class AttemptExamComponent implements OnInit {
   examForm = new FormGroup({});
   remaining_time = 0;
   student_template: any;
+  code_teamplate: any;
 
   constructor(private ss: StudentService, private route: ActivatedRoute, private es: ExamService, private router: Router) { }
 
@@ -33,9 +34,9 @@ export class AttemptExamComponent implements OnInit {
         this.examForm.addControl('ques' + this.exam.questions[i].question_id, new FormControl(''));
       }
     });
-    this.ss.getStudentTemplate(this.id).subscribe(
+    this.ss.getStudentTemplate(localStorage.getItem('user_id')).subscribe(
       res => {
-        console.log("Student Template", res);
+        this.student_template = res['base_code'];
       },
       err => {
         console.log(err);

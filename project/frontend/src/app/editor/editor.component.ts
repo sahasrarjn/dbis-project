@@ -30,7 +30,7 @@ import 'ace-builds/src-noconflict/ext-beautify';
   //   `,],
 })
 export class EditorComponent implements AfterViewInit {
-
+  @Input() input_code: string;
   @ViewChild("codeEditor") private editor: ElementRef<HTMLElement>;
   private aceEditor: ace.Ace.Editor;
   private editorBeautify;
@@ -64,12 +64,7 @@ export class EditorComponent implements AfterViewInit {
     this.aceEditor.session.setMode('ace/mode/' + this.LANG);
 
     this.aceEditor.session.setValue(
-      `#include<bits/stdc++.h>
-    using namespace std;
-  int main() {
-  cout << "Hello World" << endl;
-  return 0;
-}`
+      this.input_code
     );
   }
 

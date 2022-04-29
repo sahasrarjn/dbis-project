@@ -17,8 +17,10 @@ export class RegisterComponent implements OnInit {
   mynewteacher: NewTeacherUser;
 
   templates: any[] = [
-    { id: 0, name: "C++" },
-    { id: 1, name: "Python" },
+    { id: 2, name: "C++ basic" },
+    { id: 3, name: "C++ advanced" },
+    { id: 0, name: "Python basic" },
+    { id: 1, name: "Python advanced" },
   ];
 
   institutes: any;
