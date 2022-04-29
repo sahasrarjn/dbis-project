@@ -8,7 +8,7 @@ import { StudentService } from '../services/student.service';
   styleUrls: ['./report-card.component.scss']
 })
 export class ReportCardComponent implements OnInit {
-  student_id : any = 20309; // todo: get this from backend
+  student_id : any; // todo: get this from backend
   exam_id : any;
 
   report_data : any;
@@ -20,7 +20,10 @@ export class ReportCardComponent implements OnInit {
   // Todo: or instead get the list of exams in which student appeared then that will link to this page. That can be on student's homepage.
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => { this.exam_id = params['eid'] });
+    this.route.queryParams.subscribe(params => { 
+      this.exam_id = params['eid'];
+      this.student_id = params['sid'];
+    });
     this.getReportCard();
   }
   
