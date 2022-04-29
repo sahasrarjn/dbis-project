@@ -2,7 +2,7 @@
     <mat-card-content class="d-flex justify-content-around">
         <div *ngIf="!is_teacher && !is_student">
             <h1 style="text-align: center; font-size: 42px; margin-bottom: 32px;"> Login </h1>
-            <div class="d-flex justify-content-around">
+            <div style="width:100vw" class="d-flex justify-content-around">
                 <button mat-raised-button (click)="activateStudentLogin()" type="submit">Login as Student</button>
                 <button mat-raised-button (click)="activateTeacherLogin()" type="submit">Login as Teacher</button>
             </div>
@@ -28,6 +28,7 @@
             </form>
         </div>
         <div *ngIf="is_teacher">
+            <h1 style="text-align: center;"> Login as Teacher</h1>
             <form [formGroup]="teacherloginForm">
                 <mat-form-field appearance="fill">
                     <mat-label>User Name</mat-label>
