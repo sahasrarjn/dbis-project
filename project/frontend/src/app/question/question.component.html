@@ -61,7 +61,7 @@
                             <mat-panel-description>
                                 Author: {{q.author}}, Difficulty: {{q.primary_difficulty}}
                             </mat-panel-description>
-                            <a mat-button href="question/{{q.question_id}}">
+                            <a *ngIf="checkIfAttempted(q.question_id)" mat-button href="question/{{q.question_id}}">
                                 <mat-icon>launch</mat-icon>
                                 Detailed View
                             </a>

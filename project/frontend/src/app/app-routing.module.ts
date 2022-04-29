@@ -19,10 +19,11 @@ import { AddQuestionComponent } from './add-question/add-question.component';
 import { NotauthGuard } from './notauth.guard';
 import { AttemptExamComponent } from './attempt-exam/attempt-exam.component';
 import { EditorComponent } from './editor/editor.component';
+import { AttemptedGuardGuard } from './attempted-guard.guard';
 
 const routes: Routes = [
   { path: 'questions', component: QuestionComponent, canActivate: [AuthGuard] },
-  { path: 'question/:id', component: QuestionDataComponent, canActivate: [AuthGuard] },
+  { path: 'question/:id', component: QuestionDataComponent, canActivate: [AuthGuard, AttemptedGuardGuard] },
 
   { path: 'exams', component: ExamsComponent, canActivate: [AuthGuard] },
   { path: 'exam/:id', component: ExamDetailComponent, canActivate: [AuthGuard] },
